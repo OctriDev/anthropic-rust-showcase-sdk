@@ -25,7 +25,7 @@ pub struct UpdateBetaAgentsParams {
     pub tools: Option<Option<Vec<BetaManagedAgentsAgentToolParams>>>,
     pub mcp_servers: Option<Option<Vec<BetaManagedAgentsMCPServerParams>>>,
     pub skills: Option<Option<Vec<BetaManagedAgentsSkillParams>>>,
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
     pub multiagent: Option<Option<BetaManagedAgentsMultiagentParams>>,
 }
 

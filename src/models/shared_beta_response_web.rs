@@ -359,11 +359,41 @@ impl BetaResponseWebSearchResultLocationCitation {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaResponseWebSearchToolResultBlockContent {
     BetaResponseWebSearchToolResultError(Box<BetaResponseWebSearchToolResultError>),
     BetaResponseWebSearchResultBlockArray(Vec<BetaResponseWebSearchResultBlock>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaResponseWebSearchToolResultBlockContent {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaResponseWebSearchToolResultError>>(value.clone())
+        {
+            let candidate = Self::BetaResponseWebSearchToolResultError(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Vec<BetaResponseWebSearchResultBlock>>(value.clone())
+        {
+            let candidate = Self::BetaResponseWebSearchResultBlockArray(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaResponseWebSearchToolResultBlockContent branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Required `string` value serialized in the `type` wire field.

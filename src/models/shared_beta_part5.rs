@@ -3,6 +3,43 @@
 
 // shared_beta domain models (part 5)
 
+impl BetaTokenTaskBudget {
+    pub(super) fn validate_constraints(&self) -> Result<(), crate::errors::SdkError> {
+        if let Some(Some(value)) = self.remaining.as_ref() {
+            crate::validation::validate_range(
+                "remaining",
+                *value as f64,
+                crate::validation::RangeOpts {
+                    min: Some(0_f64),
+                    ..Default::default()
+                },
+            )?;
+        }
+        crate::validation::validate_range(
+            "total",
+            self.total as f64,
+            crate::validation::RangeOpts {
+                min: Some(1024_f64),
+                ..Default::default()
+            },
+        )?;
+        Ok(())
+    }
+
+    pub fn new(
+        total: i64,
+        type_: BetaTokenTaskBudgetTypeEnum,
+    ) -> Result<Self, crate::errors::SdkError> {
+        let value = Self {
+            remaining: None,
+            total,
+            type_,
+        };
+        value.validate_constraints()?;
+        Ok(value)
+    }
+}
+
 /// Required `string` value serialized in the `type` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum BetaUnattachedAttachmentTypeEnum {

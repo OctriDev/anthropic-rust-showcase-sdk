@@ -101,7 +101,7 @@ pub struct BetaManagedAgentsUpdateSessionParams {
         default,
         with = "crate::client::double_option"
     )]
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
     /// Vault IDs (`vlt_\*`) to attach to the session. Not yet supported; requests setting this field are rejected. Reserved for future use.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub vault_ids: Option<Vec<String>>,

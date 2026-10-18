@@ -18,11 +18,37 @@ impl BetaContextManagementResponse {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaCountMessageTokensParamsSystem {
     String(String),
     BetaRequestTextBlockArray(Vec<BetaRequestTextBlock>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaCountMessageTokensParamsSystem {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<String>(value.clone()) {
+            let candidate = Self::String(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Vec<BetaRequestTextBlock>>(value.clone()) {
+            let candidate = Self::BetaRequestTextBlockArray(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaCountMessageTokensParamsSystem branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Typed representation of the `BetaCountMessageTokensParams` API schema.
@@ -237,7 +263,7 @@ impl BetaCountMessageTokensParams {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaCountMessageTokensParamsToolsItem {
     BetaTool(Box<BetaTool>),
@@ -270,6 +296,238 @@ pub enum BetaCountMessageTokensParamsToolsItem {
     BetaMCPToolset(Box<BetaMCPToolset>),
 }
 
+impl<'de> serde::Deserialize<'de> for BetaCountMessageTokensParamsToolsItem {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<Box<BetaTool>>(value.clone()) {
+            let candidate = Self::BetaTool(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaBashTool20241022>>(value.clone()) {
+            let candidate = Self::BetaBashTool20241022(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaBashTool20250124>>(value.clone()) {
+            let candidate = Self::BetaBashTool20250124(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaCodeExecutionTool20250522>>(value.clone())
+        {
+            let candidate = Self::BetaCodeExecutionTool20250522(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaCodeExecutionTool20250825>>(value.clone())
+        {
+            let candidate = Self::BetaCodeExecutionTool20250825(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaCodeExecutionTool20260120>>(value.clone())
+        {
+            let candidate = Self::BetaCodeExecutionTool20260120(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaCodeExecutionTool20260521>>(value.clone())
+        {
+            let candidate = Self::BetaCodeExecutionTool20260521(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaBrowserToolset20260801>>(value.clone())
+        {
+            let candidate = Self::BetaBrowserToolset20260801(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaComputerUseTool20241022>>(value.clone())
+        {
+            let candidate = Self::BetaComputerUseTool20241022(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaMemoryTool20250818>>(value.clone()) {
+            let candidate = Self::BetaMemoryTool20250818(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaComputerUseTool20250124>>(value.clone())
+        {
+            let candidate = Self::BetaComputerUseTool20250124(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaTextEditor20241022>>(value.clone()) {
+            let candidate = Self::BetaTextEditor20241022(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaComputerUseTool20251124>>(value.clone())
+        {
+            let candidate = Self::BetaComputerUseTool20251124(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaComputerToolset20260801>>(value.clone())
+        {
+            let candidate = Self::BetaComputerToolset20260801(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaTextEditor20250124>>(value.clone()) {
+            let candidate = Self::BetaTextEditor20250124(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaTextEditor20250429>>(value.clone()) {
+            let candidate = Self::BetaTextEditor20250429(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaTextEditor20250728>>(value.clone()) {
+            let candidate = Self::BetaTextEditor20250728(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaWebSearchTool20250305>>(value.clone())
+        {
+            let candidate = Self::BetaWebSearchTool20250305(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaWebFetchTool20250910>>(value.clone()) {
+            let candidate = Self::BetaWebFetchTool20250910(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaWebSearchTool20260209>>(value.clone())
+        {
+            let candidate = Self::BetaWebSearchTool20260209(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaWebFetchTool20260209>>(value.clone()) {
+            let candidate = Self::BetaWebFetchTool20260209(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaWebFetchTool20260309>>(value.clone()) {
+            let candidate = Self::BetaWebFetchTool20260309(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaWebSearchTool20260318>>(value.clone())
+        {
+            let candidate = Self::BetaWebSearchTool20260318(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaWebFetchTool20260318>>(value.clone()) {
+            let candidate = Self::BetaWebFetchTool20260318(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaAdvisorTool20260301>>(value.clone()) {
+            let candidate = Self::BetaAdvisorTool20260301(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaToolSearchToolBM2520251119>>(value.clone())
+        {
+            let candidate = Self::BetaToolSearchToolBM2520251119(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaToolSearchToolRegex20251119>>(value.clone())
+        {
+            let candidate = Self::BetaToolSearchToolRegex20251119(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaMCPToolset>>(value.clone()) {
+            let candidate = Self::BetaMCPToolset(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaCountMessageTokensParamsToolsItem branch accepts this payload",
+            )
+        })
+    }
+}
+
 /// Typed representation of the `BetaCountMessageTokensResponse` API schema.
 #[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
 pub struct BetaCountMessageTokensResponse {
@@ -278,16 +536,4 @@ pub struct BetaCountMessageTokensResponse {
     pub context_management: Option<BetaContextManagementResponse>,
     /// The total number of tokens across the provided list of messages, system prompt, and tools.
     pub input_tokens: i64,
-}
-
-impl BetaCountMessageTokensResponse {
-    pub fn new(
-        context_management: Option<BetaContextManagementResponse>,
-        input_tokens: i64,
-    ) -> Self {
-        Self {
-            context_management,
-            input_tokens,
-        }
-    }
 }

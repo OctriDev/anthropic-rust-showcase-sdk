@@ -3,6 +3,38 @@
 
 // shared_beta_request_tool domain models (part 2)
 
+impl std::fmt::Display for BetaRequestToolSearchToolSearchResultBlockTypeEnum {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            BetaRequestToolSearchToolSearchResultBlockTypeEnum::ToolSearchToolSearchResult => {
+                f.write_str("tool_search_tool_search_result")
+            }
+        }
+    }
+}
+
+/// Typed representation of the `BetaRequestToolSearchToolSearchResultBlock` API schema.
+#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
+pub struct BetaRequestToolSearchToolSearchResultBlock {
+    /// Required array value serialized in the `tool_references` wire field.
+    pub tool_references: Vec<BetaRequestToolReferenceBlock>,
+    /// Required `string` value serialized in the `type` wire field.
+    #[serde(rename = "type")]
+    pub type_: BetaRequestToolSearchToolSearchResultBlockTypeEnum,
+}
+
+impl BetaRequestToolSearchToolSearchResultBlock {
+    pub fn new(
+        tool_references: Vec<BetaRequestToolReferenceBlock>,
+        type_: BetaRequestToolSearchToolSearchResultBlockTypeEnum,
+    ) -> Self {
+        Self {
+            tool_references,
+            type_,
+        }
+    }
+}
+
 /// Required `string` value serialized in the `type` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum BetaRequestToolUseBlockTypeEnum {

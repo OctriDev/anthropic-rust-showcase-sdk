@@ -89,7 +89,7 @@ pub struct UpdateBetaSessionsParams {
     pub anthropic_beta: Option<Vec<AnthropicBeta>>,
     pub anthropic_workspace_id: Option<String>,
     pub title: Option<Option<String>>,
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
     pub vault_ids: Option<Vec<String>>,
     pub agent: Option<BetaManagedAgentsSessionAgentUpdate>,
     pub budget: Option<Option<BetaManagedAgentsBudget>>,

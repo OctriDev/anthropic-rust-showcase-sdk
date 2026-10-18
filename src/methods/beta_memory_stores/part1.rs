@@ -496,7 +496,7 @@ pub struct UpdateBetaMemoryStoresParams {
     pub anthropic_workspace_id: Option<String>,
     pub name: Option<Option<String>>,
     pub description: Option<Option<String>>,
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
 }
 
 /// Updates a memory store's name, description, or metadata. Supply only the fields you want to change; set a metadata key to `null` to delete it, and use an empty `description` to clear the description.

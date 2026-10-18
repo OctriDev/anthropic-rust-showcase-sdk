@@ -11,7 +11,7 @@ use crate::validation::{validate_range, RangeOpts};
 pub struct UpdateBetaEnvironmentsWorkParams {
     pub environment_id: String,
     pub work_id: String,
-    pub metadata: std::collections::HashMap<String, String>,
+    pub metadata: std::collections::HashMap<String, Option<String>>,
     pub anthropic_beta: Option<Vec<AnthropicBeta>>,
     pub anthropic_version: Option<String>,
     pub anthropic_workspace_id: Option<String>,

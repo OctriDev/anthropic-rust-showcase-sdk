@@ -76,7 +76,7 @@ pub struct UpdateBetaOrganizationsWorkspacesParams {
     pub display_color: Option<String>,
     pub external_key_id: Option<String>,
     pub name: Option<String>,
-    pub tags: Option<Option<std::collections::HashMap<String, String>>>,
+    pub tags: Option<Option<std::collections::HashMap<String, Option<String>>>>,
 }
 
 /// Updates selected configuration fields for a workspace. Include only the fields you want to change; omitted fields remain unchanged. Use `name`, `display_color`, `tags`, `data_residency`, or `external_key_id` as needed.

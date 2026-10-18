@@ -131,7 +131,7 @@ pub struct BetaPublicEnvironmentUpdateRequest {
     pub description: Option<Option<String>>,
     /// User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub metadata: Option<std::collections::HashMap<String, String>>,
+    pub metadata: Option<std::collections::HashMap<String, Option<String>>>,
     /// Updated name for the environment
     #[serde(
         skip_serializing_if = "Option::is_none",

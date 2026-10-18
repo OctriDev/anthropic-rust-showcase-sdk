@@ -3,11 +3,37 @@
 
 // shared_beta_clear domain models
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaClearThinking20251015KeepVariant0 {
     BetaThinkingTurns(Box<BetaThinkingTurns>),
     BetaAllThinkingTurns(Box<BetaAllThinkingTurns>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaClearThinking20251015KeepVariant0 {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<Box<BetaThinkingTurns>>(value.clone()) {
+            let candidate = Self::BetaThinkingTurns(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BetaAllThinkingTurns>>(value.clone()) {
+            let candidate = Self::BetaAllThinkingTurns(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaClearThinking20251015KeepVariant0 branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Optional `string` value serialized in the `keep` wire field.
@@ -34,11 +60,39 @@ impl std::fmt::Display for BetaClearThinking20251015KeepVariant1Enum {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaClearThinking20251015Keep {
     Object(Box<BetaClearThinking20251015KeepVariant0>),
     Object2(Box<BetaClearThinking20251015KeepVariant1Enum>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaClearThinking20251015Keep {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaClearThinking20251015KeepVariant0>>(value.clone())
+        {
+            let candidate = Self::Object(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaClearThinking20251015KeepVariant1Enum>>(value.clone())
+        {
+            let candidate = Self::Object2(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom("no BetaClearThinking20251015Keep branch accepts this payload")
+        })
+    }
 }
 
 /// Required `string` value serialized in the `type` wire field.
@@ -84,11 +138,37 @@ impl BetaClearThinking20251015 {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaClearToolUses20250919ClearToolInputs {
     Bool(bool),
     StringArray(Vec<String>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaClearToolUses20250919ClearToolInputs {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<bool>(value.clone()) {
+            let candidate = Self::Bool(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Vec<String>>(value.clone()) {
+            let candidate = Self::StringArray(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaClearToolUses20250919ClearToolInputs branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Required `string` value serialized in the `type` wire field.

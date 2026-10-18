@@ -56,7 +56,7 @@ pub struct BetaManagedAgentsUpdateAgentParams {
         default,
         with = "crate::client::double_option"
     )]
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
     /// Multiagent orchestration configuration. Full replacement. Omit to preserve; send null to clear.
     #[serde(
         skip_serializing_if = "Option::is_none",
