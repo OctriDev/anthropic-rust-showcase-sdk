@@ -135,7 +135,7 @@ pub enum BetaManagedAgentsModelParams {
 impl BetaManagedAgentsModelParams {
     pub fn as_string_wire_value(&self) -> Option<&str> {
         match self {
-            Self::BetaManagedAgentsModel(value) => value.as_string_wire_value(),
+            Self::BetaManagedAgentsModel(value) => Some(value.as_str()),
             _ => None,
         }
     }

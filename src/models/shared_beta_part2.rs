@@ -136,11 +136,37 @@ impl std::fmt::Display for Unrestricted {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaDataResidencyAllowedInferenceGeos {
     StringArray(Vec<String>),
     Unrestricted(Box<Unrestricted>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaDataResidencyAllowedInferenceGeos {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<Vec<String>>(value.clone()) {
+            let candidate = Self::StringArray(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<Unrestricted>>(value.clone()) {
+            let candidate = Self::Unrestricted(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaDataResidencyAllowedInferenceGeos branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Typed representation of the `BetaDataResidency` API schema.
@@ -464,20 +490,4 @@ pub enum BetaMemoryTool20250818NameEnum {
     #[serde(rename = "memory")]
     #[default]
     Memory,
-}
-
-impl BetaMemoryTool20250818NameEnum {
-    pub fn as_str(&self) -> &str {
-        match self {
-            Self::Memory => "memory",
-        }
-    }
-}
-
-impl std::fmt::Display for BetaMemoryTool20250818NameEnum {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            BetaMemoryTool20250818NameEnum::Memory => f.write_str("memory"),
-        }
-    }
 }

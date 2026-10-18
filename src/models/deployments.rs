@@ -45,7 +45,7 @@ pub struct BetaManagedAgentsUpdateDeploymentParams {
         default,
         with = "crate::client::double_option"
     )]
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
     /// Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to manual-only).
     #[serde(
         skip_serializing_if = "Option::is_none",

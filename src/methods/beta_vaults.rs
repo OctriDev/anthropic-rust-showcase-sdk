@@ -425,7 +425,7 @@ pub struct UpdateBetaVaultsParams {
     pub anthropic_beta: Option<Vec<AnthropicBeta>>,
     pub anthropic_workspace_id: Option<String>,
     pub display_name: Option<Option<String>>,
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
 }
 
 /// Updates a vault's human-readable name or metadata. Send `display_name` to change the name, or use `metadata` to add, replace, or delete individual keys; omitted metadata keys are preserved. The `anthropic-workspace-id` header must match the credential's Workspace when you use it.

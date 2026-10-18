@@ -19,7 +19,7 @@ pub struct BetaManagedAgentsUpdateCredentialRequestBody {
         default,
         with = "crate::client::double_option"
     )]
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
     /// Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub auth: Option<BetaManagedAgentsCredentialUpdateAuth>,

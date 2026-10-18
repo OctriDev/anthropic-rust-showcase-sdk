@@ -3,18 +3,72 @@
 
 // shared_beta_create domain models
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaCreateMessageParamsContainer {
     BetaContainerParams(Box<BetaContainerParams>),
     String(String),
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+impl<'de> serde::Deserialize<'de> for BetaCreateMessageParamsContainer {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<Box<BetaContainerParams>>(value.clone()) {
+            let candidate = Self::BetaContainerParams(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<String>(value.clone()) {
+            let candidate = Self::String(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaCreateMessageParamsContainer branch accepts this payload",
+            )
+        })
+    }
+}
+
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaCreateMessageParamsFallbackCreditToken {
     String(String),
     BetaFallbackCreditTokenParam(Box<BetaFallbackCreditTokenParam>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaCreateMessageParamsFallbackCreditToken {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<String>(value.clone()) {
+            let candidate = Self::String(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<BetaFallbackCreditTokenParam>>(value.clone())
+        {
+            let candidate = Self::BetaFallbackCreditTokenParam(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaCreateMessageParamsFallbackCreditToken branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Optional `string` value serialized in the `fallbacks` wire field.
@@ -41,11 +95,37 @@ impl std::fmt::Display for Default_ {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaCreateMessageParamsFallbacks {
     BetaFallbackConfigV2Array(Vec<BetaFallbackConfigV2>),
     Default_(Box<Default_>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaCreateMessageParamsFallbacks {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<Vec<BetaFallbackConfigV2>>(value.clone()) {
+            let candidate = Self::BetaFallbackConfigV2Array(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<Default_>>(value.clone()) {
+            let candidate = Self::Default_(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaCreateMessageParamsFallbacks branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Determines whether to use priority capacity (if available) or standard capacity for this request.
@@ -98,11 +178,35 @@ impl std::fmt::Display for BetaCreateMessageParamsServiceTierEnum {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaCreateMessageParamsSystem {
     String(String),
     BetaRequestTextBlockArray(Vec<BetaRequestTextBlock>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaCreateMessageParamsSystem {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<String>(value.clone()) {
+            let candidate = Self::String(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Vec<BetaRequestTextBlock>>(value.clone()) {
+            let candidate = Self::BetaRequestTextBlockArray(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom("no BetaCreateMessageParamsSystem branch accepts this payload")
+        })
+    }
 }
 
 /// Typed representation of the `BetaCreateMessageParams` API schema.
@@ -380,129 +484,4 @@ pub struct BetaCreateMessageParams {
     /// Recommended for advanced use cases only.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub top_p: Option<f64>,
-}
-
-impl BetaCreateMessageParams {
-    pub(super) fn validate_constraints(&self) -> Result<(), crate::errors::SdkError> {
-        crate::validation::validate_range(
-            "max_tokens",
-            self.max_tokens as f64,
-            crate::validation::RangeOpts {
-                min: Some(0_f64),
-                ..Default::default()
-            },
-        )?;
-        if let Some(value) = self.mcp_servers.as_ref() {
-            crate::validation::validate_items(
-                "mcp_servers",
-                value.as_slice(),
-                crate::validation::LengthOpts {
-                    max: Some(20),
-                    ..Default::default()
-                },
-            )?;
-        }
-        if let Some(value) = self.temperature.as_ref() {
-            crate::validation::validate_range(
-                "temperature",
-                *value,
-                crate::validation::RangeOpts {
-                    min: Some(0_f64),
-                    max: Some(1_f64),
-                    ..Default::default()
-                },
-            )?;
-        }
-        if let Some(value) = self.top_k.as_ref() {
-            crate::validation::validate_range(
-                "top_k",
-                *value as f64,
-                crate::validation::RangeOpts {
-                    min: Some(0_f64),
-                    ..Default::default()
-                },
-            )?;
-        }
-        if let Some(value) = self.top_p.as_ref() {
-            crate::validation::validate_range(
-                "top_p",
-                *value,
-                crate::validation::RangeOpts {
-                    min: Some(0_f64),
-                    max: Some(1_f64),
-                    ..Default::default()
-                },
-            )?;
-        }
-        Ok(())
-    }
-
-    pub fn new(
-        model: Model,
-        messages: Vec<BetaInputMessage>,
-        max_tokens: i64,
-    ) -> Result<Self, crate::errors::SdkError> {
-        let value = Self {
-            model,
-            messages,
-            cache_control: None,
-            container: None,
-            context_management: None,
-            diagnostics: None,
-            fallback_credit_token: None,
-            fallbacks: None,
-            inference_geo: None,
-            max_tokens,
-            mcp_servers: None,
-            metadata: None,
-            output_config: None,
-            output_format: None,
-            service_tier: None,
-            speed: None,
-            stop_sequences: None,
-            stream: None,
-            system: None,
-            temperature: None,
-            thinking: None,
-            tool_choice: None,
-            tools: None,
-            top_k: None,
-            top_p: None,
-        };
-        value.validate_constraints()?;
-        Ok(value)
-    }
-}
-
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-#[serde(untagged)]
-pub enum BetaCreateMessageParamsToolsItem {
-    BetaTool(Box<BetaTool>),
-    BetaBashTool20241022(Box<BetaBashTool20241022>),
-    BetaBashTool20250124(Box<BetaBashTool20250124>),
-    BetaCodeExecutionTool20250522(Box<BetaCodeExecutionTool20250522>),
-    BetaCodeExecutionTool20250825(Box<BetaCodeExecutionTool20250825>),
-    BetaCodeExecutionTool20260120(Box<BetaCodeExecutionTool20260120>),
-    BetaCodeExecutionTool20260521(Box<BetaCodeExecutionTool20260521>),
-    BetaBrowserToolset20260801(Box<BetaBrowserToolset20260801>),
-    BetaComputerUseTool20241022(Box<BetaComputerUseTool20241022>),
-    BetaMemoryTool20250818(Box<BetaMemoryTool20250818>),
-    BetaComputerUseTool20250124(Box<BetaComputerUseTool20250124>),
-    BetaTextEditor20241022(Box<BetaTextEditor20241022>),
-    BetaComputerUseTool20251124(Box<BetaComputerUseTool20251124>),
-    BetaComputerToolset20260801(Box<BetaComputerToolset20260801>),
-    BetaTextEditor20250124(Box<BetaTextEditor20250124>),
-    BetaTextEditor20250429(Box<BetaTextEditor20250429>),
-    BetaTextEditor20250728(Box<BetaTextEditor20250728>),
-    BetaWebSearchTool20250305(Box<BetaWebSearchTool20250305>),
-    BetaWebFetchTool20250910(Box<BetaWebFetchTool20250910>),
-    BetaWebSearchTool20260209(Box<BetaWebSearchTool20260209>),
-    BetaWebFetchTool20260209(Box<BetaWebFetchTool20260209>),
-    BetaWebFetchTool20260309(Box<BetaWebFetchTool20260309>),
-    BetaWebSearchTool20260318(Box<BetaWebSearchTool20260318>),
-    BetaWebFetchTool20260318(Box<BetaWebFetchTool20260318>),
-    BetaAdvisorTool20260301(Box<BetaAdvisorTool20260301>),
-    BetaToolSearchToolBM2520251119(Box<BetaToolSearchToolBM2520251119>),
-    BetaToolSearchToolRegex20251119(Box<BetaToolSearchToolRegex20251119>),
-    BetaMCPToolset(Box<BetaMCPToolset>),
 }

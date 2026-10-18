@@ -7,11 +7,11 @@
 #[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
 pub struct BetaSelfHostedWorkUpdateRequest {
     /// Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
-    pub metadata: std::collections::HashMap<String, String>,
+    pub metadata: std::collections::HashMap<String, Option<String>>,
 }
 
 impl BetaSelfHostedWorkUpdateRequest {
-    pub fn new(metadata: std::collections::HashMap<String, String>) -> Self {
+    pub fn new(metadata: std::collections::HashMap<String, Option<String>>) -> Self {
         Self { metadata }
     }
 }

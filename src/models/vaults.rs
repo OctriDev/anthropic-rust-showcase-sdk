@@ -80,7 +80,7 @@ pub struct BetaManagedAgentsUpdateVaultRequestBody {
         default,
         with = "crate::client::double_option"
     )]
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
 }
 
 impl BetaManagedAgentsUpdateVaultRequestBody {

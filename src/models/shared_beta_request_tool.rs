@@ -246,11 +246,39 @@ impl BetaRequestToolRemovalBlockTool {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaRequestToolResultBlockContent {
     String(String),
     ItemArray(Vec<BetaRequestToolResultBlockContentItem>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaRequestToolResultBlockContent {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<String>(value.clone()) {
+            let candidate = Self::String(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Vec<BetaRequestToolResultBlockContentItem>>(value.clone())
+        {
+            let candidate = Self::ItemArray(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaRequestToolResultBlockContent branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Required `string` value serialized in the `type` wire field.
@@ -538,38 +566,6 @@ impl BetaRequestToolSearchToolSearchResultBlockTypeEnum {
     pub fn as_str(&self) -> &str {
         match self {
             Self::ToolSearchToolSearchResult => "tool_search_tool_search_result",
-        }
-    }
-}
-
-impl std::fmt::Display for BetaRequestToolSearchToolSearchResultBlockTypeEnum {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            BetaRequestToolSearchToolSearchResultBlockTypeEnum::ToolSearchToolSearchResult => {
-                f.write_str("tool_search_tool_search_result")
-            }
-        }
-    }
-}
-
-/// Typed representation of the `BetaRequestToolSearchToolSearchResultBlock` API schema.
-#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
-pub struct BetaRequestToolSearchToolSearchResultBlock {
-    /// Required array value serialized in the `tool_references` wire field.
-    pub tool_references: Vec<BetaRequestToolReferenceBlock>,
-    /// Required `string` value serialized in the `type` wire field.
-    #[serde(rename = "type")]
-    pub type_: BetaRequestToolSearchToolSearchResultBlockTypeEnum,
-}
-
-impl BetaRequestToolSearchToolSearchResultBlock {
-    pub fn new(
-        tool_references: Vec<BetaRequestToolReferenceBlock>,
-        type_: BetaRequestToolSearchToolSearchResultBlockTypeEnum,
-    ) -> Self {
-        Self {
-            tool_references,
-            type_,
         }
     }
 }

@@ -3,6 +3,22 @@
 
 // shared_beta domain models (part 3)
 
+impl BetaMemoryTool20250818NameEnum {
+    pub fn as_str(&self) -> &str {
+        match self {
+            Self::Memory => "memory",
+        }
+    }
+}
+
+impl std::fmt::Display for BetaMemoryTool20250818NameEnum {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            BetaMemoryTool20250818NameEnum::Memory => f.write_str("memory"),
+        }
+    }
+}
+
 /// Required `string` value serialized in the `type` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum BetaMemoryTool20250818TypeEnum {
@@ -447,26 +463,4 @@ pub struct BetaPlainTextSource {
     /// Required `string` value serialized in the `type` wire field.
     #[serde(rename = "type")]
     pub type_: BetaPlainTextSourceTypeEnum,
-}
-
-impl BetaPlainTextSource {
-    pub fn new(
-        data: String,
-        media_type: BetaPlainTextSourceMediaTypeEnum,
-        type_: BetaPlainTextSourceTypeEnum,
-    ) -> Self {
-        Self {
-            data,
-            media_type,
-            type_,
-        }
-    }
-}
-
-/// Required `string` value serialized in the `type` wire field.
-#[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
-pub enum BetaRateLimitErrorTypeEnum {
-    #[serde(rename = "rate_limit_error")]
-    #[default]
-    RateLimitError,
 }

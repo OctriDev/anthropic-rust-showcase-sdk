@@ -3,11 +3,37 @@
 
 // count_tokens domain models
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum CountMessageTokensParamsSystem {
     String(String),
     RequestTextBlockArray(Vec<RequestTextBlock>),
+}
+
+impl<'de> serde::Deserialize<'de> for CountMessageTokensParamsSystem {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<String>(value.clone()) {
+            let candidate = Self::String(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Vec<RequestTextBlock>>(value.clone()) {
+            let candidate = Self::RequestTextBlockArray(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no CountMessageTokensParamsSystem branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Typed representation of the `CountMessageTokensParams` API schema.
@@ -171,7 +197,7 @@ impl CountMessageTokensParams {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum CountMessageTokensParamsToolsItem {
     Tool(Box<Tool>),
@@ -195,6 +221,172 @@ pub enum CountMessageTokensParamsToolsItem {
     WebFetchTool20260318(Box<WebFetchTool20260318>),
     ToolSearchToolBM2520251119(Box<ToolSearchToolBM2520251119>),
     ToolSearchToolRegex20251119(Box<ToolSearchToolRegex20251119>),
+}
+
+impl<'de> serde::Deserialize<'de> for CountMessageTokensParamsToolsItem {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<Box<Tool>>(value.clone()) {
+            let candidate = Self::Tool(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BashTool20250124>>(value.clone()) {
+            let candidate = Self::BashTool20250124(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<CodeExecutionTool20250522>>(value.clone())
+        {
+            let candidate = Self::CodeExecutionTool20250522(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<CodeExecutionTool20250825>>(value.clone())
+        {
+            let candidate = Self::CodeExecutionTool20250825(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<CodeExecutionTool20260120>>(value.clone())
+        {
+            let candidate = Self::CodeExecutionTool20260120(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<CodeExecutionTool20260521>>(value.clone())
+        {
+            let candidate = Self::CodeExecutionTool20260521(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<BrowserToolset20260801>>(value.clone()) {
+            let candidate = Self::BrowserToolset20260801(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<MemoryTool20250818>>(value.clone()) {
+            let candidate = Self::MemoryTool20250818(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<ComputerToolset20260801>>(value.clone()) {
+            let candidate = Self::ComputerToolset20260801(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<TextEditor20250124>>(value.clone()) {
+            let candidate = Self::TextEditor20250124(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<TextEditor20250429>>(value.clone()) {
+            let candidate = Self::TextEditor20250429(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<TextEditor20250728>>(value.clone()) {
+            let candidate = Self::TextEditor20250728(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<WebSearchTool20250305>>(value.clone()) {
+            let candidate = Self::WebSearchTool20250305(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<WebFetchTool20250910>>(value.clone()) {
+            let candidate = Self::WebFetchTool20250910(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<WebSearchTool20260209>>(value.clone()) {
+            let candidate = Self::WebSearchTool20260209(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<WebFetchTool20260209>>(value.clone()) {
+            let candidate = Self::WebFetchTool20260209(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<WebFetchTool20260309>>(value.clone()) {
+            let candidate = Self::WebFetchTool20260309(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<WebSearchTool20260318>>(value.clone()) {
+            let candidate = Self::WebSearchTool20260318(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<WebFetchTool20260318>>(value.clone()) {
+            let candidate = Self::WebFetchTool20260318(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<ToolSearchToolBM2520251119>>(value.clone())
+        {
+            let candidate = Self::ToolSearchToolBM2520251119(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Box<ToolSearchToolRegex20251119>>(value.clone())
+        {
+            let candidate = Self::ToolSearchToolRegex20251119(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no CountMessageTokensParamsToolsItem branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Typed representation of the `CountMessageTokensResponse` API schema.

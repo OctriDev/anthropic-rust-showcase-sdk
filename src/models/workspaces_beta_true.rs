@@ -40,11 +40,37 @@ impl std::fmt::Display for Unrestricted0376fcc1 {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum BetaDataResidencyCreateParamsAllowedInferenceGeos {
     BetaAllowedInferenceGeoArray(Vec<BetaAllowedInferenceGeo>),
     Unrestricted0376fcc1(Box<Unrestricted0376fcc1>),
+}
+
+impl<'de> serde::Deserialize<'de> for BetaDataResidencyCreateParamsAllowedInferenceGeos {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) = serde_json::from_value::<Vec<BetaAllowedInferenceGeo>>(value.clone()) {
+            let candidate = Self::BetaAllowedInferenceGeoArray(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) = serde_json::from_value::<Box<Unrestricted0376fcc1>>(value.clone()) {
+            let candidate = Self::Unrestricted0376fcc1(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no BetaDataResidencyCreateParamsAllowedInferenceGeos branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Typed representation of the `BetaDataResidencyCreateParams` API schema.

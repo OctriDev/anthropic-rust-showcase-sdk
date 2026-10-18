@@ -3,6 +3,28 @@
 
 // shared_beta domain models (part 4)
 
+impl BetaPlainTextSource {
+    pub fn new(
+        data: String,
+        media_type: BetaPlainTextSourceMediaTypeEnum,
+        type_: BetaPlainTextSourceTypeEnum,
+    ) -> Self {
+        Self {
+            data,
+            media_type,
+            type_,
+        }
+    }
+}
+
+/// Required `string` value serialized in the `type` wire field.
+#[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
+pub enum BetaRateLimitErrorTypeEnum {
+    #[serde(rename = "rate_limit_error")]
+    #[default]
+    RateLimitError,
+}
+
 impl BetaRateLimitErrorTypeEnum {
     pub fn as_str(&self) -> &str {
         match self {
@@ -472,41 +494,4 @@ pub struct BetaTokenTaskBudget {
     /// The budget type. Currently only 'tokens' is supported.
     #[serde(rename = "type")]
     pub type_: BetaTokenTaskBudgetTypeEnum,
-}
-
-impl BetaTokenTaskBudget {
-    pub(super) fn validate_constraints(&self) -> Result<(), crate::errors::SdkError> {
-        if let Some(Some(value)) = self.remaining.as_ref() {
-            crate::validation::validate_range(
-                "remaining",
-                *value as f64,
-                crate::validation::RangeOpts {
-                    min: Some(0_f64),
-                    ..Default::default()
-                },
-            )?;
-        }
-        crate::validation::validate_range(
-            "total",
-            self.total as f64,
-            crate::validation::RangeOpts {
-                min: Some(1024_f64),
-                ..Default::default()
-            },
-        )?;
-        Ok(())
-    }
-
-    pub fn new(
-        total: i64,
-        type_: BetaTokenTaskBudgetTypeEnum,
-    ) -> Result<Self, crate::errors::SdkError> {
-        let value = Self {
-            remaining: None,
-            total,
-            type_,
-        };
-        value.validate_constraints()?;
-        Ok(value)
-    }
 }

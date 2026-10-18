@@ -357,11 +357,41 @@ impl ResponseWebSearchResultLocationCitation {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 #[serde(untagged)]
 pub enum ResponseWebSearchToolResultBlockContent {
     ResponseWebSearchToolResultError(Box<ResponseWebSearchToolResultError>),
     ResponseWebSearchResultBlockArray(Vec<ResponseWebSearchResultBlock>),
+}
+
+impl<'de> serde::Deserialize<'de> for ResponseWebSearchToolResultBlockContent {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = <serde_json::Value as serde::Deserialize>::deserialize(deserializer)?;
+        let mut lossy = None;
+        if let Ok(branch) =
+            serde_json::from_value::<Box<ResponseWebSearchToolResultError>>(value.clone())
+        {
+            let candidate = Self::ResponseWebSearchToolResultError(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        if let Ok(branch) =
+            serde_json::from_value::<Vec<ResponseWebSearchResultBlock>>(value.clone())
+        {
+            let candidate = Self::ResponseWebSearchResultBlockArray(branch);
+            if crate::client::keeps_every_key(&value, &candidate) {
+                return Ok(candidate);
+            }
+            lossy.get_or_insert(candidate);
+        }
+        lossy.ok_or_else(|| {
+            serde::de::Error::custom(
+                "no ResponseWebSearchToolResultBlockContent branch accepts this payload",
+            )
+        })
+    }
 }
 
 /// Required `string` value serialized in the `type` wire field.

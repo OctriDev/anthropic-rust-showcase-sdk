@@ -25,7 +25,7 @@ pub struct UpdateBetaDeploymentsParams {
     pub vault_ids: Option<Option<Vec<String>>>,
     pub initial_events: Option<Vec<BetaManagedAgentsDeploymentInitialEventParams>>,
     pub resources: Option<Option<Vec<BetaManagedAgentsSessionResourceParams>>>,
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
     pub schedule: Option<Option<BetaManagedAgentsScheduleParams>>,
     pub budget: Option<Option<BetaManagedAgentsBudget>>,
 }

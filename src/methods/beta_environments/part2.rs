@@ -17,7 +17,7 @@ pub struct UpdateBetaEnvironmentsParams {
     pub anthropic_workspace_id: Option<String>,
     pub config: Option<Option<BetaPublicEnvironmentUpdateRequestConfig>>,
     pub description: Option<Option<String>>,
-    pub metadata: Option<std::collections::HashMap<String, String>>,
+    pub metadata: Option<std::collections::HashMap<String, Option<String>>>,
     pub name: Option<Option<String>>,
     pub scope: Option<Option<BetaPublicEnvironmentUpdateRequestScope>>,
 }

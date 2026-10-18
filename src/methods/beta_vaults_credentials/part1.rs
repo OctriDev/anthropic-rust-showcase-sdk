@@ -467,7 +467,7 @@ pub struct UpdateBetaVaultsCredentialsParams {
     pub anthropic_beta: Option<Vec<AnthropicBeta>>,
     pub anthropic_workspace_id: Option<String>,
     pub display_name: Option<Option<String>>,
-    pub metadata: Option<Option<std::collections::HashMap<String, String>>>,
+    pub metadata: Option<Option<std::collections::HashMap<String, Option<String>>>>,
     pub auth: Option<BetaManagedAgentsCredentialUpdateAuth>,
 }
 
