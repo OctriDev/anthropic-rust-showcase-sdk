@@ -83,6 +83,18 @@ impl<'de> serde::Deserialize<'de> for ContentBlockSourceContent {
     }
 }
 
+impl ::std::convert::From<String> for ContentBlockSourceContent {
+    fn from(value: String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::std::convert::From<Vec<ContentBlockSourceContentItem>> for ContentBlockSourceContent {
+    fn from(value: Vec<ContentBlockSourceContentItem>) -> Self {
+        Self::ItemArray(value)
+    }
+}
+
 /// Required `string` value serialized in the `type` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum ContentBlockSourceTypeEnum {

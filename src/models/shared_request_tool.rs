@@ -109,6 +109,20 @@ impl<'de> serde::Deserialize<'de> for RequestToolResultBlockContent {
     }
 }
 
+impl ::std::convert::From<String> for RequestToolResultBlockContent {
+    fn from(value: String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::std::convert::From<Vec<RequestToolResultBlockContentItem>>
+    for RequestToolResultBlockContent
+{
+    fn from(value: Vec<RequestToolResultBlockContentItem>) -> Self {
+        Self::ItemArray(value)
+    }
+}
+
 /// Required `string` value serialized in the `type` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum RequestToolResultBlockTypeEnum {

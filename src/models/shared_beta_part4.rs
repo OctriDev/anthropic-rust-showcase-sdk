@@ -3,6 +3,18 @@
 
 // shared_beta domain models (part 4)
 
+/// Typed representation of the `BetaPlainTextSource` API schema.
+#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
+pub struct BetaPlainTextSource {
+    /// Required `string` value serialized in the `data` wire field.
+    pub data: String,
+    /// Required `string` value serialized in the `media_type` wire field.
+    pub media_type: BetaPlainTextSourceMediaTypeEnum,
+    /// Required `string` value serialized in the `type` wire field.
+    #[serde(rename = "type")]
+    pub type_: BetaPlainTextSourceTypeEnum,
+}
+
 impl BetaPlainTextSource {
     pub fn new(
         data: String,
@@ -477,21 +489,4 @@ impl std::fmt::Display for BetaTokenTaskBudgetTypeEnum {
             BetaTokenTaskBudgetTypeEnum::Tokens => f.write_str("tokens"),
         }
     }
-}
-
-/// User-configurable total token budget across contexts.
-#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
-pub struct BetaTokenTaskBudget {
-    /// Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
-    #[serde(
-        skip_serializing_if = "Option::is_none",
-        default,
-        with = "crate::client::double_option"
-    )]
-    pub remaining: Option<Option<i64>>,
-    /// Total token budget across all contexts in the session.
-    pub total: i64,
-    /// The budget type. Currently only 'tokens' is supported.
-    #[serde(rename = "type")]
-    pub type_: BetaTokenTaskBudgetTypeEnum,
 }

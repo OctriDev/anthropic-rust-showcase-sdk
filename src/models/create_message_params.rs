@@ -36,6 +36,18 @@ impl<'de> serde::Deserialize<'de> for CreateMessageParamsWithoutStreamContainer 
     }
 }
 
+impl ::std::convert::From<Box<ContainerParams>> for CreateMessageParamsWithoutStreamContainer {
+    fn from(value: Box<ContainerParams>) -> Self {
+        Self::ContainerParams(value)
+    }
+}
+
+impl ::std::convert::From<String> for CreateMessageParamsWithoutStreamContainer {
+    fn from(value: String) -> Self {
+        Self::String(value)
+    }
+}
+
 /// Determines whether to use priority capacity (if available) or standard capacity for this request.
 ///
 /// Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
@@ -116,6 +128,18 @@ impl<'de> serde::Deserialize<'de> for CreateMessageParamsWithoutStreamSystem {
                 "no CreateMessageParamsWithoutStreamSystem branch accepts this payload",
             )
         })
+    }
+}
+
+impl ::std::convert::From<String> for CreateMessageParamsWithoutStreamSystem {
+    fn from(value: String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::std::convert::From<Vec<RequestTextBlock>> for CreateMessageParamsWithoutStreamSystem {
+    fn from(value: Vec<RequestTextBlock>) -> Self {
+        Self::RequestTextBlockArray(value)
     }
 }
 

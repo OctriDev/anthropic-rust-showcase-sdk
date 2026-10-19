@@ -151,6 +151,18 @@ impl<'de> serde::Deserialize<'de> for BetaInputMessageContent {
     }
 }
 
+impl ::std::convert::From<String> for BetaInputMessageContent {
+    fn from(value: String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::std::convert::From<Vec<BetaInputContentBlock>> for BetaInputMessageContent {
+    fn from(value: Vec<BetaInputContentBlock>) -> Self {
+        Self::BetaInputContentBlockArray(value)
+    }
+}
+
 /// Required enumerated value serialized in the `role` wire field.
 #[derive(Debug, Clone, PartialEq, Default)]
 pub enum BetaInputMessageRoleEnum {

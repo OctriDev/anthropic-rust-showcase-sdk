@@ -169,6 +169,18 @@ impl<'de> serde::Deserialize<'de> for BetaDataResidencyAllowedInferenceGeos {
     }
 }
 
+impl ::std::convert::From<Vec<String>> for BetaDataResidencyAllowedInferenceGeos {
+    fn from(value: Vec<String>) -> Self {
+        Self::StringArray(value)
+    }
+}
+
+impl ::std::convert::From<Box<Unrestricted>> for BetaDataResidencyAllowedInferenceGeos {
+    fn from(value: Box<Unrestricted>) -> Self {
+        Self::Unrestricted(value)
+    }
+}
+
 /// Typed representation of the `BetaDataResidency` API schema.
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct BetaDataResidency {
@@ -480,14 +492,4 @@ impl BetaMCPToolset {
         value.validate_constraints()?;
         Ok(value)
     }
-}
-
-/// Name of the tool.
-///
-/// This is how the tool will be called by the model and in `tool_use` blocks.
-#[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
-pub enum BetaMemoryTool20250818NameEnum {
-    #[serde(rename = "memory")]
-    #[default]
-    Memory,
 }
