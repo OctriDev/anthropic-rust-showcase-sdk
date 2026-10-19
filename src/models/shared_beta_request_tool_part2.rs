@@ -3,6 +3,14 @@
 
 // shared_beta_request_tool domain models (part 2)
 
+impl BetaRequestToolSearchToolSearchResultBlockTypeEnum {
+    pub fn as_str(&self) -> &str {
+        match self {
+            Self::ToolSearchToolSearchResult => "tool_search_tool_search_result",
+        }
+    }
+}
+
 impl std::fmt::Display for BetaRequestToolSearchToolSearchResultBlockTypeEnum {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {

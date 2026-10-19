@@ -60,6 +60,22 @@ impl<'de> serde::Deserialize<'de> for BetaDataResidencyUpdateParamsAllowedInfere
     }
 }
 
+impl ::std::convert::From<Vec<BetaAllowedInferenceGeo>>
+    for BetaDataResidencyUpdateParamsAllowedInferenceGeos
+{
+    fn from(value: Vec<BetaAllowedInferenceGeo>) -> Self {
+        Self::BetaAllowedInferenceGeoArray(value)
+    }
+}
+
+impl ::std::convert::From<Box<Unrestricted991d26af>>
+    for BetaDataResidencyUpdateParamsAllowedInferenceGeos
+{
+    fn from(value: Box<Unrestricted991d26af>) -> Self {
+        Self::Unrestricted991d26af(value)
+    }
+}
+
 /// Typed representation of the `BetaDataResidencyUpdateParams` API schema.
 #[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
 pub struct BetaDataResidencyUpdateParams {

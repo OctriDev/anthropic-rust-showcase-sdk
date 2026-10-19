@@ -3,6 +3,23 @@
 
 // shared_beta domain models (part 5)
 
+/// User-configurable total token budget across contexts.
+#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
+pub struct BetaTokenTaskBudget {
+    /// Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+    #[serde(
+        skip_serializing_if = "Option::is_none",
+        default,
+        with = "crate::client::double_option"
+    )]
+    pub remaining: Option<Option<i64>>,
+    /// Total token budget across all contexts in the session.
+    pub total: i64,
+    /// The budget type. Currently only 'tokens' is supported.
+    #[serde(rename = "type")]
+    pub type_: BetaTokenTaskBudgetTypeEnum,
+}
+
 impl BetaTokenTaskBudget {
     pub(super) fn validate_constraints(&self) -> Result<(), crate::errors::SdkError> {
         if let Some(Some(value)) = self.remaining.as_ref() {

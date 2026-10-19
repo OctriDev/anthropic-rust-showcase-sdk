@@ -129,6 +129,7 @@ include!("models/shared_beta_content.rs");
 include!("models/shared_beta_context.rs");
 include!("models/shared_beta_create.rs");
 include!("models/shared_beta_create_part2.rs");
+include!("models/shared_beta_create_part3.rs");
 include!("models/shared_beta_diagnostics.rs");
 include!("models/shared_beta_dream.rs");
 include!("models/shared_beta_dreaming.rs");

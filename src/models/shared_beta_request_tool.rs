@@ -281,6 +281,20 @@ impl<'de> serde::Deserialize<'de> for BetaRequestToolResultBlockContent {
     }
 }
 
+impl ::std::convert::From<String> for BetaRequestToolResultBlockContent {
+    fn from(value: String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::std::convert::From<Vec<BetaRequestToolResultBlockContentItem>>
+    for BetaRequestToolResultBlockContent
+{
+    fn from(value: Vec<BetaRequestToolResultBlockContentItem>) -> Self {
+        Self::ItemArray(value)
+    }
+}
+
 /// Required `string` value serialized in the `type` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum BetaRequestToolResultBlockTypeEnum {
@@ -560,12 +574,4 @@ pub enum BetaRequestToolSearchToolSearchResultBlockTypeEnum {
     #[serde(rename = "tool_search_tool_search_result")]
     #[default]
     ToolSearchToolSearchResult,
-}
-
-impl BetaRequestToolSearchToolSearchResultBlockTypeEnum {
-    pub fn as_str(&self) -> &str {
-        match self {
-            Self::ToolSearchToolSearchResult => "tool_search_tool_search_result",
-        }
-    }
 }

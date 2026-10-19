@@ -396,6 +396,22 @@ impl<'de> serde::Deserialize<'de> for BetaResponseWebSearchToolResultBlockConten
     }
 }
 
+impl ::std::convert::From<Box<BetaResponseWebSearchToolResultError>>
+    for BetaResponseWebSearchToolResultBlockContent
+{
+    fn from(value: Box<BetaResponseWebSearchToolResultError>) -> Self {
+        Self::BetaResponseWebSearchToolResultError(value)
+    }
+}
+
+impl ::std::convert::From<Vec<BetaResponseWebSearchResultBlock>>
+    for BetaResponseWebSearchToolResultBlockContent
+{
+    fn from(value: Vec<BetaResponseWebSearchResultBlock>) -> Self {
+        Self::BetaResponseWebSearchResultBlockArray(value)
+    }
+}
+
 /// Required `string` value serialized in the `type` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum BetaResponseWebSearchToolResultBlockTypeEnum {
