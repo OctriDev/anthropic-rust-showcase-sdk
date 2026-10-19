@@ -36,6 +36,18 @@ impl<'de> serde::Deserialize<'de> for BetaClearThinking20251015KeepVariant0 {
     }
 }
 
+impl ::std::convert::From<Box<BetaThinkingTurns>> for BetaClearThinking20251015KeepVariant0 {
+    fn from(value: Box<BetaThinkingTurns>) -> Self {
+        Self::BetaThinkingTurns(value)
+    }
+}
+
+impl ::std::convert::From<Box<BetaAllThinkingTurns>> for BetaClearThinking20251015KeepVariant0 {
+    fn from(value: Box<BetaAllThinkingTurns>) -> Self {
+        Self::BetaAllThinkingTurns(value)
+    }
+}
+
 /// Optional `string` value serialized in the `keep` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum BetaClearThinking20251015KeepVariant1Enum {
@@ -92,6 +104,22 @@ impl<'de> serde::Deserialize<'de> for BetaClearThinking20251015Keep {
         lossy.ok_or_else(|| {
             serde::de::Error::custom("no BetaClearThinking20251015Keep branch accepts this payload")
         })
+    }
+}
+
+impl ::std::convert::From<Box<BetaClearThinking20251015KeepVariant0>>
+    for BetaClearThinking20251015Keep
+{
+    fn from(value: Box<BetaClearThinking20251015KeepVariant0>) -> Self {
+        Self::Object(value)
+    }
+}
+
+impl ::std::convert::From<Box<BetaClearThinking20251015KeepVariant1Enum>>
+    for BetaClearThinking20251015Keep
+{
+    fn from(value: Box<BetaClearThinking20251015KeepVariant1Enum>) -> Self {
+        Self::Object2(value)
     }
 }
 
@@ -168,6 +196,18 @@ impl<'de> serde::Deserialize<'de> for BetaClearToolUses20250919ClearToolInputs {
                 "no BetaClearToolUses20250919ClearToolInputs branch accepts this payload",
             )
         })
+    }
+}
+
+impl ::std::convert::From<bool> for BetaClearToolUses20250919ClearToolInputs {
+    fn from(value: bool) -> Self {
+        Self::Bool(value)
+    }
+}
+
+impl ::std::convert::From<Vec<String>> for BetaClearToolUses20250919ClearToolInputs {
+    fn from(value: Vec<String>) -> Self {
+        Self::StringArray(value)
     }
 }
 

@@ -394,6 +394,22 @@ impl<'de> serde::Deserialize<'de> for ResponseWebSearchToolResultBlockContent {
     }
 }
 
+impl ::std::convert::From<Box<ResponseWebSearchToolResultError>>
+    for ResponseWebSearchToolResultBlockContent
+{
+    fn from(value: Box<ResponseWebSearchToolResultError>) -> Self {
+        Self::ResponseWebSearchToolResultError(value)
+    }
+}
+
+impl ::std::convert::From<Vec<ResponseWebSearchResultBlock>>
+    for ResponseWebSearchToolResultBlockContent
+{
+    fn from(value: Vec<ResponseWebSearchResultBlock>) -> Self {
+        Self::ResponseWebSearchResultBlockArray(value)
+    }
+}
+
 /// Required `string` value serialized in the `type` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum ResponseWebSearchToolResultBlockTypeEnum {

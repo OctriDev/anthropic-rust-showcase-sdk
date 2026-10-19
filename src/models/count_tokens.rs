@@ -36,6 +36,18 @@ impl<'de> serde::Deserialize<'de> for CountMessageTokensParamsSystem {
     }
 }
 
+impl ::std::convert::From<String> for CountMessageTokensParamsSystem {
+    fn from(value: String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::std::convert::From<Vec<RequestTextBlock>> for CountMessageTokensParamsSystem {
+    fn from(value: Vec<RequestTextBlock>) -> Self {
+        Self::RequestTextBlockArray(value)
+    }
+}
+
 /// Typed representation of the `CountMessageTokensParams` API schema.
 #[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
 pub struct CountMessageTokensParams {

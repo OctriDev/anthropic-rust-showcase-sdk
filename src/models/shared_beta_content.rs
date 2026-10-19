@@ -93,6 +93,20 @@ impl<'de> serde::Deserialize<'de> for BetaContentBlockSourceContent {
     }
 }
 
+impl ::std::convert::From<String> for BetaContentBlockSourceContent {
+    fn from(value: String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::std::convert::From<Vec<BetaContentBlockSourceContentItem>>
+    for BetaContentBlockSourceContent
+{
+    fn from(value: Vec<BetaContentBlockSourceContentItem>) -> Self {
+        Self::ItemArray(value)
+    }
+}
+
 /// Required `string` value serialized in the `type` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum BetaContentBlockSourceTypeEnum {

@@ -36,6 +36,18 @@ impl<'de> serde::Deserialize<'de> for BetaResponseMCPToolResultBlockContent {
     }
 }
 
+impl ::std::convert::From<String> for BetaResponseMCPToolResultBlockContent {
+    fn from(value: String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::std::convert::From<Vec<BetaResponseTextBlock>> for BetaResponseMCPToolResultBlockContent {
+    fn from(value: Vec<BetaResponseTextBlock>) -> Self {
+        Self::BetaResponseTextBlockArray(value)
+    }
+}
+
 /// Required `string` value serialized in the `type` wire field.
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub enum BetaResponseMCPToolResultBlockTypeEnum {

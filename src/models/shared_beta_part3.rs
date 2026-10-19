@@ -3,6 +3,16 @@
 
 // shared_beta domain models (part 3)
 
+/// Name of the tool.
+///
+/// This is how the tool will be called by the model and in `tool_use` blocks.
+#[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
+pub enum BetaMemoryTool20250818NameEnum {
+    #[serde(rename = "memory")]
+    #[default]
+    Memory,
+}
+
 impl BetaMemoryTool20250818NameEnum {
     pub fn as_str(&self) -> &str {
         match self {
@@ -451,16 +461,4 @@ impl std::fmt::Display for BetaPlainTextSourceTypeEnum {
             BetaPlainTextSourceTypeEnum::Text => f.write_str("text"),
         }
     }
-}
-
-/// Typed representation of the `BetaPlainTextSource` API schema.
-#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
-pub struct BetaPlainTextSource {
-    /// Required `string` value serialized in the `data` wire field.
-    pub data: String,
-    /// Required `string` value serialized in the `media_type` wire field.
-    pub media_type: BetaPlainTextSourceMediaTypeEnum,
-    /// Required `string` value serialized in the `type` wire field.
-    #[serde(rename = "type")]
-    pub type_: BetaPlainTextSourceTypeEnum,
 }

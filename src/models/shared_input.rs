@@ -89,6 +89,18 @@ impl<'de> serde::Deserialize<'de> for InputMessageContent {
     }
 }
 
+impl ::std::convert::From<String> for InputMessageContent {
+    fn from(value: String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::std::convert::From<Vec<InputContentBlock>> for InputMessageContent {
+    fn from(value: Vec<InputContentBlock>) -> Self {
+        Self::InputContentBlockArray(value)
+    }
+}
+
 /// Required enumerated value serialized in the `role` wire field.
 #[derive(Debug, Clone, PartialEq, Default)]
 pub enum InputMessageRoleEnum {
