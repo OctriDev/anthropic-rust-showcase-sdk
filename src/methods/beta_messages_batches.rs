@@ -255,6 +255,14 @@ pub fn list_beta_messages_batches(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaMessagesBatchesParams {
+    pub message_batch_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 ///
 /// # Arguments
@@ -273,12 +281,15 @@ pub fn list_beta_messages_batches(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn retrieve_beta_messages_batches(
     config: &ClientConfig,
-    message_batch_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: RetrieveBetaMessagesBatchesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaMessageBatch, SdkError> {
+    let RetrieveBetaMessagesBatchesParams {
+        message_batch_id,
+        anthropic_beta,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(3);
     if let Some(ref value) = anthropic_beta {
         __headers.push((
@@ -335,6 +346,14 @@ pub fn retrieve_beta_messages_batches(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaMessagesBatchesParams {
+    pub message_batch_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Delete a Message Batch. Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 ///
 /// # Arguments
@@ -353,12 +372,15 @@ pub fn retrieve_beta_messages_batches(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn delete_beta_messages_batches(
     config: &ClientConfig,
-    message_batch_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: DeleteBetaMessagesBatchesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaDeleteMessageBatchResponse, SdkError> {
+    let DeleteBetaMessagesBatchesParams {
+        message_batch_id,
+        anthropic_beta,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(3);
     if let Some(ref value) = anthropic_beta {
         __headers.push((
@@ -415,6 +437,14 @@ pub fn delete_beta_messages_batches(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct CancelBetaMessagesBatchesParams {
+    pub message_batch_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation. The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 ///
 /// # Arguments
@@ -433,12 +463,15 @@ pub fn delete_beta_messages_batches(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn cancel_beta_messages_batches(
     config: &ClientConfig,
-    message_batch_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: CancelBetaMessagesBatchesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaMessageBatch, SdkError> {
+    let CancelBetaMessagesBatchesParams {
+        message_batch_id,
+        anthropic_beta,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(3);
     if let Some(ref value) = anthropic_beta {
         __headers.push((
@@ -495,6 +528,14 @@ pub fn cancel_beta_messages_batches(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ResultsBetaMessagesBatchesParams {
+    pub message_batch_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Streams the results of a Message Batch as a `.jsonl` file. Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 ///
 /// # Arguments
@@ -513,12 +554,15 @@ pub fn cancel_beta_messages_batches(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn results_beta_messages_batches(
     config: &ClientConfig,
-    message_batch_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: ResultsBetaMessagesBatchesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaMessageBatchIndividualResponse, SdkError> {
+    let ResultsBetaMessagesBatchesParams {
+        message_batch_id,
+        anthropic_beta,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(3);
     if let Some(ref value) = anthropic_beta {
         __headers.push((

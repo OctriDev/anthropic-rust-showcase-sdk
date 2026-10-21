@@ -19,20 +19,10 @@ impl MessagesBatchesNamespace {
     /// Send a batch of Message creation requests. The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
     pub fn create(
         &self,
-        requests: Vec<MessageBatchIndividualRequestParams>,
-        anthropic_version: Option<String>,
-        anthropic_user_profile_id: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::messages_batches::CreateMessagesBatchesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<MessageBatch, crate::errors::SdkError> {
-        crate::methods::messages_batches::create_messages_batches(
-            &self.config,
-            requests,
-            anthropic_version,
-            anthropic_user_profile_id,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::messages_batches::create_messages_batches(&self.config, params, options)
     }
     /// List all Message Batches within a Workspace. Most recently created batches are returned first. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
     pub fn list(
@@ -45,66 +35,34 @@ impl MessagesBatchesNamespace {
     /// This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
     pub fn retrieve(
         &self,
-        message_batch_id: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::messages_batches::RetrieveMessagesBatchesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<MessageBatch, crate::errors::SdkError> {
-        crate::methods::messages_batches::retrieve_messages_batches(
-            &self.config,
-            message_batch_id,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::messages_batches::retrieve_messages_batches(&self.config, params, options)
     }
     /// Delete a Message Batch. Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
     pub fn delete(
         &self,
-        message_batch_id: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::messages_batches::DeleteMessagesBatchesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<DeleteMessageBatchResponse, crate::errors::SdkError> {
-        crate::methods::messages_batches::delete_messages_batches(
-            &self.config,
-            message_batch_id,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::messages_batches::delete_messages_batches(&self.config, params, options)
     }
     /// Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation. The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
     pub fn cancel(
         &self,
-        message_batch_id: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::messages_batches::CancelMessagesBatchesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<MessageBatch, crate::errors::SdkError> {
-        crate::methods::messages_batches::cancel_messages_batches(
-            &self.config,
-            message_batch_id,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::messages_batches::cancel_messages_batches(&self.config, params, options)
     }
     /// Streams the results of a Message Batch as a `.jsonl` file. Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
     pub fn results(
         &self,
-        message_batch_id: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::messages_batches::ResultsMessagesBatchesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<MessageBatchIndividualResponse, crate::errors::SdkError> {
-        crate::methods::messages_batches::results_messages_batches(
-            &self.config,
-            message_batch_id,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::messages_batches::results_messages_batches(&self.config, params, options)
     }
 }
 
@@ -185,20 +143,10 @@ impl ModelsNamespace {
     /// Get a specific model. The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
     pub fn retrieve(
         &self,
-        model_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::models::RetrieveModelsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<ModelInfo, crate::errors::SdkError> {
-        crate::methods::models::retrieve_models(
-            &self.config,
-            model_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::models::retrieve_models(&self.config, params, options)
     }
 }
 
@@ -217,20 +165,10 @@ impl FilesNamespace {
     /// Uploads a file for use through the Files API. Send the file as multipart form data and optionally set `expires_in_seconds` to control how long its bytes remain available. The response includes file metadata and the expiration time when one is set.
     pub fn upload(
         &self,
-        file: crate::client::UploadFile,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
-        expires_in_seconds: Option<i64>,
+        params: crate::methods::files::UploadFilesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<FileMetadataSchema, crate::errors::SdkError> {
-        crate::methods::files::upload_files(
-            &self.config,
-            file,
-            anthropic_version,
-            anthropic_workspace_id,
-            expires_in_seconds,
-            options,
-        )
+        crate::methods::files::upload_files(&self.config, params, options)
     }
     /// Lists file metadata for the authenticated user in the selected Workspace. Use `page` and `limit` to paginate the results, or use `ids[]` to request specific files; `ids[]` cannot be combined with either parameter and returns a single page. IDs that do not resolve to visible files are omitted.
     pub fn list(
@@ -252,50 +190,26 @@ impl FilesNamespace {
     /// Retrieves metadata for a specific file. Use `file_id` to identify the file whose metadata you need, including its filename, MIME type, size, and availability. The response also includes the file's expiration time when applicable.
     pub fn retrieve(
         &self,
-        file_id: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::files::RetrieveFilesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<FileMetadataSchema, crate::errors::SdkError> {
-        crate::methods::files::retrieve_files(
-            &self.config,
-            file_id,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::files::retrieve_files(&self.config, params, options)
     }
     /// Deletes a specific file. Supply the file's `file_id` to remove it from the Files API. A successful response identifies the deleted file.
     pub fn delete(
         &self,
-        file_id: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::files::DeleteFilesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<FileDeleteResponse, crate::errors::SdkError> {
-        crate::methods::files::delete_files(
-            &self.config,
-            file_id,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::files::delete_files(&self.config, params, options)
     }
     /// Retrieves the file bytes for a specific file. Supply `file_id` for the file whose content you want to download. The response contains the file content as an octet stream.
     pub fn download(
         &self,
-        file_id: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::files::DownloadFilesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<Vec<u8>, crate::errors::SdkError> {
-        crate::methods::files::download_files(
-            &self.config,
-            file_id,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::files::download_files(&self.config, params, options)
     }
 }
 
@@ -314,20 +228,10 @@ impl SkillsVersionsNamespace {
     /// Creates a new version of a skill by uploading its files. Put all files in the same top-level directory and include `SKILL.md` at that directory's root. The response contains the created skill version and its generated identifier.
     pub fn create(
         &self,
-        skill_id: String,
-        files: Vec<crate::client::UploadFile>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::skills_versions::CreateSkillsVersionsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<SkillVersion, crate::errors::SdkError> {
-        crate::methods::skills_versions::create_skills_versions(
-            &self.config,
-            skill_id,
-            files,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::skills_versions::create_skills_versions(&self.config, params, options)
     }
     /// Lists versions of a specific skill. Use `page` to continue from the previous response's `next_page` token and `limit` to control the number of results per page.
     pub fn list(
@@ -354,38 +258,18 @@ impl SkillsVersionsNamespace {
     /// Retrieves a specific version of a skill. Use `version` to identify the version by its ID or request `latest` for the skill's most recent version. With the `skills-2025-10-02` beta header, identify the version by its Unix epoch timestamp instead.
     pub fn retrieve(
         &self,
-        skill_id: String,
-        version: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::skills_versions::RetrieveSkillsVersionsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<SkillVersion, crate::errors::SdkError> {
-        crate::methods::skills_versions::retrieve_skills_versions(
-            &self.config,
-            skill_id,
-            version,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::skills_versions::retrieve_skills_versions(&self.config, params, options)
     }
     /// Deletes a specific version of a skill. Supply the skill and version identifiers to select the version to remove. The response confirms the deletion with the deleted version's ID.
     pub fn delete(
         &self,
-        skill_id: String,
-        version: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::skills_versions::DeleteSkillsVersionsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<DeletedSkillVersion, crate::errors::SdkError> {
-        crate::methods::skills_versions::delete_skills_versions(
-            &self.config,
-            skill_id,
-            version,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::skills_versions::delete_skills_versions(&self.config, params, options)
     }
 }
 
@@ -406,20 +290,10 @@ impl SkillsNamespace {
     /// Creates a skill from uploaded files and creates its initial version. Provide the files in a single top-level directory with `SKILL.md` at that directory's root; optionally set `display_name` to a human-readable label. If omitted, the label is derived from the `SKILL.md` frontmatter name.
     pub fn create(
         &self,
-        files: Vec<crate::client::UploadFile>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
-        display_name: Option<Option<String>>,
+        params: crate::methods::skills::CreateSkillsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<Skill, crate::errors::SdkError> {
-        crate::methods::skills::create_skills(
-            &self.config,
-            files,
-            anthropic_version,
-            anthropic_workspace_id,
-            display_name,
-            options,
-        )
+        crate::methods::skills::create_skills(&self.config, params, options)
     }
     /// Lists skills available to the authenticated user, with optional pagination and filtering by source. Use `source` to limit results to custom or Anthropic-created skills, and use `page` and `limit` to paginate the results. The response includes a `next_page` cursor when more results are available.
     pub fn list(
@@ -441,34 +315,18 @@ impl SkillsNamespace {
     /// Retrieves a skill by its unique identifier. Use `skill_id` to identify the skill and inspect its display name, source, timestamps, and latest version identifier. The identifier's format and length may change over time.
     pub fn retrieve(
         &self,
-        skill_id: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::skills::RetrieveSkillsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<Skill, crate::errors::SdkError> {
-        crate::methods::skills::retrieve_skills(
-            &self.config,
-            skill_id,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::skills::retrieve_skills(&self.config, params, options)
     }
     /// Deletes a skill identified by its unique identifier. Use `skill_id` to select the skill to remove. A successful response confirms the deletion and includes the skill's ID.
     pub fn delete(
         &self,
-        skill_id: String,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::skills::DeleteSkillsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<DeletedSkill, crate::errors::SdkError> {
-        crate::methods::skills::delete_skills(
-            &self.config,
-            skill_id,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::skills::delete_skills(&self.config, params, options)
     }
 }
 
@@ -511,72 +369,48 @@ impl BetaMessagesBatchesNamespace {
     /// This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
     pub fn retrieve(
         &self,
-        message_batch_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_messages_batches::RetrieveBetaMessagesBatchesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaMessageBatch, crate::errors::SdkError> {
         crate::methods::beta_messages_batches::retrieve_beta_messages_batches(
             &self.config,
-            message_batch_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
+            params,
             options,
         )
     }
     /// Delete a Message Batch. Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
     pub fn delete(
         &self,
-        message_batch_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_messages_batches::DeleteBetaMessagesBatchesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDeleteMessageBatchResponse, crate::errors::SdkError> {
         crate::methods::beta_messages_batches::delete_beta_messages_batches(
             &self.config,
-            message_batch_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
+            params,
             options,
         )
     }
     /// Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation. The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
     pub fn cancel(
         &self,
-        message_batch_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_messages_batches::CancelBetaMessagesBatchesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaMessageBatch, crate::errors::SdkError> {
         crate::methods::beta_messages_batches::cancel_beta_messages_batches(
             &self.config,
-            message_batch_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
+            params,
             options,
         )
     }
     /// Streams the results of a Message Batch as a `.jsonl` file. Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
     pub fn results(
         &self,
-        message_batch_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_messages_batches::ResultsBetaMessagesBatchesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaMessageBatchIndividualResponse, crate::errors::SdkError> {
         crate::methods::beta_messages_batches::results_beta_messages_batches(
             &self.config,
-            message_batch_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
+            params,
             options,
         )
     }
@@ -637,20 +471,10 @@ impl BetaModelsNamespace {
     /// Get a specific model. The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
     pub fn retrieve(
         &self,
-        model_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_models::RetrieveBetaModelsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaModelInfo, crate::errors::SdkError> {
-        crate::methods::beta_models::retrieve_beta_models(
-            &self.config,
-            model_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_models::retrieve_beta_models(&self.config, params, options)
     }
 }
 
@@ -699,56 +523,26 @@ impl BetaFilesNamespace {
     /// Retrieves metadata for a file by its ID. Use this operation to inspect details such as the file's name, MIME type, size, scope, and expiration time. Provide an API key and, when needed, a Workspace ID that matches the credential's Workspace.
     pub fn retrieve(
         &self,
-        file_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_files::RetrieveBetaFilesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaFileMetadataSchema, crate::errors::SdkError> {
-        crate::methods::beta_files::retrieve_beta_files(
-            &self.config,
-            file_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_files::retrieve_beta_files(&self.config, params, options)
     }
     /// Deletes a file by its ID. Use this operation when you no longer need the file; deletion removes it from the files available to you. Provide an API key and, when needed, a Workspace ID that matches the credential's Workspace.
     pub fn delete(
         &self,
-        file_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_files::DeleteBetaFilesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaFileDeleteResponse, crate::errors::SdkError> {
-        crate::methods::beta_files::delete_beta_files(
-            &self.config,
-            file_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_files::delete_beta_files(&self.config, params, options)
     }
     /// Retrieves the contents of a file by its ID. Use this operation when you need the file bytes rather than its metadata. Provide an API key and, when needed, a Workspace ID that matches the credential's Workspace.
     pub fn download(
         &self,
-        file_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_files::DownloadBetaFilesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<Vec<u8>, crate::errors::SdkError> {
-        crate::methods::beta_files::download_beta_files(
-            &self.config,
-            file_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_files::download_beta_files(&self.config, params, options)
     }
 }
 
@@ -887,38 +681,18 @@ impl BetaSkillsNamespace {
     /// Retrieves a Skill by its identifier. Use `skill_id` to select the Skill and, when applicable, `anthropic-workspace-id` to choose the workspace to access. The response includes the Skill's metadata and latest version identifier.
     pub fn retrieve(
         &self,
-        skill_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_skills::RetrieveBetaSkillsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaSkill, crate::errors::SdkError> {
-        crate::methods::beta_skills::retrieve_beta_skills(
-            &self.config,
-            skill_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_skills::retrieve_beta_skills(&self.config, params, options)
     }
     /// Deletes a Skill identified by its `skill_id` path parameter. Use this operation when you want to remove a Skill from the selected workspace. The response confirms deletion with the Skill identifier and a deletion type.
     pub fn delete(
         &self,
-        skill_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_skills::DeleteBetaSkillsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDeletedSkill, crate::errors::SdkError> {
-        crate::methods::beta_skills::delete_beta_skills(
-            &self.config,
-            skill_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_skills::delete_beta_skills(&self.config, params, options)
     }
 }
 
@@ -1117,20 +891,10 @@ impl BetaEnvironmentsNamespace {
     /// Retrieve a specific environment by ID.
     pub fn retrieve(
         &self,
-        environment_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_environments::RetrieveBetaEnvironmentsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaEnvironment, crate::errors::SdkError> {
-        crate::methods::beta_environments::retrieve_beta_environments(
-            &self.config,
-            environment_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_environments::retrieve_beta_environments(&self.config, params, options)
     }
     /// Updates the configuration and settings of an existing environment. Supply only the fields you want to change: omitted fields remain unchanged, while `description: null` clears the description. Use `scope` to choose whether the environment is visible across the organization or only to its owning account.
     ///
@@ -1147,40 +911,20 @@ impl BetaEnvironmentsNamespace {
     /// Delete an environment by ID. Returns a confirmation of the deletion.
     pub fn delete(
         &self,
-        environment_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_environments::DeleteBetaEnvironmentsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaEnvironmentDeleteResponse, crate::errors::SdkError> {
-        crate::methods::beta_environments::delete_beta_environments(
-            &self.config,
-            environment_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_environments::delete_beta_environments(&self.config, params, options)
     }
     /// Archives an environment identified by `environment_id`. Use this operation to prevent the environment from being used to create new sessions without deleting the environment record. The response includes the environment with its updated archive timestamp.
     ///
     /// Archive an environment by ID. Archived environments cannot be used to create new sessions.
     pub fn archive(
         &self,
-        environment_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_environments::ArchiveBetaEnvironmentsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaEnvironment, crate::errors::SdkError> {
-        crate::methods::beta_environments::archive_beta_environments(
-            &self.config,
-            environment_id,
-            anthropic_beta,
-            anthropic_version,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_environments::archive_beta_environments(&self.config, params, options)
     }
 }
 
@@ -1505,20 +1249,10 @@ impl BetaSessionsNamespace {
     /// Retrieves a session by its identifier. Use this operation to inspect the session's current status, configuration, resources, cumulative usage, and timing statistics. The returned agent definition is a snapshot of the agent configuration from when the session was created.
     pub fn retrieve(
         &self,
-        session_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_sessions::RetrieveBetaSessionsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsSession, crate::errors::SdkError> {
-        crate::methods::beta_sessions::retrieve_beta_sessions(
-            &self.config,
-            session_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_sessions::retrieve_beta_sessions(&self.config, params, options)
     }
     /// Updates configurable fields on a session while preserving fields you omit. Use `title`, `metadata`, `agent`, or `budget` to change the corresponding session settings; only `tools` and `mcp_servers` can be updated in the agent configuration. `vault_ids` is reserved for future use and requests that set it are rejected.
     pub fn update(
@@ -1531,38 +1265,18 @@ impl BetaSessionsNamespace {
     /// Deletes a session permanently. Use this operation when you need to remove a session rather than archive it. A successful response confirms deletion with the session identifier.
     pub fn delete(
         &self,
-        session_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_sessions::DeleteBetaSessionsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsDeletedSession, crate::errors::SdkError> {
-        crate::methods::beta_sessions::delete_beta_sessions(
-            &self.config,
-            session_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_sessions::delete_beta_sessions(&self.config, params, options)
     }
     /// Archives a session, marking it as archived while retaining its session record. Use `session_id` to identify the session; if you select a Workspace with `anthropic-workspace-id`, it must match the Workspace associated with the credential.
     pub fn archive(
         &self,
-        session_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_sessions::ArchiveBetaSessionsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsSession, crate::errors::SdkError> {
-        crate::methods::beta_sessions::archive_beta_sessions(
-            &self.config,
-            session_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_sessions::archive_beta_sessions(&self.config, params, options)
     }
 }
 
@@ -1669,20 +1383,10 @@ impl BetaAgentsNamespace {
     /// Archives an agent so it is marked as archived. Use `agent_id` to select the agent to archive. A successful response returns the agent object, including its archive timestamp.
     pub fn archive(
         &self,
-        agent_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_agents::ArchiveBetaAgentsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsAgent, crate::errors::SdkError> {
-        crate::methods::beta_agents::archive_beta_agents(
-            &self.config,
-            agent_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_agents::archive_beta_agents(&self.config, params, options)
     }
 }
 
@@ -1731,20 +1435,10 @@ impl BetaDeploymentsNamespace {
     /// Retrieves a deployment by its identifier. Use `deployment_id` to select the deployment and inspect its agent, environment, schedule, resources, and lifecycle status. The response includes the deployment's current configuration and status details.
     pub fn retrieve(
         &self,
-        deployment_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_deployments::RetrieveBetaDeploymentsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsDeployment, crate::errors::SdkError> {
-        crate::methods::beta_deployments::retrieve_beta_deployments(
-            &self.config,
-            deployment_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_deployments::retrieve_beta_deployments(&self.config, params, options)
     }
     /// Updates a deployment's configuration while preserving any fields you omit. Use the request body to replace or clear supported values, including `description`, `vault_ids`, `resources`, `metadata`, `schedule`, and `budget`; `name` must be non-empty when supplied. The response includes the updated deployment and its current status.
     pub fn update(
@@ -1757,74 +1451,34 @@ impl BetaDeploymentsNamespace {
     /// Archives a deployment so it is no longer treated as an active deployment for management purposes. Use `deployment_id` to identify the deployment to archive; the response returns the deployment record, including its status and timestamps.
     pub fn archive(
         &self,
-        deployment_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_deployments::ArchiveBetaDeploymentsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsDeployment, crate::errors::SdkError> {
-        crate::methods::beta_deployments::archive_beta_deployments(
-            &self.config,
-            deployment_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_deployments::archive_beta_deployments(&self.config, params, options)
     }
     /// Pauses a deployment to stop it from running until it is unpaused. Use `deployment_id` to select the deployment; the response returns the deployment record with its computed status and pause information.
     pub fn pause(
         &self,
-        deployment_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_deployments::PauseBetaDeploymentsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsDeployment, crate::errors::SdkError> {
-        crate::methods::beta_deployments::pause_beta_deployments(
-            &self.config,
-            deployment_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_deployments::pause_beta_deployments(&self.config, params, options)
     }
     /// Unpauses a deployment so it can run again. Use `deployment_id` to select the deployment; the response returns the deployment record with its computed status and pause information.
     pub fn unpause(
         &self,
-        deployment_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_deployments::UnpauseBetaDeploymentsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsDeployment, crate::errors::SdkError> {
-        crate::methods::beta_deployments::unpause_beta_deployments(
-            &self.config,
-            deployment_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_deployments::unpause_beta_deployments(&self.config, params, options)
     }
     /// Triggers an immediate run of a deployment and records the result of session creation. Use `deployment_id` to select the deployment; inspect the returned run record's `session_id` or `error` to determine whether session creation succeeded.
     pub fn run(
         &self,
-        deployment_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_deployments::RunBetaDeploymentsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsDeploymentRun, crate::errors::SdkError> {
-        crate::methods::beta_deployments::run_beta_deployments(
-            &self.config,
-            deployment_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_deployments::run_beta_deployments(&self.config, params, options)
     }
 }
 
@@ -1869,18 +1523,12 @@ impl BetaDeploymentRunsNamespace {
     /// Retrieves the record for a single deployment run, including whether session creation succeeded or failed. Use `deployment_run_id` to select the run and inspect `session_id` or `error` for its creation outcome.
     pub fn retrieve(
         &self,
-        deployment_run_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_deployment_runs::RetrieveBetaDeploymentRunsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsDeploymentRun, crate::errors::SdkError> {
         crate::methods::beta_deployment_runs::retrieve_beta_deployment_runs(
             &self.config,
-            deployment_run_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
+            params,
             options,
         )
     }
@@ -2045,20 +1693,10 @@ impl BetaVaultsNamespace {
     /// Retrieves a vault that stores credentials for use by agents during sessions. Use `vault_id` to identify the vault; the response includes its display name, metadata, timestamps, and archive state.
     pub fn retrieve(
         &self,
-        vault_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_vaults::RetrieveBetaVaultsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsVault, crate::errors::SdkError> {
-        crate::methods::beta_vaults::retrieve_beta_vaults(
-            &self.config,
-            vault_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_vaults::retrieve_beta_vaults(&self.config, params, options)
     }
     /// Updates a vault's human-readable name or metadata. Send `display_name` to change the name, or use `metadata` to add, replace, or delete individual keys; omitted metadata keys are preserved. The `anthropic-workspace-id` header must match the credential's Workspace when you use it.
     pub fn update(
@@ -2071,38 +1709,18 @@ impl BetaVaultsNamespace {
     /// Deletes a vault. Use `vault_id` to identify the vault to remove, and send `anthropic-workspace-id` only when your credential can act on more than one Workspace. The response confirms deletion and includes the deleted vault's identifier.
     pub fn delete(
         &self,
-        vault_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_vaults::DeleteBetaVaultsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsDeletedVault, crate::errors::SdkError> {
-        crate::methods::beta_vaults::delete_beta_vaults(
-            &self.config,
-            vault_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_vaults::delete_beta_vaults(&self.config, params, options)
     }
     /// Archives a vault so it is no longer active for use by agents during sessions. Use `vault_id` to select the vault, and provide `anthropic-workspace-id` when a multi-Workspace credential needs to target a specific Workspace. The response includes the vault's updated archive timestamp.
     pub fn archive(
         &self,
-        vault_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_vaults::ArchiveBetaVaultsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsVault, crate::errors::SdkError> {
-        crate::methods::beta_vaults::archive_beta_vaults(
-            &self.config,
-            vault_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_vaults::archive_beta_vaults(&self.config, params, options)
     }
 }
 
@@ -2294,18 +1912,12 @@ impl BetaMemoryStoresNamespace {
     /// Retrieves a memory store, including stores that have been archived. Use `memory_store_id` to identify the store; include `anthropic-workspace-id` only when your credentials can access multiple workspaces.
     pub fn retrieve(
         &self,
-        memory_store_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_memory_stores::RetrieveBetaMemoryStoresParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsGetMemoryStoreResponse, crate::errors::SdkError> {
         crate::methods::beta_memory_stores::retrieve_beta_memory_stores(
             &self.config,
-            memory_store_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
+            params,
             options,
         )
     }
@@ -2320,36 +1932,20 @@ impl BetaMemoryStoresNamespace {
     /// Deletes a memory store. Use `memory_store_id` to identify the store; deletion removes the store rather than archiving it. A successful response confirms the deleted store's identifier.
     pub fn delete(
         &self,
-        memory_store_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_memory_stores::DeleteBetaMemoryStoresParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsDeleteMemoryStoreResponse, crate::errors::SdkError> {
-        crate::methods::beta_memory_stores::delete_beta_memory_stores(
-            &self.config,
-            memory_store_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_memory_stores::delete_beta_memory_stores(&self.config, params, options)
     }
     /// Archives a memory store by setting its `archived_at` timestamp. Use this operation when you want to retain the store while marking it as archived; the response includes the updated store.
     pub fn archive(
         &self,
-        memory_store_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_memory_stores::ArchiveBetaMemoryStoresParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaManagedAgentsArchiveMemoryStoreResponse, crate::errors::SdkError> {
         crate::methods::beta_memory_stores::archive_beta_memory_stores(
             &self.config,
-            memory_store_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
+            params,
             options,
         )
     }
@@ -2400,16 +1996,12 @@ impl BetaUserProfilesNamespace {
     /// Retrieves a user profile by its identifier. Use `user_profile_id` to select the profile; the response includes its profile details, trust grants, metadata, and timestamps.
     pub fn retrieve(
         &self,
-        user_profile_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
+        params: crate::methods::beta_user_profiles::RetrieveBetaUserProfilesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaUserProfile, crate::errors::SdkError> {
         crate::methods::beta_user_profiles::retrieve_beta_user_profiles(
             &self.config,
-            user_profile_id,
-            anthropic_version,
-            anthropic_beta,
+            params,
             options,
         )
     }
@@ -2424,16 +2016,12 @@ impl BetaUserProfilesNamespace {
     /// Creates an enrollment URL for a user profile to send to the represented end user. Use `user_profile_id` to select the profile, then send the returned URL before its `expires_at` time.
     pub fn create_enrollment_url(
         &self,
-        user_profile_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
+        params: crate::methods::beta_user_profiles::CreateBetaUserProfilesEnrollmentUrlParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaEnrollmentUrl, crate::errors::SdkError> {
         crate::methods::beta_user_profiles::create_beta_user_profiles_enrollment_url(
             &self.config,
-            user_profile_id,
-            anthropic_version,
-            anthropic_beta,
+            params,
             options,
         )
     }
@@ -2544,20 +2132,10 @@ impl BetaTunnelsNamespace {
     /// The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window. Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel; it is not idempotent. The new tunnel rejects MCP traffic until at least one CA certificate is added.
     pub fn create(
         &self,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
-        display_name: Option<Option<String>>,
+        params: crate::methods::beta_tunnels::CreateBetaTunnelsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaTunnel, crate::errors::SdkError> {
-        crate::methods::beta_tunnels::create_beta_tunnels(
-            &self.config,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            display_name,
-            options,
-        )
+        crate::methods::beta_tunnels::create_beta_tunnels(&self.config, params, options)
     }
     /// Lists tunnels in creation-time order, newest first, excluding archived tunnels by default. Use `page` to continue through results and `include_archived` to include archived tunnels; this research-preview API requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period.
     ///
@@ -2590,60 +2168,30 @@ impl BetaTunnelsNamespace {
     /// The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window. Fetches a tunnel by ID.
     pub fn retrieve(
         &self,
-        tunnel_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_tunnels::RetrieveBetaTunnelsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaTunnel, crate::errors::SdkError> {
-        crate::methods::beta_tunnels::retrieve_beta_tunnels(
-            &self.config,
-            tunnel_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_tunnels::retrieve_beta_tunnels(&self.config, params, options)
     }
     /// Archives a tunnel, invalidating its token and retiring its hostname. Archiving also archives every non-archived certificate on the tunnel, and repeating the request for an already archived tunnel returns its record unchanged. This action is irreversible; send the required `anthropic-beta` header to use the research-preview API.
     ///
     /// The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window. Archives a tunnel. Archival is irreversible: every non-archived certificate on the tunnel is archived in the same operation, the hostname is retired and never re-allocated, and the tunnel token is invalidated. Retrying against an already-archived tunnel returns the existing record unchanged.
     pub fn archive(
         &self,
-        tunnel_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_tunnels::ArchiveBetaTunnelsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaTunnel, crate::errors::SdkError> {
-        crate::methods::beta_tunnels::archive_beta_tunnels(
-            &self.config,
-            tunnel_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_tunnels::archive_beta_tunnels(&self.config, params, options)
     }
     /// Reveals the connector token for a tunnel; repeated calls return the same token until it is rotated. Treat the returned token as a credential, and use this POST operation so the value does not appear in intermediary access logs. Send the required `anthropic-beta` header to use the research-preview API.
     ///
     /// The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window. Reveals a tunnel's connector token. The value is fetched live on each call; Anthropic does not store it. Repeated calls return the same value until the token is rotated. Exposed as POST so the token does not appear in intermediary access logs.
     pub fn reveal_token(
         &self,
-        tunnel_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_tunnels::RevealBetaTunnelsTokenParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaTunnelToken, crate::errors::SdkError> {
-        crate::methods::beta_tunnels::reveal_beta_tunnels_token(
-            &self.config,
-            tunnel_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_tunnels::reveal_beta_tunnels_token(&self.config, params, options)
     }
     /// Rotates a tunnel's connector token and returns a fresh value, invalidating the current token for new connections. Established connections are not severed, but restart the connector with the new token. Send the required `anthropic-beta` header to use this research-preview API.
     ///
@@ -2702,56 +2250,26 @@ impl BetaDreamsNamespace {
     /// Retrieves a Dream job by its identifier. Use this endpoint to inspect the job's status, inputs, outputs, and cumulative token usage. The returned status indicates whether the job is pending, running, completed, failed, or canceled.
     pub fn retrieve(
         &self,
-        dream_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_dreams::RetrieveBetaDreamsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDream, crate::errors::SdkError> {
-        crate::methods::beta_dreams::retrieve_beta_dreams(
-            &self.config,
-            dream_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_dreams::retrieve_beta_dreams(&self.config, params, options)
     }
     /// Triggers cancellation of a Dream job. Provide the Dream's identifier to request cancellation of the job. Use GET /v1/dreams/{dream_id}?beta=true to inspect the job's status after the cancellation request.
     pub fn cancel(
         &self,
-        dream_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_dreams::CancelBetaDreamsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDream, crate::errors::SdkError> {
-        crate::methods::beta_dreams::cancel_beta_dreams(
-            &self.config,
-            dream_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_dreams::cancel_beta_dreams(&self.config, params, options)
     }
     /// Archives a Dream job. Provide the Dream's identifier to archive that job. Use GET /v1/dreams/{dream_id}?beta=true to retrieve the Dream and inspect its archive timestamp.
     pub fn archive(
         &self,
-        dream_id: String,
-        anthropic_version: Option<String>,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_workspace_id: Option<String>,
+        params: crate::methods::beta_dreams::ArchiveBetaDreamsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDream, crate::errors::SdkError> {
-        crate::methods::beta_dreams::archive_beta_dreams(
-            &self.config,
-            dream_id,
-            anthropic_version,
-            anthropic_beta,
-            anthropic_workspace_id,
-            options,
-        )
+        crate::methods::beta_dreams::archive_beta_dreams(&self.config, params, options)
     }
 }
 
@@ -2770,18 +2288,12 @@ impl BetaOrganizationsInvitesNamespace {
     /// Invite a user to join the organization by email. On plans that draw members from a finite pool of purchased seats, the invite automatically consumes a seat from the lowest tier with availability; there is no seat-tier parameter. When no seat is free the request fails with a 400 error rather than purchasing a seat.
     pub fn create(
         &self,
-        email: String,
-        role: BetaCreateInviteParamsRoleEnum,
-        anthropic_version: Option<String>,
-        rbac_group_ids: Option<Vec<String>>,
+        params: crate::methods::beta_organizations_invites::CreateBetaOrganizationsInvitesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaInviteSchema, crate::errors::SdkError> {
         crate::methods::beta_organizations_invites::create_beta_organizations_invites(
             &self.config,
-            email,
-            role,
-            anthropic_version,
-            rbac_group_ids,
+            params,
             options,
         )
     }
@@ -2804,14 +2316,12 @@ impl BetaOrganizationsInvitesNamespace {
     /// Retrieve an invite by ID.
     pub fn retrieve(
         &self,
-        invite_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_invites::RetrieveBetaOrganizationsInvitesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaInviteSchema, crate::errors::SdkError> {
         crate::methods::beta_organizations_invites::retrieve_beta_organizations_invites(
             &self.config,
-            invite_id,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -2820,14 +2330,12 @@ impl BetaOrganizationsInvitesNamespace {
     /// Delete a pending invite.
     pub fn delete(
         &self,
-        invite_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_invites::DeleteBetaOrganizationsInvitesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDeleteInviteResponse, crate::errors::SdkError> {
         crate::methods::beta_organizations_invites::delete_beta_organizations_invites(
             &self.config,
-            invite_id,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -2850,14 +2358,12 @@ impl BetaOrganizationsUsersNamespace {
     /// Retrieve a member of the organization by user ID.
     pub fn retrieve(
         &self,
-        user_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_users::RetrieveBetaOrganizationsUsersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaUser, crate::errors::SdkError> {
         crate::methods::beta_organizations_users::retrieve_beta_organizations_users(
             &self.config,
-            user_id,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -2866,16 +2372,12 @@ impl BetaOrganizationsUsersNamespace {
     /// Update a member's organization role.
     pub fn update(
         &self,
-        user_id: String,
-        role: BetaUpdateUserParamsRoleEnum,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_users::UpdateBetaOrganizationsUsersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaUser, crate::errors::SdkError> {
         crate::methods::beta_organizations_users::update_beta_organizations_users(
             &self.config,
-            user_id,
-            role,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -2884,14 +2386,12 @@ impl BetaOrganizationsUsersNamespace {
     /// Remove a member from the organization.
     pub fn delete(
         &self,
-        user_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_users::DeleteBetaOrganizationsUsersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDeleteUserResponse, crate::errors::SdkError> {
         crate::methods::beta_organizations_users::delete_beta_organizations_users(
             &self.config,
-            user_id,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -2926,33 +2426,26 @@ impl BetaOrganizationsWorkspacesMembersNamespace {
     /// Retrieves a user's membership in a workspace. Supply both `workspace_id` and `user_id` to identify the membership. The response includes the user's workspace role.
     pub fn retrieve(
         &self,
-        workspace_id: String,
-        user_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_workspaces_members::RetrieveBetaOrganizationsWorkspacesMembersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaWorkspaceMemberSchema, crate::errors::SdkError> {
-        crate::methods::beta_organizations_workspaces_members::retrieve_beta_organizations_workspaces_members(&self.config, workspace_id, user_id, anthropic_version, options)
+        crate::methods::beta_organizations_workspaces_members::retrieve_beta_organizations_workspaces_members(&self.config, params, options)
     }
     /// Updates a user's role in a workspace. Supply `workspace_role` with the new role and use the path parameters to identify the workspace membership. The role must be one of the defined workspace roles.
     pub fn update(
         &self,
-        user_id: String,
-        workspace_id: String,
-        workspace_role: BetaWorkspaceRoleSchema,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_workspaces_members::UpdateBetaOrganizationsWorkspacesMembersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaWorkspaceMemberSchema, crate::errors::SdkError> {
-        crate::methods::beta_organizations_workspaces_members::update_beta_organizations_workspaces_members(&self.config, user_id, workspace_id, workspace_role, anthropic_version, options)
+        crate::methods::beta_organizations_workspaces_members::update_beta_organizations_workspaces_members(&self.config, params, options)
     }
     /// Removes a user's membership from a workspace. Identify the membership with `workspace_id` and `user_id`, and authenticate with an Admin API key in the `x-api-key` header. The response identifies the deleted workspace membership.
     pub fn delete(
         &self,
-        user_id: String,
-        workspace_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_workspaces_members::DeleteBetaOrganizationsWorkspacesMembersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDeleteWorkspaceMemberResponse, crate::errors::SdkError> {
-        crate::methods::beta_organizations_workspaces_members::delete_beta_organizations_workspaces_members(&self.config, user_id, workspace_id, anthropic_version, options)
+        crate::methods::beta_organizations_workspaces_members::delete_beta_organizations_workspaces_members(&self.config, params, options)
     }
     /// Lists members of a specified workspace. Use `before_id` or `after_id` to navigate the results, and `limit` to control the page size. The response includes cursor IDs and a `has_more` flag.
     pub fn list(
@@ -2965,13 +2458,10 @@ impl BetaOrganizationsWorkspacesMembersNamespace {
     /// Creates a membership for a user in a specified workspace. Supply `user_id` and `workspace_role`; the role must be one of the supported non-billing workspace roles. The response contains the new workspace member and its assigned role.
     pub fn create(
         &self,
-        workspace_id: String,
-        user_id: String,
-        workspace_role: BetaNoBillingWorkspaceRoleSchema,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_workspaces_members::CreateBetaOrganizationsWorkspacesMembersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaWorkspaceMemberSchema, crate::errors::SdkError> {
-        crate::methods::beta_organizations_workspaces_members::create_beta_organizations_workspaces_members(&self.config, workspace_id, user_id, workspace_role, anthropic_version, options)
+        crate::methods::beta_organizations_workspaces_members::create_beta_organizations_workspaces_members(&self.config, params, options)
     }
 }
 
@@ -3046,13 +2536,10 @@ impl BetaOrganizationsWorkspacesServiceAccountsNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Retrieve a service account's membership in a workspace. Returns the membership record, including the service account's `workspace_role` in this workspace. Archived workspaces return 400\. For the default workspace, returns the implicit (`implicit: true`) membership when no explicit membership exists; an explicitly added membership is returned with its assigned role. An archived service account returns 404.
     pub fn retrieve(
         &self,
-        workspace_id: String,
-        service_account_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_workspaces_service_accounts::RetrieveBetaOrganizationsWorkspacesServiceAccountsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaServiceAccountWorkspaceMember, crate::errors::SdkError> {
-        crate::methods::beta_organizations_workspaces_service_accounts::retrieve_beta_organizations_workspaces_service_accounts(&self.config, workspace_id, service_account_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_workspaces_service_accounts::retrieve_beta_organizations_workspaces_service_accounts(&self.config, params, options)
     }
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Change a service account's role in a workspace. The new `workspace_role` replaces the current one. Only explicit memberships can be updated; to set a role on the implicit default-workspace membership, add the service account explicitly with `POST /workspaces/{workspace_id}/service_accounts`. Archived workspaces return 400\. Archived service accounts cannot be updated and are rejected.
     pub fn update(
@@ -3065,13 +2552,10 @@ impl BetaOrganizationsWorkspacesServiceAccountsNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Remove a service account from a workspace. Removal is idempotent (returns 200 even if the membership was already removed). A DELETE against the implicit default-workspace membership returns 200 but is a no-op and the membership persists; deleting an explicit default-workspace row reverts to the implicit `workspace_user` membership. Archived workspaces return 400.
     pub fn delete(
         &self,
-        workspace_id: String,
-        service_account_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_workspaces_service_accounts::DeleteBetaOrganizationsWorkspacesServiceAccountsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaServiceAccountWorkspaceMemberDeleteResponse, crate::errors::SdkError> {
-        crate::methods::beta_organizations_workspaces_service_accounts::delete_beta_organizations_workspaces_service_accounts(&self.config, workspace_id, service_account_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_workspaces_service_accounts::delete_beta_organizations_workspaces_service_accounts(&self.config, params, options)
     }
 }
 
@@ -3098,14 +2582,12 @@ impl BetaOrganizationsWorkspacesNamespace {
     /// Retrieves a workspace by its identifier. Use `workspace_id` to select the workspace whose configuration and metadata you need. The response includes the workspace's data residency settings, tags, and archive state.
     pub fn retrieve(
         &self,
-        workspace_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_workspaces::RetrieveBetaOrganizationsWorkspacesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaWorkspace, crate::errors::SdkError> {
         crate::methods::beta_organizations_workspaces::retrieve_beta_organizations_workspaces(
             &self.config,
-            workspace_id,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -3148,14 +2630,12 @@ impl BetaOrganizationsWorkspacesNamespace {
     /// Archives a workspace in the organization. Use `workspace_id` to identify the workspace to archive. The response returns the workspace object with its archive state.
     pub fn archive(
         &self,
-        workspace_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_workspaces::ArchiveBetaOrganizationsWorkspacesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaWorkspace, crate::errors::SdkError> {
         crate::methods::beta_organizations_workspaces::archive_beta_organizations_workspaces(
             &self.config,
-            workspace_id,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -3176,32 +2656,24 @@ impl BetaOrganizationsApiKeysNamespace {
     /// Retrieves a specific API key by its ID. Use `api_key_id` to identify the key whose metadata you need. The response includes its status, scope, creation and expiration details, and a partially redacted key hint.
     pub fn retrieve(
         &self,
-        api_key_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_api_keys::RetrieveBetaOrganizationsApiKeysParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaApiKey, crate::errors::SdkError> {
         crate::methods::beta_organizations_api_keys::retrieve_beta_organizations_api_keys(
             &self.config,
-            api_key_id,
-            anthropic_version,
+            params,
             options,
         )
     }
     /// Updates an API key's name, status, or both. Include the fields you want to change; `name` can be a string or `null`, and `status` can be active, archived, inactive, or `null`. The response returns the API key object with its current metadata.
     pub fn update(
         &self,
-        api_key_id: String,
-        anthropic_version: Option<String>,
-        name: Option<Option<String>>,
-        status: Option<Option<BetaApiKeyUpdateParamsStatus>>,
+        params: crate::methods::beta_organizations_api_keys::UpdateBetaOrganizationsApiKeysParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaApiKey, crate::errors::SdkError> {
         crate::methods::beta_organizations_api_keys::update_beta_organizations_api_keys(
             &self.config,
-            api_key_id,
-            anthropic_version,
-            name,
-            status,
+            params,
             options,
         )
     }
@@ -3265,25 +2737,19 @@ impl BetaOrganizationsUsageReportClaudeCodeNamespace {
     /// Retrieve daily aggregated usage metrics for Claude Code users. Enables organizations to analyze developer productivity and build custom dashboards.
     pub fn retrieve(
         &self,
-        starting_at: String,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_usage_report_claude_code::RetrieveBetaOrganizationsUsageReportClaudeCodeParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaGetClaudeCodeUsageReportResponse, crate::errors::SdkError> {
-        crate::methods::beta_organizations_usage_report_claude_code::retrieve_beta_organizations_usage_report_claude_code(&self.config, starting_at, limit, page, anthropic_version, options)
+        crate::methods::beta_organizations_usage_report_claude_code::retrieve_beta_organizations_usage_report_claude_code(&self.config, params, options)
     }
     /// Retrieve daily aggregated usage metrics for Claude Code users. Enables organizations to analyze developer productivity and build custom dashboards.
     pub fn retrieve_paginated(
         &self,
-        starting_at: String,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_usage_report_claude_code::RetrieveBetaOrganizationsUsageReportClaudeCodeParams,
         options: Option<&crate::client::RequestOptions>,
         yield_fn: impl FnMut(&BetaClaudeCodeUsageReportItem) -> bool,
     ) -> Result<(), crate::errors::SdkError> {
-        crate::methods::beta_organizations_usage_report_claude_code::retrieve_beta_organizations_usage_report_claude_code_paginated(&self.config, starting_at, limit, page, anthropic_version, options, yield_fn)
+        crate::methods::beta_organizations_usage_report_claude_code::retrieve_beta_organizations_usage_report_claude_code_paginated(&self.config, params, options, yield_fn)
     }
 }
 
@@ -3352,12 +2818,12 @@ impl BetaOrganizationsMeNamespace {
     /// Retrieve information about the organization associated with the authenticated API key.
     pub fn retrieve(
         &self,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_me::RetrieveBetaOrganizationsMeParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaOrganizationSchema, crate::errors::SdkError> {
         crate::methods::beta_organizations_me::retrieve_beta_organizations_me(
             &self.config,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -3378,59 +2844,45 @@ impl BetaOrganizationsExternalKeysNamespace {
     /// Create an external key config owned by the caller's organization.
     pub fn create(
         &self,
-        provider_config: BetaExternalKeyCreateParamsProviderConfig,
-        anthropic_version: Option<String>,
-        display_name: Option<Option<String>>,
-        geo: Option<BetaExternalKeyCreateParamsGeoEnum>,
+        params: crate::methods::beta_organizations_external_keys::CreateBetaOrganizationsExternalKeysParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaExternalKey, crate::errors::SdkError> {
         crate::methods::beta_organizations_external_keys::create_beta_organizations_external_keys(
             &self.config,
-            provider_config,
-            anthropic_version,
-            display_name,
-            geo,
+            params,
             options,
         )
     }
     /// List external key configs in the caller's organization. Results are ordered by creation time (newest first). Use the `next_page` cursor from the response to fetch subsequent pages.
     pub fn list(
         &self,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_external_keys::ListBetaOrganizationsExternalKeysParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaExternalKeyListResponse, crate::errors::SdkError> {
         crate::methods::beta_organizations_external_keys::list_beta_organizations_external_keys(
             &self.config,
-            limit,
-            page,
-            anthropic_version,
+            params,
             options,
         )
     }
     /// List external key configs in the caller's organization. Results are ordered by creation time (newest first). Use the `next_page` cursor from the response to fetch subsequent pages.
     pub fn list_paginated(
         &self,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_external_keys::ListBetaOrganizationsExternalKeysParams,
         options: Option<&crate::client::RequestOptions>,
         yield_fn: impl FnMut(&BetaExternalKey) -> bool,
     ) -> Result<(), crate::errors::SdkError> {
-        crate::methods::beta_organizations_external_keys::list_beta_organizations_external_keys_paginated(&self.config, limit, page, anthropic_version, options, yield_fn)
+        crate::methods::beta_organizations_external_keys::list_beta_organizations_external_keys_paginated(&self.config, params, options, yield_fn)
     }
     /// Retrieve a single external key config in the caller's organization by ID.
     pub fn retrieve(
         &self,
-        external_key_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_external_keys::RetrieveBetaOrganizationsExternalKeysParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaExternalKey, crate::errors::SdkError> {
         crate::methods::beta_organizations_external_keys::retrieve_beta_organizations_external_keys(
             &self.config,
-            external_key_id,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -3449,28 +2901,24 @@ impl BetaOrganizationsExternalKeysNamespace {
     /// Delete an external key config. The request is rejected if any workspace still references this config.
     pub fn delete(
         &self,
-        external_key_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_external_keys::DeleteBetaOrganizationsExternalKeysParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDeleteExternalKeyResponse, crate::errors::SdkError> {
         crate::methods::beta_organizations_external_keys::delete_beta_organizations_external_keys(
             &self.config,
-            external_key_id,
-            anthropic_version,
+            params,
             options,
         )
     }
     /// Validate an external key config against the customer's KMS. Anthropic performs an encrypt/decrypt roundtrip against the configured KMS key and waits up to 30 seconds for the result. The response status is `success` if the roundtrip succeeded, or `failure` with an error message if it failed or timed out.
     pub fn validate(
         &self,
-        external_key_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_external_keys::ValidateBetaOrganizationsExternalKeysParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaValidateExternalKeyResponse, crate::errors::SdkError> {
         crate::methods::beta_organizations_external_keys::validate_beta_organizations_external_keys(
             &self.config,
-            external_key_id,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -3491,19 +2939,18 @@ impl BetaOrganizationsComplianceSettingsNamespace {
     /// Retrieve your organization's Compliance Settings. Compliance Settings is a singleton resource: there is exactly one per organization, addressed without an identifier. The `state` field reflects whether the Compliance API is enabled. An organization with a parent organization reads the state inherited from the parent's configuration.
     pub fn list(
         &self,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_compliance_settings::ListBetaOrganizationsComplianceSettingsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaComplianceSettings, crate::errors::SdkError> {
-        crate::methods::beta_organizations_compliance_settings::list_beta_organizations_compliance_settings(&self.config, anthropic_version, options)
+        crate::methods::beta_organizations_compliance_settings::list_beta_organizations_compliance_settings(&self.config, params, options)
     }
     /// Update your organization's Compliance Settings. Setting `state` to `enabled` turns on the Compliance API and begins capturing organization activity events. Setting it to `disabled` turns both off. `state` reflects whether the Compliance API is enabled. A request that sets `state` to its current value succeeds and leaves the resource unchanged. A `disabled` request stays in effect until a later `enabled` request or the organization's next provisioning action that enables Access Transparency: enabling Access Transparency also enables the Compliance API, which serves its activity events, so such provisioning (including re-runs) re-enables the Compliance API even after a `disabled` request. Automated provisioning never disables compliance settings.
     pub fn create(
         &self,
-        state: BetaComplianceSettingsUpdateParamsState,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_compliance_settings::CreateBetaOrganizationsComplianceSettingsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaComplianceSettings, crate::errors::SdkError> {
-        crate::methods::beta_organizations_compliance_settings::create_beta_organizations_compliance_settings(&self.config, state, anthropic_version, options)
+        crate::methods::beta_organizations_compliance_settings::create_beta_organizations_compliance_settings(&self.config, params, options)
     }
 }
 
@@ -3592,26 +3039,24 @@ impl BetaOrganizationsSpendLimitsNamespace {
     /// Retrieve a spend limit by ID.
     pub fn retrieve(
         &self,
-        spend_limit_id: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_spend_limits::RetrieveBetaOrganizationsSpendLimitsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaSpendLimit, crate::errors::SdkError> {
         crate::methods::beta_organizations_spend_limits::retrieve_beta_organizations_spend_limits(
             &self.config,
-            spend_limit_id,
-            anthropic_version,
+            params,
             options,
         )
     }
     /// Delete a per-user spend limit override. The member falls back to any inherited spend limit at that period. Seat-tier, group, and organization-level rows cannot be deleted via this endpoint.
     pub fn delete(
         &self,
-        spend_limit_id: String,
+        params: crate::methods::beta_organizations_spend_limits::DeleteBetaOrganizationsSpendLimitsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDeleteSpendLimitResponse, crate::errors::SdkError> {
         crate::methods::beta_organizations_spend_limits::delete_beta_organizations_spend_limits(
             &self.config,
-            spend_limit_id,
+            params,
             options,
         )
     }
@@ -3620,16 +3065,12 @@ impl BetaOrganizationsSpendLimitsNamespace {
     /// Set a per-user spend limit override. Upsert keyed on (scope, period): setting a limit that already exists overwrites it in place. Only `scope.type: "user"` is accepted; seat-tier, group, and organization-level defaults are configured in claude.ai.
     pub fn create(
         &self,
-        amount: Option<String>,
-        scope: BetaUserScope,
-        period: Option<BetaSetSpendLimitParamsPeriodEnum>,
+        params: crate::methods::beta_organizations_spend_limits::CreateBetaOrganizationsSpendLimitsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaSpendLimit, crate::errors::SdkError> {
         crate::methods::beta_organizations_spend_limits::create_beta_organizations_spend_limits(
             &self.config,
-            amount,
-            scope,
-            period,
+            params,
             options,
         )
     }
@@ -3675,13 +3116,10 @@ impl BetaOrganizationsServiceAccountsWorkspacesNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Remove a service account from a workspace. Mirror of `DELETE /workspaces/{workspace_id}/service_accounts/{service_account_id}`, addressed from the service-account side. Removal is idempotent (returns 200 even if the membership was already removed). A DELETE against the implicit default-workspace membership returns 200 but is a no-op and the membership persists; deleting an explicit default-workspace row reverts to the implicit `workspace_user` membership. Archived workspaces return 400.
     pub fn delete(
         &self,
-        workspace_id: String,
-        service_account_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_service_accounts_workspaces::DeleteBetaOrganizationsServiceAccountsWorkspacesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaServiceAccountWorkspaceMemberDeleteResponse, crate::errors::SdkError> {
-        crate::methods::beta_organizations_service_accounts_workspaces::delete_beta_organizations_service_accounts_workspaces(&self.config, workspace_id, service_account_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_service_accounts_workspaces::delete_beta_organizations_service_accounts_workspaces(&self.config, params, options)
     }
 }
 
@@ -3727,12 +3165,10 @@ impl BetaOrganizationsServiceAccountsNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Retrieve a service account by its ID (`svac_...`).
     pub fn retrieve(
         &self,
-        service_account_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_service_accounts::RetrieveBetaOrganizationsServiceAccountsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaServiceAccount, crate::errors::SdkError> {
-        crate::methods::beta_organizations_service_accounts::retrieve_beta_organizations_service_accounts(&self.config, service_account_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_service_accounts::retrieve_beta_organizations_service_accounts(&self.config, params, options)
     }
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Update a service account. Only `description` and `organization_role` are mutable; `name` cannot be changed. Archived service accounts cannot be updated; this returns 400\. Setting `organization_role` to `admin` (even when unchanged) requires an interactive credential (a user OAuth token or a Console session).
     pub fn update(
@@ -3745,12 +3181,10 @@ impl BetaOrganizationsServiceAccountsNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Archive a service account. Idempotent; re-archiving returns the service account with its original `archived_at`. Rejected with 400 if any live (non-archived) federation rule still targets this service account, same as issuer archival; archive those rules first or change their target to another service account.
     pub fn archive(
         &self,
-        service_account_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_service_accounts::ArchiveBetaOrganizationsServiceAccountsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaServiceAccount, crate::errors::SdkError> {
-        crate::methods::beta_organizations_service_accounts::archive_beta_organizations_service_accounts(&self.config, service_account_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_service_accounts::archive_beta_organizations_service_accounts(&self.config, params, options)
     }
 }
 
@@ -3794,12 +3228,10 @@ impl BetaOrganizationsFederationIssuersNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Retrieve a federation issuer by its ID (`fdis_...`).
     pub fn retrieve(
         &self,
-        federation_issuer_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_federation_issuers::RetrieveBetaOrganizationsFederationIssuersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaFederationIssuer, crate::errors::SdkError> {
-        crate::methods::beta_organizations_federation_issuers::retrieve_beta_organizations_federation_issuers(&self.config, federation_issuer_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_federation_issuers::retrieve_beta_organizations_federation_issuers(&self.config, params, options)
     }
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Partially update a federation issuer. Setting `jwks` replaces the full JWKS shape at once. Archived issuers cannot be updated; this returns 400\. Create a new issuer instead. Updating an issuer that backs a rule with a scope outside `workspace:developer` or `workspace:inference` requires a Console session.
     pub fn update(
@@ -3812,12 +3244,10 @@ impl BetaOrganizationsFederationIssuersNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Archive a federation issuer. Idempotent; re-archiving returns the issuer with its original `archived_at`. Rejected with 400 if any live (non-archived) federation rule still references the issuer; archive those rules first (a rule's issuer cannot be changed), or recreate them against another issuer.
     pub fn archive(
         &self,
-        federation_issuer_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_federation_issuers::ArchiveBetaOrganizationsFederationIssuersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaFederationIssuer, crate::errors::SdkError> {
-        crate::methods::beta_organizations_federation_issuers::archive_beta_organizations_federation_issuers(&self.config, federation_issuer_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_federation_issuers::archive_beta_organizations_federation_issuers(&self.config, params, options)
     }
 }
 
@@ -3836,13 +3266,10 @@ impl BetaOrganizationsFederationRulesWorkspacesNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Enable a federation rule for a workspace. Idempotent; re-enabling returns the existing enablement. The rule and workspace must both belong to your organization. Membership of the rule's target service account in this workspace is not checked at enablement: token exchange into this workspace is rejected unless the target is a member (it is implicitly a member of the default workspace). Archived rules are rejected with 400\. OAuth callers may only manage rules whose `oauth_scope` is `workspace:developer` or `workspace:inference`; other scopes require a Console session.
     pub fn create(
         &self,
-        federation_rule_id: String,
-        workspace_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_federation_rules_workspaces::CreateBetaOrganizationsFederationRulesWorkspacesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaFederationRuleWorkspace, crate::errors::SdkError> {
-        crate::methods::beta_organizations_federation_rules_workspaces::create_beta_organizations_federation_rules_workspaces(&self.config, federation_rule_id, workspace_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_federation_rules_workspaces::create_beta_organizations_federation_rules_workspaces(&self.config, params, options)
     }
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. List workspaces where this federation rule is enabled. Returns all workspace enablements in a single response; the `limit` and `page` parameters are accepted but have no effect, and `next_page` is always `null`. Returns explicit per-workspace enablements only; for rules with `applies_to_all_workspaces` or a legacy single `workspace_id`, check those fields on the rule itself.
     pub fn list(
@@ -3864,13 +3291,10 @@ impl BetaOrganizationsFederationRulesWorkspacesNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Disable a federation rule for a workspace. Idempotent; succeeds even if the enablement was already removed. OAuth callers may only manage rules whose `oauth_scope` is `workspace:developer` or `workspace:inference`; other scopes require a Console session.
     pub fn delete(
         &self,
-        federation_rule_id: String,
-        workspace_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_federation_rules_workspaces::DeleteBetaOrganizationsFederationRulesWorkspacesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaRemoveFederationRuleWorkspaceResponse, crate::errors::SdkError> {
-        crate::methods::beta_organizations_federation_rules_workspaces::delete_beta_organizations_federation_rules_workspaces(&self.config, federation_rule_id, workspace_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_federation_rules_workspaces::delete_beta_organizations_federation_rules_workspaces(&self.config, params, options)
     }
 }
 
@@ -3916,12 +3340,10 @@ impl BetaOrganizationsFederationRulesNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Retrieve a federation rule by its ID (`fdrl_...`).
     pub fn retrieve(
         &self,
-        federation_rule_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_federation_rules::RetrieveBetaOrganizationsFederationRulesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaFederationRule, crate::errors::SdkError> {
-        crate::methods::beta_organizations_federation_rules::retrieve_beta_organizations_federation_rules(&self.config, federation_rule_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_federation_rules::retrieve_beta_organizations_federation_rules(&self.config, params, options)
     }
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Partially update a federation rule. `issuer_id` is immutable. `match` and `target` are replaced as whole objects when set. Referenced service accounts and workspaces must exist in your organization; invalid references are rejected with a 400 error. Archived rules cannot be updated; this returns 400\. Create a new rule instead. Rules on well-known shared issuers (GitHub Actions, GitLab, Buildkite, Terraform Cloud, Google) must constrain tenant identity via an identity-bearing claim, a tenant-pinning subject prefix (such as `repo:YOUR_ORG/...`), or a CEL condition referencing one of those identity claims (e.g. `claims.repository_owner`). On these issuers the requirement is re-checked on every update; if an existing rule's stored match does not yet constrain tenant identity, any update (even a rename or description change) must also supply a conforming `match` in the same request. OAuth callers may only manage rules whose `oauth_scope` is `workspace:developer` or `workspace:inference`; other scopes require a Console session.
     pub fn update(
@@ -3934,12 +3356,10 @@ impl BetaOrganizationsFederationRulesNamespace {
     /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Archive a federation rule. Token exchange through this rule stops immediately. Idempotent; re-archiving returns the rule with its original `archived_at`. Archiving clears the rule's workspace targeting (`workspace_id` and `workspace_ids` are emptied). Tokens already minted before archive remain valid until they expire. OAuth callers may only manage rules whose `oauth_scope` is `workspace:developer` or `workspace:inference`; other scopes require a Console session.
     pub fn archive(
         &self,
-        federation_rule_id: String,
-        anthropic_beta: Option<Vec<AnthropicBeta>>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_federation_rules::ArchiveBetaOrganizationsFederationRulesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaFederationRule, crate::errors::SdkError> {
-        crate::methods::beta_organizations_federation_rules::archive_beta_organizations_federation_rules(&self.config, federation_rule_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_federation_rules::archive_beta_organizations_federation_rules(&self.config, params, options)
     }
 }
 
@@ -3958,61 +3378,51 @@ impl BetaOrganizationsSpendLimitIncreaseRequestsNamespace {
     /// Retrieve a spend limit increase request. While `pending`, the response includes a live `spend_summary` for the requester at the request's period.
     pub fn retrieve(
         &self,
-        spend_limit_increase_request_id: String,
+        params: crate::methods::beta_organizations_spend_limit_increase_requests::RetrieveBetaOrganizationsSpendLimitIncreaseRequestsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaSpendLimitIncreaseRequestSchema, crate::errors::SdkError> {
-        crate::methods::beta_organizations_spend_limit_increase_requests::retrieve_beta_organizations_spend_limit_increase_requests(&self.config, spend_limit_increase_request_id, options)
+        crate::methods::beta_organizations_spend_limit_increase_requests::retrieve_beta_organizations_spend_limit_increase_requests(&self.config, params, options)
     }
     /// Denies a pending spend limit increase request and records the request as denied. Denying an already-denied request is idempotent, while denying an approved request is rejected; the requester is emailed unless `suppress_notification` is set.
     ///
     /// Deny a pending spend limit increase request. Idempotent on `denied`; denying an already-`approved` request returns 400\. Anthropic emails the requester unless `suppress_notification` is set.
     pub fn deny(
         &self,
-        spend_limit_increase_request_id: String,
-        suppress_notification: Option<bool>,
+        params: crate::methods::beta_organizations_spend_limit_increase_requests::DenyBetaOrganizationsSpendLimitIncreaseRequestsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaSpendLimitIncreaseRequestSchema, crate::errors::SdkError> {
-        crate::methods::beta_organizations_spend_limit_increase_requests::deny_beta_organizations_spend_limit_increase_requests(&self.config, spend_limit_increase_request_id, suppress_notification, options)
+        crate::methods::beta_organizations_spend_limit_increase_requests::deny_beta_organizations_spend_limit_increase_requests(&self.config, params, options)
     }
     /// Approves a pending spend limit increase request and creates a per-user spend limit for the requester. Supply `amount` as a non-negative integer decimal string in minor units; `period` defaults to the period the member was blocked on, and the requester is emailed unless `suppress_notification` is set.
     ///
     /// Approve a pending spend limit increase request. Writes a per-user spend limit at `amount` for the requester and transitions the request to `approved`. `period` defaults to the period the member was blocked on. Anthropic emails the requester unless `suppress_notification` is set.
     pub fn approve(
         &self,
-        spend_limit_increase_request_id: String,
-        amount: String,
-        period: Option<Option<BetaApproveSpendLimitIncreaseRequestParamsPeriod>>,
-        suppress_notification: Option<bool>,
+        params: crate::methods::beta_organizations_spend_limit_increase_requests::ApproveBetaOrganizationsSpendLimitIncreaseRequestsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaApproveSpendLimitIncreaseRequestResponse, crate::errors::SdkError> {
-        crate::methods::beta_organizations_spend_limit_increase_requests::approve_beta_organizations_spend_limit_increase_requests(&self.config, spend_limit_increase_request_id, amount, period, suppress_notification, options)
+        crate::methods::beta_organizations_spend_limit_increase_requests::approve_beta_organizations_spend_limit_increase_requests(&self.config, params, options)
     }
     /// Lists spend limit increase requests, ordered from most recent to oldest. Filter by request status or requester, and use the `page` cursor from a previous response to continue through the results; pending requests include a live `spend_summary`, while requests from former members are excluded.
     ///
     /// List spend limit increase requests, most recent first. Pending requests include a live `spend_summary` for the requester. Requests whose requester is no longer a member are excluded.
     pub fn list(
         &self,
-        status: Option<Option<Vec<crate::methods::beta_organizations_spend_limit_increase_requests::ListBetaOrganizationsSpendLimitIncreaseRequestsItemEnum>>>,
-        actor_ids: Option<Option<Vec<String>>>,
-        page: Option<Option<String>>,
-        limit: Option<i64>,
+        params: crate::methods::beta_organizations_spend_limit_increase_requests::ListBetaOrganizationsSpendLimitIncreaseRequestsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaSpendLimitIncreaseRequestListResponse, crate::errors::SdkError> {
-        crate::methods::beta_organizations_spend_limit_increase_requests::list_beta_organizations_spend_limit_increase_requests(&self.config, status, actor_ids, page, limit, options)
+        crate::methods::beta_organizations_spend_limit_increase_requests::list_beta_organizations_spend_limit_increase_requests(&self.config, params, options)
     }
     /// Lists spend limit increase requests, ordered from most recent to oldest. Filter by request status or requester, and use the `page` cursor from a previous response to continue through the results; pending requests include a live `spend_summary`, while requests from former members are excluded.
     ///
     /// List spend limit increase requests, most recent first. Pending requests include a live `spend_summary` for the requester. Requests whose requester is no longer a member are excluded.
     pub fn list_paginated(
         &self,
-        status: Option<Option<Vec<crate::methods::beta_organizations_spend_limit_increase_requests::ListBetaOrganizationsSpendLimitIncreaseRequestsItemEnum>>>,
-        actor_ids: Option<Option<Vec<String>>>,
-        page: Option<Option<String>>,
-        limit: Option<i64>,
+        params: crate::methods::beta_organizations_spend_limit_increase_requests::ListBetaOrganizationsSpendLimitIncreaseRequestsParams,
         options: Option<&crate::client::RequestOptions>,
         yield_fn: impl FnMut(&BetaSpendLimitIncreaseRequestSchema) -> bool,
     ) -> Result<(), crate::errors::SdkError> {
-        crate::methods::beta_organizations_spend_limit_increase_requests::list_beta_organizations_spend_limit_increase_requests_paginated(&self.config, status, actor_ids, page, limit, options, yield_fn)
+        crate::methods::beta_organizations_spend_limit_increase_requests::list_beta_organizations_spend_limit_increase_requests_paginated(&self.config, params, options, yield_fn)
     }
 }
 
@@ -4035,13 +3445,10 @@ impl BetaOrganizationsTunnelsCertificatesNamespace {
     /// This operation is deprecated and may be removed in a future release.
     pub fn create(
         &self,
-        tunnel_id: String,
-        anthropic_beta: Vec<AnthropicBeta>,
-        ca_certificate_pem: String,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_tunnels_certificates::CreateBetaOrganizationsTunnelsCertificatesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaOrganizationTunnelCertificate, crate::errors::SdkError> {
-        crate::methods::beta_organizations_tunnels_certificates::create_beta_organizations_tunnels_certificates(&self.config, tunnel_id, anthropic_beta, ca_certificate_pem, anthropic_version, options)
+        crate::methods::beta_organizations_tunnels_certificates::create_beta_organizations_tunnels_certificates(&self.config, params, options)
     }
     /// \*\*Deprecated.\*\* This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use `/v1/tunnels` with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window. List the certificates registered on a tunnel. Archived certificates are excluded unless `include_archived` is set.
     ///
@@ -4075,13 +3482,10 @@ impl BetaOrganizationsTunnelsCertificatesNamespace {
     /// This operation is deprecated and may be removed in a future release.
     pub fn retrieve(
         &self,
-        tunnel_id: String,
-        certificate_id: String,
-        anthropic_beta: Vec<AnthropicBeta>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_tunnels_certificates::RetrieveBetaOrganizationsTunnelsCertificatesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaOrganizationTunnelCertificate, crate::errors::SdkError> {
-        crate::methods::beta_organizations_tunnels_certificates::retrieve_beta_organizations_tunnels_certificates(&self.config, tunnel_id, certificate_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_tunnels_certificates::retrieve_beta_organizations_tunnels_certificates(&self.config, params, options)
     }
     /// \*\*Deprecated.\*\* This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use `/v1/tunnels` with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window. Archive a certificate, removing it from the set Anthropic trusts for this tunnel. The certificate record is retained. Archiving the last non-archived certificate is permitted; the tunnel rejects MCP traffic until a new certificate is added.
     ///
@@ -4090,13 +3494,10 @@ impl BetaOrganizationsTunnelsCertificatesNamespace {
     /// This operation is deprecated and may be removed in a future release.
     pub fn archive(
         &self,
-        tunnel_id: String,
-        certificate_id: String,
-        anthropic_beta: Vec<AnthropicBeta>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_tunnels_certificates::ArchiveBetaOrganizationsTunnelsCertificatesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaOrganizationTunnelCertificate, crate::errors::SdkError> {
-        crate::methods::beta_organizations_tunnels_certificates::archive_beta_organizations_tunnels_certificates(&self.config, tunnel_id, certificate_id, anthropic_beta, anthropic_version, options)
+        crate::methods::beta_organizations_tunnels_certificates::archive_beta_organizations_tunnels_certificates(&self.config, params, options)
     }
 }
 
@@ -4155,16 +3556,12 @@ impl BetaOrganizationsTunnelsNamespace {
     /// This operation is deprecated and may be removed in a future release.
     pub fn retrieve(
         &self,
-        tunnel_id: String,
-        anthropic_beta: Vec<AnthropicBeta>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_tunnels::RetrieveBetaOrganizationsTunnelsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaOrganizationTunnel, crate::errors::SdkError> {
         crate::methods::beta_organizations_tunnels::retrieve_beta_organizations_tunnels(
             &self.config,
-            tunnel_id,
-            anthropic_beta,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -4175,16 +3572,12 @@ impl BetaOrganizationsTunnelsNamespace {
     /// This operation is deprecated and may be removed in a future release.
     pub fn archive(
         &self,
-        tunnel_id: String,
-        anthropic_beta: Vec<AnthropicBeta>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_tunnels::ArchiveBetaOrganizationsTunnelsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaOrganizationTunnel, crate::errors::SdkError> {
         crate::methods::beta_organizations_tunnels::archive_beta_organizations_tunnels(
             &self.config,
-            tunnel_id,
-            anthropic_beta,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -4195,16 +3588,12 @@ impl BetaOrganizationsTunnelsNamespace {
     /// This operation is deprecated and may be removed in a future release.
     pub fn reveal_token(
         &self,
-        tunnel_id: String,
-        anthropic_beta: Vec<AnthropicBeta>,
-        anthropic_version: Option<String>,
+        params: crate::methods::beta_organizations_tunnels::RevealBetaOrganizationsTunnelsTokenParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaOrganizationTunnelToken, crate::errors::SdkError> {
         crate::methods::beta_organizations_tunnels::reveal_beta_organizations_tunnels_token(
             &self.config,
-            tunnel_id,
-            anthropic_beta,
-            anthropic_version,
+            params,
             options,
         )
     }
@@ -4217,18 +3606,12 @@ impl BetaOrganizationsTunnelsNamespace {
     /// This operation is deprecated and may be removed in a future release.
     pub fn rotate_token(
         &self,
-        tunnel_id: String,
-        anthropic_beta: Vec<AnthropicBeta>,
-        anthropic_version: Option<String>,
-        body: Option<BetaRotateTunnelTokenParams>,
+        params: crate::methods::beta_organizations_tunnels::RotateBetaOrganizationsTunnelsTokenParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaOrganizationTunnelToken, crate::errors::SdkError> {
         crate::methods::beta_organizations_tunnels::rotate_beta_organizations_tunnels_token(
             &self.config,
-            tunnel_id,
-            anthropic_beta,
-            anthropic_version,
-            body,
+            params,
             options,
         )
     }
@@ -4249,41 +3632,35 @@ impl BetaOrganizationsRbacGroupsMembersNamespace {
     /// Remove a User from an RBAC Group. Membership of groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API while an organization in the tenant uses SCIM provisioning. The RBAC Groups API is available to Claude Enterprise organizations only.
     pub fn delete(
         &self,
-        group_id: String,
-        user_id: String,
+        params: crate::methods::beta_organizations_rbac_groups_members::DeleteBetaOrganizationsRbacGroupsMembersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDeleteRbacGroupMemberResponse, crate::errors::SdkError> {
-        crate::methods::beta_organizations_rbac_groups_members::delete_beta_organizations_rbac_groups_members(&self.config, group_id, user_id, options)
+        crate::methods::beta_organizations_rbac_groups_members::delete_beta_organizations_rbac_groups_members(&self.config, params, options)
     }
     /// List members of an RBAC Group. The RBAC Groups API is available to Claude Enterprise organizations only.
     pub fn list(
         &self,
-        group_id: String,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
+        params: crate::methods::beta_organizations_rbac_groups_members::ListBetaOrganizationsRbacGroupsMembersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaRbacGroupMemberList, crate::errors::SdkError> {
-        crate::methods::beta_organizations_rbac_groups_members::list_beta_organizations_rbac_groups_members(&self.config, group_id, limit, page, options)
+        crate::methods::beta_organizations_rbac_groups_members::list_beta_organizations_rbac_groups_members(&self.config, params, options)
     }
     /// List members of an RBAC Group. The RBAC Groups API is available to Claude Enterprise organizations only.
     pub fn list_paginated(
         &self,
-        group_id: String,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
+        params: crate::methods::beta_organizations_rbac_groups_members::ListBetaOrganizationsRbacGroupsMembersParams,
         options: Option<&crate::client::RequestOptions>,
         yield_fn: impl FnMut(&BetaRbacGroupMember) -> bool,
     ) -> Result<(), crate::errors::SdkError> {
-        crate::methods::beta_organizations_rbac_groups_members::list_beta_organizations_rbac_groups_members_paginated(&self.config, group_id, limit, page, options, yield_fn)
+        crate::methods::beta_organizations_rbac_groups_members::list_beta_organizations_rbac_groups_members_paginated(&self.config, params, options, yield_fn)
     }
     /// Add a User to an RBAC Group. Membership of groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API while an organization in the tenant uses SCIM provisioning. The RBAC Groups API is available to Claude Enterprise organizations only.
     pub fn create(
         &self,
-        group_id: String,
-        user_id: String,
+        params: crate::methods::beta_organizations_rbac_groups_members::CreateBetaOrganizationsRbacGroupsMembersParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaRbacGroupMember, crate::errors::SdkError> {
-        crate::methods::beta_organizations_rbac_groups_members::create_beta_organizations_rbac_groups_members(&self.config, group_id, user_id, options)
+        crate::methods::beta_organizations_rbac_groups_members::create_beta_organizations_rbac_groups_members(&self.config, params, options)
     }
 }
 
@@ -4304,74 +3681,69 @@ impl BetaOrganizationsRbacGroupsNamespace {
     /// Create an RBAC Group in the Claude Enterprise tenant. Groups created via the API have source type `"direct"`. The RBAC Groups API is available to Claude Enterprise organizations only.
     pub fn create(
         &self,
-        name: String,
+        params: crate::methods::beta_organizations_rbac_groups::CreateBetaOrganizationsRbacGroupsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaRbacGroup, crate::errors::SdkError> {
         crate::methods::beta_organizations_rbac_groups::create_beta_organizations_rbac_groups(
             &self.config,
-            name,
+            params,
             options,
         )
     }
     /// List RBAC Groups in the Claude Enterprise tenant. The RBAC Groups API is available to Claude Enterprise organizations only.
     pub fn list(
         &self,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
+        params: crate::methods::beta_organizations_rbac_groups::ListBetaOrganizationsRbacGroupsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaRbacGroupList, crate::errors::SdkError> {
         crate::methods::beta_organizations_rbac_groups::list_beta_organizations_rbac_groups(
             &self.config,
-            limit,
-            page,
+            params,
             options,
         )
     }
     /// List RBAC Groups in the Claude Enterprise tenant. The RBAC Groups API is available to Claude Enterprise organizations only.
     pub fn list_paginated(
         &self,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
+        params: crate::methods::beta_organizations_rbac_groups::ListBetaOrganizationsRbacGroupsParams,
         options: Option<&crate::client::RequestOptions>,
         yield_fn: impl FnMut(&BetaRbacGroup) -> bool,
     ) -> Result<(), crate::errors::SdkError> {
-        crate::methods::beta_organizations_rbac_groups::list_beta_organizations_rbac_groups_paginated(&self.config, limit, page, options, yield_fn)
+        crate::methods::beta_organizations_rbac_groups::list_beta_organizations_rbac_groups_paginated(&self.config, params, options, yield_fn)
     }
     /// Update an RBAC Group's name. Groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API while an organization in the tenant uses SCIM provisioning. The RBAC Groups API is available to Claude Enterprise organizations only.
     pub fn update(
         &self,
-        group_id: String,
-        name: Option<Option<String>>,
+        params: crate::methods::beta_organizations_rbac_groups::UpdateBetaOrganizationsRbacGroupsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaRbacGroup, crate::errors::SdkError> {
         crate::methods::beta_organizations_rbac_groups::update_beta_organizations_rbac_groups(
             &self.config,
-            group_id,
-            name,
+            params,
             options,
         )
     }
     /// Delete an RBAC Group. Groups provisioned by an identity provider (source type `"scim"`) cannot be deleted via the API while an organization in the tenant uses SCIM provisioning. The RBAC Groups API is available to Claude Enterprise organizations only.
     pub fn delete(
         &self,
-        group_id: String,
+        params: crate::methods::beta_organizations_rbac_groups::DeleteBetaOrganizationsRbacGroupsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaDeleteRbacGroupResponse, crate::errors::SdkError> {
         crate::methods::beta_organizations_rbac_groups::delete_beta_organizations_rbac_groups(
             &self.config,
-            group_id,
+            params,
             options,
         )
     }
     /// Retrieve an RBAC Group by ID. The RBAC Groups API is available to Claude Enterprise organizations only.
     pub fn retrieve(
         &self,
-        group_id: String,
+        params: crate::methods::beta_organizations_rbac_groups::RetrieveBetaOrganizationsRbacGroupsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaRbacGroup, crate::errors::SdkError> {
         crate::methods::beta_organizations_rbac_groups::retrieve_beta_organizations_rbac_groups(
             &self.config,
-            group_id,
+            params,
             options,
         )
     }
@@ -4392,29 +3764,25 @@ impl BetaOrganizationsRbacRolesNamespace {
     /// List RBAC Roles in the organization. The RBAC Roles API is available to Claude Enterprise organizations only.
     pub fn list(
         &self,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
+        params: crate::methods::beta_organizations_rbac_roles::ListBetaOrganizationsRbacRolesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaRbacRoleList, crate::errors::SdkError> {
         crate::methods::beta_organizations_rbac_roles::list_beta_organizations_rbac_roles(
             &self.config,
-            limit,
-            page,
+            params,
             options,
         )
     }
     /// List RBAC Roles in the organization. The RBAC Roles API is available to Claude Enterprise organizations only.
     pub fn list_paginated(
         &self,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
+        params: crate::methods::beta_organizations_rbac_roles::ListBetaOrganizationsRbacRolesParams,
         options: Option<&crate::client::RequestOptions>,
         yield_fn: impl FnMut(&BetaRbacRole) -> bool,
     ) -> Result<(), crate::errors::SdkError> {
         crate::methods::beta_organizations_rbac_roles::list_beta_organizations_rbac_roles_paginated(
             &self.config,
-            limit,
-            page,
+            params,
             options,
             yield_fn,
         )
@@ -4422,41 +3790,35 @@ impl BetaOrganizationsRbacRolesNamespace {
     /// Retrieve an RBAC Role by ID. The RBAC Roles API is available to Claude Enterprise organizations only.
     pub fn retrieve(
         &self,
-        role_id: String,
+        params: crate::methods::beta_organizations_rbac_roles::RetrieveBetaOrganizationsRbacRolesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaRbacRole, crate::errors::SdkError> {
         crate::methods::beta_organizations_rbac_roles::retrieve_beta_organizations_rbac_roles(
             &self.config,
-            role_id,
+            params,
             options,
         )
     }
     /// List the permissions an RBAC Role grants. The RBAC Roles API is available to Claude Enterprise organizations only.
     pub fn permissions(
         &self,
-        role_id: String,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
+        params: crate::methods::beta_organizations_rbac_roles::PermissionsBetaOrganizationsRbacRolesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaRbacRolePermissionList, crate::errors::SdkError> {
         crate::methods::beta_organizations_rbac_roles::permissions_beta_organizations_rbac_roles(
             &self.config,
-            role_id,
-            limit,
-            page,
+            params,
             options,
         )
     }
     /// List the permissions an RBAC Role grants. The RBAC Roles API is available to Claude Enterprise organizations only.
     pub fn permissions_paginated(
         &self,
-        role_id: String,
-        limit: Option<i64>,
-        page: Option<Option<String>>,
+        params: crate::methods::beta_organizations_rbac_roles::PermissionsBetaOrganizationsRbacRolesParams,
         options: Option<&crate::client::RequestOptions>,
         yield_fn: impl FnMut(&BetaRbacRolePermission) -> bool,
     ) -> Result<(), crate::errors::SdkError> {
-        crate::methods::beta_organizations_rbac_roles::permissions_beta_organizations_rbac_roles_paginated(&self.config, role_id, limit, page, options, yield_fn)
+        crate::methods::beta_organizations_rbac_roles::permissions_beta_organizations_rbac_roles_paginated(&self.config, params, options, yield_fn)
     }
 }
 
@@ -4599,12 +3961,10 @@ impl BetaOrganizationsAnalyticsSummariesNamespace {
     /// Get organization-wide activity summaries for a date range. Returns one entry per day from `starting_date` (inclusive) to `ending_date` (exclusive). Data is typically available with a 1-day lag and may be revised by a few percent over the following days: when `ending_date` is omitted it defaults to the most recent available day \+ 1, so the last entry covers the most recent available day. The series can be scoped to an RBAC group via `filter[]=rbac_group_id:{id}`. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
     pub fn list(
         &self,
-        starting_date: String,
-        ending_date: Option<Option<String>>,
-        filter: Option<Option<Vec<String>>>,
+        params: crate::methods::beta_organizations_analytics_summaries::ListBetaOrganizationsAnalyticsSummariesParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaAnalyticsActivitySummaryResponse, crate::errors::SdkError> {
-        crate::methods::beta_organizations_analytics_summaries::list_beta_organizations_analytics_summaries(&self.config, starting_date, ending_date, filter, options)
+        crate::methods::beta_organizations_analytics_summaries::list_beta_organizations_analytics_summaries(&self.config, params, options)
     }
 }
 
@@ -4777,19 +4137,19 @@ impl BetaOrganizationsAnalyticsPluginsNamespace {
     /// Get per-plugin install \+ invocation usage for a given day, with pagination. Returns plugin usage metrics for the organization across Cowork and Claude Code, sorted by plugin name. The `plugin_name` value `third-party` is an aggregate bucket, not a plugin: it collects plugin activity, from either surface, for which the reporting client did not provide a plugin name — so an organization's own plugins can contribute both to their own named rows and to this bucket. Use `group_by[]` to break usage out per member, per RBAC group, or per product surface (Cowork / Claude Code), and `filter[]` to scope results; the parameter descriptions list the supported dimensions. Requires an API key with the `read:analytics` scope. `starting_date` / `ending_date` select range-rollup mode like `/skills`.
     pub fn list(
         &self,
-        params: crate::methods::beta_organizations_analytics_plugins::ListBetaOrganizationsAnalyticsPluginsParams,
+        params: crate::methods::beta_organizations_analytics_plugins::ListBetaOrganizationAnalyticsPluginsParams,
         options: Option<&crate::client::RequestOptions>,
     ) -> Result<BetaAnalyticsPluginsResponse, crate::errors::SdkError> {
-        crate::methods::beta_organizations_analytics_plugins::list_beta_organizations_analytics_plugins(&self.config, params, options)
+        crate::methods::beta_organizations_analytics_plugins::list_beta_organization_analytics_plugins(&self.config, params, options)
     }
     /// Get per-plugin install \+ invocation usage for a given day, with pagination. Returns plugin usage metrics for the organization across Cowork and Claude Code, sorted by plugin name. The `plugin_name` value `third-party` is an aggregate bucket, not a plugin: it collects plugin activity, from either surface, for which the reporting client did not provide a plugin name — so an organization's own plugins can contribute both to their own named rows and to this bucket. Use `group_by[]` to break usage out per member, per RBAC group, or per product surface (Cowork / Claude Code), and `filter[]` to scope results; the parameter descriptions list the supported dimensions. Requires an API key with the `read:analytics` scope. `starting_date` / `ending_date` select range-rollup mode like `/skills`.
     pub fn list_paginated(
         &self,
-        params: crate::methods::beta_organizations_analytics_plugins::ListBetaOrganizationsAnalyticsPluginsParams,
+        params: crate::methods::beta_organizations_analytics_plugins::ListBetaOrganizationAnalyticsPluginsParams,
         options: Option<&crate::client::RequestOptions>,
         yield_fn: impl FnMut(&BetaAnalyticsPluginActivity) -> bool,
     ) -> Result<(), crate::errors::SdkError> {
-        crate::methods::beta_organizations_analytics_plugins::list_beta_organizations_analytics_plugins_paginated(&self.config, params, options, yield_fn)
+        crate::methods::beta_organizations_analytics_plugins::list_beta_organization_analytics_plugins_paginated(&self.config, params, options, yield_fn)
     }
 }
 

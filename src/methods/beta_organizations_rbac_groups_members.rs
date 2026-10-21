@@ -9,6 +9,12 @@ use crate::types::{
 };
 use crate::validation::{validate_range, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaOrganizationsRbacGroupsMembersParams {
+    pub group_id: String,
+    pub user_id: String,
+}
+
 /// Remove a User from an RBAC Group. Membership of groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API while an organization in the tenant uses SCIM provisioning. The RBAC Groups API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -17,10 +23,10 @@ use crate::validation::{validate_range, RangeOpts};
 /// * `user_id` - ID of the User.
 pub fn delete_beta_organizations_rbac_groups_members(
     config: &ClientConfig,
-    group_id: String,
-    user_id: String,
+    params: DeleteBetaOrganizationsRbacGroupsMembersParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaDeleteRbacGroupMemberResponse, SdkError> {
+    let DeleteBetaOrganizationsRbacGroupsMembersParams { group_id, user_id } = params;
     Ok(sdk_request::<BetaDeleteRbacGroupMemberResponse>(
         "DELETE",
         &format!(
@@ -57,6 +63,13 @@ pub fn delete_beta_organizations_rbac_groups_members(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ListBetaOrganizationsRbacGroupsMembersParams {
+    pub group_id: String,
+    pub limit: Option<i64>,
+    pub page: Option<Option<String>>,
+}
+
 /// List members of an RBAC Group. The RBAC Groups API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -68,11 +81,14 @@ pub fn delete_beta_organizations_rbac_groups_members(
 ///   response.
 pub fn list_beta_organizations_rbac_groups_members(
     config: &ClientConfig,
-    group_id: String,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: ListBetaOrganizationsRbacGroupsMembersParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaRbacGroupMemberList, SdkError> {
+    let ListBetaOrganizationsRbacGroupsMembersParams {
+        group_id,
+        limit,
+        page,
+    } = params;
     if let Some(ref limit_v) = limit {
         validate_range(
             "limit",
@@ -140,19 +156,25 @@ pub fn list_beta_organizations_rbac_groups_members(
 ///   response.
 pub fn list_beta_organizations_rbac_groups_members_paginated(
     config: &ClientConfig,
-    group_id: String,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: ListBetaOrganizationsRbacGroupsMembersParams,
     options: Option<&RequestOptions>,
     mut yield_fn: impl FnMut(&BetaRbacGroupMember) -> bool,
 ) -> Result<(), SdkError> {
+    let ListBetaOrganizationsRbacGroupsMembersParams {
+        group_id,
+        limit,
+        page,
+    } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
         let _page = list_beta_organizations_rbac_groups_members(
             config,
-            group_id.clone(),
-            limit,
-            _cursor,
+            ListBetaOrganizationsRbacGroupsMembersParams {
+                group_id: group_id.clone(),
+                limit,
+                page: _cursor,
+            },
             options,
         )?;
         let _items: Vec<_> = _page.data.iter().collect();
@@ -183,19 +205,25 @@ pub struct ListBetaOrganizationsRbacGroupsMembersPage<'a> {
 
 pub fn list_beta_organizations_rbac_groups_members_pages(
     config: &ClientConfig,
-    group_id: String,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: ListBetaOrganizationsRbacGroupsMembersParams,
     options: Option<&RequestOptions>,
     mut yield_page: impl FnMut(ListBetaOrganizationsRbacGroupsMembersPage<'_>) -> bool,
 ) -> Result<(), SdkError> {
+    let ListBetaOrganizationsRbacGroupsMembersParams {
+        group_id,
+        limit,
+        page,
+    } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
         let _page = list_beta_organizations_rbac_groups_members(
             config,
-            group_id.clone(),
-            limit,
-            _cursor,
+            ListBetaOrganizationsRbacGroupsMembersParams {
+                group_id: group_id.clone(),
+                limit,
+                page: _cursor,
+            },
             options,
         )?;
         let _items: Vec<_> = _page.data.iter().collect();
@@ -221,6 +249,12 @@ pub fn list_beta_organizations_rbac_groups_members_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateBetaOrganizationsRbacGroupsMembersParams {
+    pub group_id: String,
+    pub user_id: String,
+}
+
 /// Add a User to an RBAC Group. Membership of groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API while an organization in the tenant uses SCIM provisioning. The RBAC Groups API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -229,10 +263,10 @@ pub fn list_beta_organizations_rbac_groups_members_pages(
 /// * `user_id` - ID of the User.
 pub fn create_beta_organizations_rbac_groups_members(
     config: &ClientConfig,
-    group_id: String,
-    user_id: String,
+    params: CreateBetaOrganizationsRbacGroupsMembersParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaRbacGroupMember, SdkError> {
+    let CreateBetaOrganizationsRbacGroupsMembersParams { group_id, user_id } = params;
     let mut __body_map = serde_json::Map::new();
     __body_map.insert(
         "user_id".to_string(),

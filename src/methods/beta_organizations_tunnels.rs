@@ -249,6 +249,13 @@ pub fn list_beta_organizations_tunnels_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsTunnelsParams {
+    pub tunnel_id: String,
+    pub anthropic_beta: Vec<AnthropicBeta>,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Deprecated.\*\* This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use `/v1/tunnels` with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window. Retrieve a single tunnel in the caller's organization by ID.
 ///
 /// # Arguments
@@ -265,11 +272,14 @@ pub fn list_beta_organizations_tunnels_pages(
 /// This operation is deprecated and may be removed in a future release.
 pub fn retrieve_beta_organizations_tunnels(
     config: &ClientConfig,
-    tunnel_id: String,
-    anthropic_beta: Vec<AnthropicBeta>,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsTunnelsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaOrganizationTunnel, SdkError> {
+    let RetrieveBetaOrganizationsTunnelsParams {
+        tunnel_id,
+        anthropic_beta,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     __headers.extend([(
         "anthropic-beta".to_string(),
@@ -318,6 +328,13 @@ pub fn retrieve_beta_organizations_tunnels(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ArchiveBetaOrganizationsTunnelsParams {
+    pub tunnel_id: String,
+    pub anthropic_beta: Vec<AnthropicBeta>,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Deprecated.\*\* This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use `/v1/tunnels` with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window. Archive a tunnel. Archival is irreversible. Every non-archived certificate on the tunnel is archived in the same operation, the hostname is retired and never re-allocated, and the tunnel token is invalidated. Retrying against an already-archived tunnel returns the existing record unchanged.
 ///
 /// # Arguments
@@ -334,11 +351,14 @@ pub fn retrieve_beta_organizations_tunnels(
 /// This operation is deprecated and may be removed in a future release.
 pub fn archive_beta_organizations_tunnels(
     config: &ClientConfig,
-    tunnel_id: String,
-    anthropic_beta: Vec<AnthropicBeta>,
-    anthropic_version: Option<String>,
+    params: ArchiveBetaOrganizationsTunnelsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaOrganizationTunnel, SdkError> {
+    let ArchiveBetaOrganizationsTunnelsParams {
+        tunnel_id,
+        anthropic_beta,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     __headers.extend([(
         "anthropic-beta".to_string(),
@@ -387,6 +407,13 @@ pub fn archive_beta_organizations_tunnels(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RevealBetaOrganizationsTunnelsTokenParams {
+    pub tunnel_id: String,
+    pub anthropic_beta: Vec<AnthropicBeta>,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Deprecated.\*\* This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use `/v1/tunnels` with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window. Return the tunnel's current connection token. The value is fetched live on each call; Anthropic does not store it. Repeated calls return the same value until the token is rotated. Exposed as `POST` so the token does not appear in intermediary access logs.
 ///
 /// # Arguments
@@ -403,11 +430,14 @@ pub fn archive_beta_organizations_tunnels(
 /// This operation is deprecated and may be removed in a future release.
 pub fn reveal_beta_organizations_tunnels_token(
     config: &ClientConfig,
-    tunnel_id: String,
-    anthropic_beta: Vec<AnthropicBeta>,
-    anthropic_version: Option<String>,
+    params: RevealBetaOrganizationsTunnelsTokenParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaOrganizationTunnelToken, SdkError> {
+    let RevealBetaOrganizationsTunnelsTokenParams {
+        tunnel_id,
+        anthropic_beta,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     __headers.extend([(
         "anthropic-beta".to_string(),
@@ -456,6 +486,14 @@ pub fn reveal_beta_organizations_tunnels_token(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RotateBetaOrganizationsTunnelsTokenParams {
+    pub tunnel_id: String,
+    pub anthropic_beta: Vec<AnthropicBeta>,
+    pub anthropic_version: Option<String>,
+    pub body: Option<BetaRotateTunnelTokenParams>,
+}
+
 /// Rotates a tunnel's token, invalidating the previous token for new connections and returning a fresh value. Established connections remain active, but connectors restarted after rotation must use the new token; provide `reason` to record operational context. This operation is closing down and will be removed after the migration window; use the replacement tunnel endpoint for new integrations.
 ///
 /// \*\*Deprecated.\*\* This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use `/v1/tunnels` with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window. Invalidate the tunnel's current token for new connections and return a fresh value. Established connections are not severed by rotation; a connector restarted after rotation must use the new value. An optional `reason` is captured for operational context.
@@ -474,12 +512,15 @@ pub fn reveal_beta_organizations_tunnels_token(
 /// This operation is deprecated and may be removed in a future release.
 pub fn rotate_beta_organizations_tunnels_token(
     config: &ClientConfig,
-    tunnel_id: String,
-    anthropic_beta: Vec<AnthropicBeta>,
-    anthropic_version: Option<String>,
-    body: Option<BetaRotateTunnelTokenParams>,
+    params: RotateBetaOrganizationsTunnelsTokenParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaOrganizationTunnelToken, SdkError> {
+    let RotateBetaOrganizationsTunnelsTokenParams {
+        tunnel_id,
+        anthropic_beta,
+        anthropic_version,
+        body,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     __headers.extend([(
         "anthropic-beta".to_string(),

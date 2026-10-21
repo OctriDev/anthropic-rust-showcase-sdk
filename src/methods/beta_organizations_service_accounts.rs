@@ -354,6 +354,13 @@ pub fn list_beta_organizations_service_accounts_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsServiceAccountsParams {
+    pub service_account_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Retrieve a service account by its ID (`svac_...`).
 ///
 /// # Arguments
@@ -367,11 +374,14 @@ pub fn list_beta_organizations_service_accounts_pages(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_service_accounts(
     config: &ClientConfig,
-    service_account_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsServiceAccountsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaServiceAccount, SdkError> {
+    let RetrieveBetaOrganizationsServiceAccountsParams {
+        service_account_id,
+        anthropic_beta,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_beta {
         __headers.push((
@@ -534,6 +544,13 @@ pub fn update_beta_organizations_service_accounts(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ArchiveBetaOrganizationsServiceAccountsParams {
+    pub service_account_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Archive a service account. Idempotent; re-archiving returns the service account with its original `archived_at`. Rejected with 400 if any live (non-archived) federation rule still targets this service account, same as issuer archival; archive those rules first or change their target to another service account.
 ///
 /// # Arguments
@@ -547,11 +564,14 @@ pub fn update_beta_organizations_service_accounts(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn archive_beta_organizations_service_accounts(
     config: &ClientConfig,
-    service_account_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
+    params: ArchiveBetaOrganizationsServiceAccountsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaServiceAccount, SdkError> {
+    let ArchiveBetaOrganizationsServiceAccountsParams {
+        service_account_id,
+        anthropic_beta,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_beta {
         __headers.push((

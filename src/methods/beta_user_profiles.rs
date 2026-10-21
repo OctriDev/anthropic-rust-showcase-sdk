@@ -365,6 +365,13 @@ pub fn list_beta_user_profiles_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaUserProfilesParams {
+    pub user_profile_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+}
+
 /// Retrieves a user profile by its identifier. Use `user_profile_id` to select the profile; the response includes its profile details, trust grants, metadata, and timestamps.
 ///
 /// # Arguments
@@ -372,11 +379,14 @@ pub fn list_beta_user_profiles_pages(
 /// * `user_profile_id` - Path parameter user_profile_id
 pub fn retrieve_beta_user_profiles(
     config: &ClientConfig,
-    user_profile_id: String,
-    anthropic_version: Option<String>,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
+    params: RetrieveBetaUserProfilesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaUserProfile, SdkError> {
+    let RetrieveBetaUserProfilesParams {
+        user_profile_id,
+        anthropic_version,
+        anthropic_beta,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -580,6 +590,13 @@ pub fn update_beta_user_profiles(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateBetaUserProfilesEnrollmentUrlParams {
+    pub user_profile_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+}
+
 /// Creates an enrollment URL for a user profile to send to the represented end user. Use `user_profile_id` to select the profile, then send the returned URL before its `expires_at` time.
 ///
 /// # Arguments
@@ -587,11 +604,14 @@ pub fn update_beta_user_profiles(
 /// * `user_profile_id` - Path parameter user_profile_id
 pub fn create_beta_user_profiles_enrollment_url(
     config: &ClientConfig,
-    user_profile_id: String,
-    anthropic_version: Option<String>,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
+    params: CreateBetaUserProfilesEnrollmentUrlParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaEnrollmentUrl, SdkError> {
+    let CreateBetaUserProfilesEnrollmentUrlParams {
+        user_profile_id,
+        anthropic_version,
+        anthropic_beta,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((

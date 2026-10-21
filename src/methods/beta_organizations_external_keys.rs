@@ -12,6 +12,14 @@ use crate::types::{
 };
 use crate::validation::{validate_length, validate_range, LengthOpts, RangeOpts};
 
+#[derive(Debug, Clone)]
+pub struct CreateBetaOrganizationsExternalKeysParams {
+    pub provider_config: BetaExternalKeyCreateParamsProviderConfig,
+    pub anthropic_version: Option<String>,
+    pub display_name: Option<Option<String>>,
+    pub geo: Option<BetaExternalKeyCreateParamsGeoEnum>,
+}
+
 /// Create an external key config owned by the caller's organization.
 ///
 /// # Arguments
@@ -24,12 +32,15 @@ use crate::validation::{validate_length, validate_range, LengthOpts, RangeOpts};
 /// * `geo` - Data residency geo. Only `us` is supported.
 pub fn create_beta_organizations_external_keys(
     config: &ClientConfig,
-    provider_config: BetaExternalKeyCreateParamsProviderConfig,
-    anthropic_version: Option<String>,
-    display_name: Option<Option<String>>,
-    geo: Option<BetaExternalKeyCreateParamsGeoEnum>,
+    params: CreateBetaOrganizationsExternalKeysParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaExternalKey, SdkError> {
+    let CreateBetaOrganizationsExternalKeysParams {
+        provider_config,
+        anthropic_version,
+        display_name,
+        geo,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -106,6 +117,13 @@ pub fn create_beta_organizations_external_keys(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ListBetaOrganizationsExternalKeysParams {
+    pub limit: Option<i64>,
+    pub page: Option<Option<String>>,
+    pub anthropic_version: Option<String>,
+}
+
 /// List external key configs in the caller's organization. Results are ordered by creation time (newest first). Use the `next_page` cursor from the response to fetch subsequent pages.
 ///
 /// # Arguments
@@ -117,11 +135,14 @@ pub fn create_beta_organizations_external_keys(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn list_beta_organizations_external_keys(
     config: &ClientConfig,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
-    anthropic_version: Option<String>,
+    params: ListBetaOrganizationsExternalKeysParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaExternalKeyListResponse, SdkError> {
+    let ListBetaOrganizationsExternalKeysParams {
+        limit,
+        page,
+        anthropic_version,
+    } = params;
     if let Some(ref limit_v) = limit {
         validate_range(
             "limit",
@@ -195,19 +216,25 @@ pub fn list_beta_organizations_external_keys(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn list_beta_organizations_external_keys_paginated(
     config: &ClientConfig,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
-    anthropic_version: Option<String>,
+    params: ListBetaOrganizationsExternalKeysParams,
     options: Option<&RequestOptions>,
     mut yield_fn: impl FnMut(&BetaExternalKey) -> bool,
 ) -> Result<(), SdkError> {
+    let ListBetaOrganizationsExternalKeysParams {
+        limit,
+        page,
+        anthropic_version,
+    } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
         let _page = list_beta_organizations_external_keys(
             config,
-            limit,
-            _cursor,
-            anthropic_version.clone(),
+            ListBetaOrganizationsExternalKeysParams {
+                limit,
+                page: _cursor,
+                anthropic_version: anthropic_version.clone(),
+            },
             options,
         )?;
         let _items: Vec<_> = _page.data.iter().collect();
@@ -235,19 +262,25 @@ pub struct ListBetaOrganizationsExternalKeysPage<'a> {
 
 pub fn list_beta_organizations_external_keys_pages(
     config: &ClientConfig,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
-    anthropic_version: Option<String>,
+    params: ListBetaOrganizationsExternalKeysParams,
     options: Option<&RequestOptions>,
     mut yield_page: impl FnMut(ListBetaOrganizationsExternalKeysPage<'_>) -> bool,
 ) -> Result<(), SdkError> {
+    let ListBetaOrganizationsExternalKeysParams {
+        limit,
+        page,
+        anthropic_version,
+    } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
         let _page = list_beta_organizations_external_keys(
             config,
-            limit,
-            _cursor,
-            anthropic_version.clone(),
+            ListBetaOrganizationsExternalKeysParams {
+                limit,
+                page: _cursor,
+                anthropic_version: anthropic_version.clone(),
+            },
             options,
         )?;
         let _items: Vec<_> = _page.data.iter().collect();
@@ -273,6 +306,12 @@ pub fn list_beta_organizations_external_keys_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsExternalKeysParams {
+    pub external_key_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Retrieve a single external key config in the caller's organization by ID.
 ///
 /// # Arguments
@@ -283,10 +322,13 @@ pub fn list_beta_organizations_external_keys_pages(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_external_keys(
     config: &ClientConfig,
-    external_key_id: String,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsExternalKeysParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaExternalKey, SdkError> {
+    let RetrieveBetaOrganizationsExternalKeysParams {
+        external_key_id,
+        anthropic_version,
+    } = params;
     validate_length(
         "external_key_id",
         &external_key_id,
@@ -462,6 +504,12 @@ pub fn update_beta_organizations_external_keys(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaOrganizationsExternalKeysParams {
+    pub external_key_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Delete an external key config. The request is rejected if any workspace still references this config.
 ///
 /// # Arguments
@@ -472,10 +520,13 @@ pub fn update_beta_organizations_external_keys(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn delete_beta_organizations_external_keys(
     config: &ClientConfig,
-    external_key_id: String,
-    anthropic_version: Option<String>,
+    params: DeleteBetaOrganizationsExternalKeysParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaDeleteExternalKeyResponse, SdkError> {
+    let DeleteBetaOrganizationsExternalKeysParams {
+        external_key_id,
+        anthropic_version,
+    } = params;
     validate_length(
         "external_key_id",
         &external_key_id,
@@ -529,6 +580,12 @@ pub fn delete_beta_organizations_external_keys(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ValidateBetaOrganizationsExternalKeysParams {
+    pub external_key_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Validate an external key config against the customer's KMS. Anthropic performs an encrypt/decrypt roundtrip against the configured KMS key and waits up to 30 seconds for the result. The response status is `success` if the roundtrip succeeded, or `failure` with an error message if it failed or timed out.
 ///
 /// # Arguments
@@ -539,10 +596,13 @@ pub fn delete_beta_organizations_external_keys(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn validate_beta_organizations_external_keys(
     config: &ClientConfig,
-    external_key_id: String,
-    anthropic_version: Option<String>,
+    params: ValidateBetaOrganizationsExternalKeysParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaValidateExternalKeyResponse, SdkError> {
+    let ValidateBetaOrganizationsExternalKeysParams {
+        external_key_id,
+        anthropic_version,
+    } = params;
     validate_length(
         "external_key_id",
         &external_key_id,

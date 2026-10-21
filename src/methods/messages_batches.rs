@@ -10,6 +10,14 @@ use crate::types::{
 };
 use crate::validation::{validate_items, validate_range, LengthOpts, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateMessagesBatchesParams {
+    pub requests: Vec<MessageBatchIndividualRequestParams>,
+    pub anthropic_version: Option<String>,
+    pub anthropic_user_profile_id: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Send a batch of Message creation requests. The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 ///
 /// # Arguments
@@ -31,12 +39,15 @@ use crate::validation::{validate_items, validate_range, LengthOpts, RangeOpts};
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn create_messages_batches(
     config: &ClientConfig,
-    requests: Vec<MessageBatchIndividualRequestParams>,
-    anthropic_version: Option<String>,
-    anthropic_user_profile_id: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: CreateMessagesBatchesParams,
     options: Option<&RequestOptions>,
 ) -> Result<MessageBatch, SdkError> {
+    let CreateMessagesBatchesParams {
+        requests,
+        anthropic_version,
+        anthropic_user_profile_id,
+        anthropic_workspace_id,
+    } = params;
     validate_items(
         "requests",
         &requests,
@@ -222,6 +233,13 @@ pub fn list_messages_batches(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveMessagesBatchesParams {
+    pub message_batch_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 ///
 /// # Arguments
@@ -237,11 +255,14 @@ pub fn list_messages_batches(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn retrieve_messages_batches(
     config: &ClientConfig,
-    message_batch_id: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: RetrieveMessagesBatchesParams,
     options: Option<&RequestOptions>,
 ) -> Result<MessageBatch, SdkError> {
+    let RetrieveMessagesBatchesParams {
+        message_batch_id,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -292,6 +313,13 @@ pub fn retrieve_messages_batches(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteMessagesBatchesParams {
+    pub message_batch_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Delete a Message Batch. Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 ///
 /// # Arguments
@@ -307,11 +335,14 @@ pub fn retrieve_messages_batches(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn delete_messages_batches(
     config: &ClientConfig,
-    message_batch_id: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: DeleteMessagesBatchesParams,
     options: Option<&RequestOptions>,
 ) -> Result<DeleteMessageBatchResponse, SdkError> {
+    let DeleteMessagesBatchesParams {
+        message_batch_id,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -362,6 +393,13 @@ pub fn delete_messages_batches(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct CancelMessagesBatchesParams {
+    pub message_batch_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation. The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 ///
 /// # Arguments
@@ -377,11 +415,14 @@ pub fn delete_messages_batches(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn cancel_messages_batches(
     config: &ClientConfig,
-    message_batch_id: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: CancelMessagesBatchesParams,
     options: Option<&RequestOptions>,
 ) -> Result<MessageBatch, SdkError> {
+    let CancelMessagesBatchesParams {
+        message_batch_id,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -432,6 +473,13 @@ pub fn cancel_messages_batches(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ResultsMessagesBatchesParams {
+    pub message_batch_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Streams the results of a Message Batch as a `.jsonl` file. Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests. Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 ///
 /// # Arguments
@@ -447,11 +495,14 @@ pub fn cancel_messages_batches(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn results_messages_batches(
     config: &ClientConfig,
-    message_batch_id: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: ResultsMessagesBatchesParams,
     options: Option<&RequestOptions>,
 ) -> Result<MessageBatchIndividualResponse, SdkError> {
+    let ResultsMessagesBatchesParams {
+        message_batch_id,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((

@@ -337,6 +337,14 @@ pub fn create_beta_organizations_service_accounts_workspaces(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaOrganizationsServiceAccountsWorkspacesParams {
+    pub workspace_id: String,
+    pub service_account_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Remove a service account from a workspace. Mirror of `DELETE /workspaces/{workspace_id}/service_accounts/{service_account_id}`, addressed from the service-account side. Removal is idempotent (returns 200 even if the membership was already removed). A DELETE against the implicit default-workspace membership returns 200 but is a no-op and the membership persists; deleting an explicit default-workspace row reverts to the implicit `workspace_user` membership. Archived workspaces return 400.
 ///
 /// # Arguments
@@ -351,12 +359,15 @@ pub fn create_beta_organizations_service_accounts_workspaces(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn delete_beta_organizations_service_accounts_workspaces(
     config: &ClientConfig,
-    workspace_id: String,
-    service_account_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
+    params: DeleteBetaOrganizationsServiceAccountsWorkspacesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaServiceAccountWorkspaceMemberDeleteResponse, SdkError> {
+    let DeleteBetaOrganizationsServiceAccountsWorkspacesParams {
+        workspace_id,
+        service_account_id,
+        anthropic_beta,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_beta {
         __headers.push((

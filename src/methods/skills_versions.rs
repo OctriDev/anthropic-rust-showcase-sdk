@@ -6,6 +6,14 @@ use crate::client::{sdk_request, RequestOptions, RequestOpts};
 use crate::errors::SdkError;
 use crate::types::{DeletedSkillVersion, ListSkillVersionsResponse, SkillVersion};
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateSkillsVersionsParams {
+    pub skill_id: String,
+    pub files: Vec<crate::client::UploadFile>,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Creates a new version of a skill by uploading its files. Put all files in the same top-level directory and include `SKILL.md` at that directory's root. The response contains the created skill version and its generated identifier.
 ///
 /// # Arguments
@@ -25,12 +33,15 @@ use crate::types::{DeletedSkillVersion, ListSkillVersionsResponse, SkillVersion}
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn create_skills_versions(
     config: &ClientConfig,
-    skill_id: String,
-    files: Vec<crate::client::UploadFile>,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: CreateSkillsVersionsParams,
     options: Option<&RequestOptions>,
 ) -> Result<SkillVersion, SdkError> {
+    let CreateSkillsVersionsParams {
+        skill_id,
+        files,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -317,6 +328,14 @@ pub fn list_skills_versions_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveSkillsVersionsParams {
+    pub skill_id: String,
+    pub version: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Retrieves a specific version of a skill. Use `version` to identify the version by its ID or request `latest` for the skill's most recent version. With the `skills-2025-10-02` beta header, identify the version by its Unix epoch timestamp instead.
 ///
 /// # Arguments
@@ -337,12 +356,15 @@ pub fn list_skills_versions_pages(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn retrieve_skills_versions(
     config: &ClientConfig,
-    skill_id: String,
-    version: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: RetrieveSkillsVersionsParams,
     options: Option<&RequestOptions>,
 ) -> Result<SkillVersion, SdkError> {
+    let RetrieveSkillsVersionsParams {
+        skill_id,
+        version,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -394,6 +416,14 @@ pub fn retrieve_skills_versions(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteSkillsVersionsParams {
+    pub skill_id: String,
+    pub version: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Deletes a specific version of a skill. Supply the skill and version identifiers to select the version to remove. The response confirms the deletion with the deleted version's ID.
 ///
 /// # Arguments
@@ -413,12 +443,15 @@ pub fn retrieve_skills_versions(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn delete_skills_versions(
     config: &ClientConfig,
-    skill_id: String,
-    version: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: DeleteSkillsVersionsParams,
     options: Option<&RequestOptions>,
 ) -> Result<DeletedSkillVersion, SdkError> {
+    let DeleteSkillsVersionsParams {
+        skill_id,
+        version,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((

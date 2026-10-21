@@ -318,6 +318,14 @@ pub fn list_beta_deployment_runs_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaDeploymentRunsParams {
+    pub deployment_run_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Retrieves the record for a single deployment run, including whether session creation succeeded or failed. Use `deployment_run_id` to select the run and inspect `session_id` or `error` for its creation outcome.
 ///
 /// # Arguments
@@ -330,12 +338,15 @@ pub fn list_beta_deployment_runs_pages(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn retrieve_beta_deployment_runs(
     config: &ClientConfig,
-    deployment_run_id: String,
-    anthropic_version: Option<String>,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_workspace_id: Option<String>,
+    params: RetrieveBetaDeploymentRunsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaManagedAgentsDeploymentRun, SdkError> {
+    let RetrieveBetaDeploymentRunsParams {
+        deployment_run_id,
+        anthropic_version,
+        anthropic_beta,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(3);
     if let Some(ref value) = anthropic_version {
         __headers.push((

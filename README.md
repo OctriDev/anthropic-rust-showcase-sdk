@@ -25,7 +25,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         ..Default::default()
     };
     let client = Anthropic::new(config);
-    let result = client.beta.agents.retrieve(octridev_anthropic::methods::beta_agents::RetrieveBetaAgentsParams { agent_id: "agent_011CZkYpogX7uDKUyvBTophP".to_string(), version: None, anthropic_version: None, anthropic_beta: None, anthropic_workspace_id: None }, None)?;
+    let result = client.beta.agents.retrieve(octridev_anthropic::methods::beta_agents::RetrieveBetaAgentsParams { agent_id: "agent_011CZkYpogX7uDKUyvBTophP".to_string(), ..Default::default() }, None)?;
     println!("{result:#?}");
     Ok(())
 }

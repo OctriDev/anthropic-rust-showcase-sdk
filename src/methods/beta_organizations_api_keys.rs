@@ -60,6 +60,12 @@ impl std::fmt::Display for ListBetaOrganizationsApiKeys {
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsApiKeysParams {
+    pub api_key_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Retrieves a specific API key by its ID. Use `api_key_id` to identify the key whose metadata you need. The response includes its status, scope, creation and expiration details, and a partially redacted key hint.
 ///
 /// # Arguments
@@ -70,10 +76,13 @@ impl std::fmt::Display for ListBetaOrganizationsApiKeys {
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_api_keys(
     config: &ClientConfig,
-    api_key_id: String,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsApiKeysParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaApiKey, SdkError> {
+    let RetrieveBetaOrganizationsApiKeysParams {
+        api_key_id,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -118,6 +127,14 @@ pub fn retrieve_beta_organizations_api_keys(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct UpdateBetaOrganizationsApiKeysParams {
+    pub api_key_id: String,
+    pub anthropic_version: Option<String>,
+    pub name: Option<Option<String>>,
+    pub status: Option<Option<BetaApiKeyUpdateParamsStatus>>,
+}
+
 /// Updates an API key's name, status, or both. Include the fields you want to change; `name` can be a string or `null`, and `status` can be active, archived, inactive, or `null`. The response returns the API key object with its current metadata.
 ///
 /// # Arguments
@@ -130,12 +147,15 @@ pub fn retrieve_beta_organizations_api_keys(
 /// * `status` - Status of the API key.
 pub fn update_beta_organizations_api_keys(
     config: &ClientConfig,
-    api_key_id: String,
-    anthropic_version: Option<String>,
-    name: Option<Option<String>>,
-    status: Option<Option<BetaApiKeyUpdateParamsStatus>>,
+    params: UpdateBetaOrganizationsApiKeysParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaApiKey, SdkError> {
+    let UpdateBetaOrganizationsApiKeysParams {
+        api_key_id,
+        anthropic_version,
+        name,
+        status,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
