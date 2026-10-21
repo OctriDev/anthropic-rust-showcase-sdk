@@ -7,6 +7,11 @@ use crate::errors::{SdkError, SdkNetworkError};
 use crate::types::{BetaDeleteRbacGroupResponse, BetaRbacGroup, BetaRbacGroupList};
 use crate::validation::{validate_length, validate_range, LengthOpts, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateBetaOrganizationsRbacGroupsParams {
+    pub name: String,
+}
+
 /// Create an RBAC Group in the Claude Enterprise tenant. Groups created via the API have source type `"direct"`. The RBAC Groups API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -14,9 +19,10 @@ use crate::validation::{validate_length, validate_range, LengthOpts, RangeOpts};
 /// * `name` - Name of the RBAC Group. Not uniqueness-enforced.
 pub fn create_beta_organizations_rbac_groups(
     config: &ClientConfig,
-    name: String,
+    params: CreateBetaOrganizationsRbacGroupsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaRbacGroup, SdkError> {
+    let CreateBetaOrganizationsRbacGroupsParams { name } = params;
     validate_length(
         "name",
         &name,
@@ -71,6 +77,12 @@ pub fn create_beta_organizations_rbac_groups(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ListBetaOrganizationsRbacGroupsParams {
+    pub limit: Option<i64>,
+    pub page: Option<Option<String>>,
+}
+
 /// List RBAC Groups in the Claude Enterprise tenant. The RBAC Groups API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -81,10 +93,10 @@ pub fn create_beta_organizations_rbac_groups(
 ///   response.
 pub fn list_beta_organizations_rbac_groups(
     config: &ClientConfig,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: ListBetaOrganizationsRbacGroupsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaRbacGroupList, SdkError> {
+    let ListBetaOrganizationsRbacGroupsParams { limit, page } = params;
     if let Some(ref limit_v) = limit {
         validate_range(
             "limit",
@@ -148,14 +160,22 @@ pub fn list_beta_organizations_rbac_groups(
 ///   response.
 pub fn list_beta_organizations_rbac_groups_paginated(
     config: &ClientConfig,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: ListBetaOrganizationsRbacGroupsParams,
     options: Option<&RequestOptions>,
     mut yield_fn: impl FnMut(&BetaRbacGroup) -> bool,
 ) -> Result<(), SdkError> {
+    let ListBetaOrganizationsRbacGroupsParams { limit, page } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
-        let _page = list_beta_organizations_rbac_groups(config, limit, _cursor, options)?;
+        let _page = list_beta_organizations_rbac_groups(
+            config,
+            ListBetaOrganizationsRbacGroupsParams {
+                limit,
+                page: _cursor,
+            },
+            options,
+        )?;
         let _items: Vec<_> = _page.data.iter().collect();
         if _items.is_empty() {
             return Ok(());
@@ -184,14 +204,22 @@ pub struct ListBetaOrganizationsRbacGroupsPage<'a> {
 
 pub fn list_beta_organizations_rbac_groups_pages(
     config: &ClientConfig,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: ListBetaOrganizationsRbacGroupsParams,
     options: Option<&RequestOptions>,
     mut yield_page: impl FnMut(ListBetaOrganizationsRbacGroupsPage<'_>) -> bool,
 ) -> Result<(), SdkError> {
+    let ListBetaOrganizationsRbacGroupsParams { limit, page } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
-        let _page = list_beta_organizations_rbac_groups(config, limit, _cursor, options)?;
+        let _page = list_beta_organizations_rbac_groups(
+            config,
+            ListBetaOrganizationsRbacGroupsParams {
+                limit,
+                page: _cursor,
+            },
+            options,
+        )?;
         let _items: Vec<_> = _page.data.iter().collect();
         if _items.is_empty() {
             return Ok(());
@@ -215,6 +243,12 @@ pub fn list_beta_organizations_rbac_groups_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct UpdateBetaOrganizationsRbacGroupsParams {
+    pub group_id: String,
+    pub name: Option<Option<String>>,
+}
+
 /// Update an RBAC Group's name. Groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API while an organization in the tenant uses SCIM provisioning. The RBAC Groups API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -223,10 +257,10 @@ pub fn list_beta_organizations_rbac_groups_pages(
 /// * `name` - Name of the RBAC Group. Not uniqueness-enforced.
 pub fn update_beta_organizations_rbac_groups(
     config: &ClientConfig,
-    group_id: String,
-    name: Option<Option<String>>,
+    params: UpdateBetaOrganizationsRbacGroupsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaRbacGroup, SdkError> {
+    let UpdateBetaOrganizationsRbacGroupsParams { group_id, name } = params;
     let mut __body_map = serde_json::Map::new();
     if let Some(ref value) = name {
         __body_map.insert(
@@ -277,6 +311,11 @@ pub fn update_beta_organizations_rbac_groups(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaOrganizationsRbacGroupsParams {
+    pub group_id: String,
+}
+
 /// Delete an RBAC Group. Groups provisioned by an identity provider (source type `"scim"`) cannot be deleted via the API while an organization in the tenant uses SCIM provisioning. The RBAC Groups API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -284,9 +323,10 @@ pub fn update_beta_organizations_rbac_groups(
 /// * `group_id` - ID of the RBAC Group.
 pub fn delete_beta_organizations_rbac_groups(
     config: &ClientConfig,
-    group_id: String,
+    params: DeleteBetaOrganizationsRbacGroupsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaDeleteRbacGroupResponse, SdkError> {
+    let DeleteBetaOrganizationsRbacGroupsParams { group_id } = params;
     Ok(sdk_request::<BetaDeleteRbacGroupResponse>(
         "DELETE",
         &format!(
@@ -322,6 +362,11 @@ pub fn delete_beta_organizations_rbac_groups(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsRbacGroupsParams {
+    pub group_id: String,
+}
+
 /// Retrieve an RBAC Group by ID. The RBAC Groups API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -329,9 +374,10 @@ pub fn delete_beta_organizations_rbac_groups(
 /// * `group_id` - ID of the RBAC Group.
 pub fn retrieve_beta_organizations_rbac_groups(
     config: &ClientConfig,
-    group_id: String,
+    params: RetrieveBetaOrganizationsRbacGroupsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaRbacGroup, SdkError> {
+    let RetrieveBetaOrganizationsRbacGroupsParams { group_id } = params;
     Ok(sdk_request::<BetaRbacGroup>(
         "GET",
         &format!(

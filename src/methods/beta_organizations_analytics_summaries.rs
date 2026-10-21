@@ -7,6 +7,13 @@ use crate::errors::SdkError;
 use crate::types::BetaAnalyticsActivitySummaryResponse;
 use crate::validation::{validate_date, validate_items, LengthOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct ListBetaOrganizationsAnalyticsSummariesParams {
+    pub starting_date: String,
+    pub ending_date: Option<Option<String>>,
+    pub filter: Option<Option<Vec<String>>>,
+}
+
 /// Get organization-wide activity summaries for a date range. Returns one entry per day from `starting_date` (inclusive) to `ending_date` (exclusive). Data is typically available with a 1-day lag and may be revised by a few percent over the following days: when `ending_date` is omitted it defaults to the most recent available day \+ 1, so the last entry covers the most recent available day. The series can be scoped to an RBAC group via `filter[]=rbac_group_id:{id}`. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
 ///
 /// # Arguments
@@ -32,11 +39,14 @@ use crate::validation::{validate_date, validate_items, LengthOpts};
 ///   attribution). At most 100 entries.
 pub fn list_beta_organizations_analytics_summaries(
     config: &ClientConfig,
-    starting_date: String,
-    ending_date: Option<Option<String>>,
-    filter: Option<Option<Vec<String>>>,
+    params: ListBetaOrganizationsAnalyticsSummariesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaAnalyticsActivitySummaryResponse, SdkError> {
+    let ListBetaOrganizationsAnalyticsSummariesParams {
+        starting_date,
+        ending_date,
+        filter,
+    } = params;
     validate_date("starting_date", &starting_date)?;
     if let Some(Some(ref filter_v)) = &filter {
         validate_items(

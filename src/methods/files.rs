@@ -7,6 +7,14 @@ use crate::errors::{SdkError, SdkNetworkError};
 use crate::types::{FileDeleteResponse, FileListResponse, FileMetadataSchema};
 use crate::validation::{validate_range, RangeOpts};
 
+#[derive(Debug, Clone)]
+pub struct UploadFilesParams {
+    pub file: crate::client::UploadFile,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+    pub expires_in_seconds: Option<i64>,
+}
+
 /// Uploads a file for use through the Files API. Send the file as multipart form data and optionally set `expires_in_seconds` to control how long its bytes remain available. The response includes file metadata and the expiration time when one is set.
 ///
 /// # Arguments
@@ -27,12 +35,15 @@ use crate::validation::{validate_range, RangeOpts};
 ///   7776000 (ninety days).
 pub fn upload_files(
     config: &ClientConfig,
-    file: crate::client::UploadFile,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
-    expires_in_seconds: Option<i64>,
+    params: UploadFilesParams,
     options: Option<&RequestOptions>,
 ) -> Result<FileMetadataSchema, SdkError> {
+    let UploadFilesParams {
+        file,
+        anthropic_version,
+        anthropic_workspace_id,
+        expires_in_seconds,
+    } = params;
     if let Some(ref expires_in_seconds_v) = expires_in_seconds {
         validate_range(
             "expires_in_seconds",
@@ -356,6 +367,13 @@ pub fn list_files_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveFilesParams {
+    pub file_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Retrieves metadata for a specific file. Use `file_id` to identify the file whose metadata you need, including its filename, MIME type, size, and availability. The response also includes the file's expiration time when applicable.
 ///
 /// # Arguments
@@ -371,11 +389,14 @@ pub fn list_files_pages(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn retrieve_files(
     config: &ClientConfig,
-    file_id: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: RetrieveFilesParams,
     options: Option<&RequestOptions>,
 ) -> Result<FileMetadataSchema, SdkError> {
+    let RetrieveFilesParams {
+        file_id,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -423,6 +444,13 @@ pub fn retrieve_files(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteFilesParams {
+    pub file_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Deletes a specific file. Supply the file's `file_id` to remove it from the Files API. A successful response identifies the deleted file.
 ///
 /// # Arguments
@@ -438,11 +466,14 @@ pub fn retrieve_files(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn delete_files(
     config: &ClientConfig,
-    file_id: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: DeleteFilesParams,
     options: Option<&RequestOptions>,
 ) -> Result<FileDeleteResponse, SdkError> {
+    let DeleteFilesParams {
+        file_id,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -490,6 +521,13 @@ pub fn delete_files(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DownloadFilesParams {
+    pub file_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Retrieves the file bytes for a specific file. Supply `file_id` for the file whose content you want to download. The response contains the file content as an octet stream.
 ///
 /// # Arguments
@@ -505,11 +543,14 @@ pub fn delete_files(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn download_files(
     config: &ClientConfig,
-    file_id: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: DownloadFilesParams,
     options: Option<&RequestOptions>,
 ) -> Result<Vec<u8>, SdkError> {
+    let DownloadFilesParams {
+        file_id,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((

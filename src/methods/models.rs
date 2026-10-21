@@ -128,6 +128,14 @@ pub fn list_models(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveModelsParams {
+    pub model_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Get a specific model. The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
 ///
 /// # Arguments
@@ -146,12 +154,15 @@ pub fn list_models(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn retrieve_models(
     config: &ClientConfig,
-    model_id: String,
-    anthropic_version: Option<String>,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_workspace_id: Option<String>,
+    params: RetrieveModelsParams,
     options: Option<&RequestOptions>,
 ) -> Result<ModelInfo, SdkError> {
+    let RetrieveModelsParams {
+        model_id,
+        anthropic_version,
+        anthropic_beta,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(3);
     if let Some(ref value) = anthropic_version {
         __headers.push((

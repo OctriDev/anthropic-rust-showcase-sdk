@@ -6,6 +6,11 @@ use crate::client::{sdk_request, RequestOptions, RequestOpts};
 use crate::errors::SdkError;
 use crate::types::BetaOrganizationSchema;
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsMeParams {
+    pub anthropic_version: Option<String>,
+}
+
 /// Retrieve information about the organization associated with the authenticated API key.
 ///
 /// # Arguments
@@ -15,9 +20,10 @@ use crate::types::BetaOrganizationSchema;
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_me(
     config: &ClientConfig,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsMeParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaOrganizationSchema, SdkError> {
+    let RetrieveBetaOrganizationsMeParams { anthropic_version } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((

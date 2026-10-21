@@ -7,6 +7,14 @@ use crate::errors::{SdkError, SdkNetworkError};
 use crate::types::{DeletedSkill, ListSkillsResponse, Skill};
 use crate::validation::{validate_range, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateSkillsParams {
+    pub files: Vec<crate::client::UploadFile>,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+    pub display_name: Option<Option<String>>,
+}
+
 /// Creates a skill from uploaded files and creates its initial version. Provide the files in a single top-level directory with `SKILL.md` at that directory's root; optionally set `display_name` to a human-readable label. If omitted, the label is derived from the `SKILL.md` frontmatter name.
 ///
 /// # Arguments
@@ -27,12 +35,15 @@ use crate::validation::{validate_range, RangeOpts};
 ///   when omitted at creation. Not unique.
 pub fn create_skills(
     config: &ClientConfig,
-    files: Vec<crate::client::UploadFile>,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
-    display_name: Option<Option<String>>,
+    params: CreateSkillsParams,
     options: Option<&RequestOptions>,
 ) -> Result<Skill, SdkError> {
+    let CreateSkillsParams {
+        files,
+        anthropic_version,
+        anthropic_workspace_id,
+        display_name,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -345,6 +356,13 @@ pub fn list_skills_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveSkillsParams {
+    pub skill_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Retrieves a skill by its unique identifier. Use `skill_id` to identify the skill and inspect its display name, source, timestamps, and latest version identifier. The identifier's format and length may change over time.
 ///
 /// # Arguments
@@ -361,11 +379,14 @@ pub fn list_skills_pages(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn retrieve_skills(
     config: &ClientConfig,
-    skill_id: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: RetrieveSkillsParams,
     options: Option<&RequestOptions>,
 ) -> Result<Skill, SdkError> {
+    let RetrieveSkillsParams {
+        skill_id,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -416,6 +437,13 @@ pub fn retrieve_skills(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteSkillsParams {
+    pub skill_id: String,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Deletes a skill identified by its unique identifier. Use `skill_id` to select the skill to remove. A successful response confirms the deletion and includes the skill's ID.
 ///
 /// # Arguments
@@ -432,11 +460,14 @@ pub fn retrieve_skills(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn delete_skills(
     config: &ClientConfig,
-    skill_id: String,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: DeleteSkillsParams,
     options: Option<&RequestOptions>,
 ) -> Result<DeletedSkill, SdkError> {
+    let DeleteSkillsParams {
+        skill_id,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_version {
         __headers.push((

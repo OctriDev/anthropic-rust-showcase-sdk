@@ -10,6 +10,12 @@ use crate::types::{
 };
 use crate::validation::{validate_length, validate_pattern, validate_range, LengthOpts, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsWorkspacesParams {
+    pub workspace_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Retrieves a workspace by its identifier. Use `workspace_id` to select the workspace whose configuration and metadata you need. The response includes the workspace's data residency settings, tags, and archive state.
 ///
 /// # Arguments
@@ -20,10 +26,13 @@ use crate::validation::{validate_length, validate_pattern, validate_range, Lengt
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_workspaces(
     config: &ClientConfig,
-    workspace_id: String,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsWorkspacesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaWorkspace, SdkError> {
+    let RetrieveBetaOrganizationsWorkspacesParams {
+        workspace_id,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -513,6 +522,12 @@ pub fn create_beta_organizations_workspaces(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ArchiveBetaOrganizationsWorkspacesParams {
+    pub workspace_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Archives a workspace in the organization. Use `workspace_id` to identify the workspace to archive. The response returns the workspace object with its archive state.
 ///
 /// # Arguments
@@ -522,10 +537,13 @@ pub fn create_beta_organizations_workspaces(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn archive_beta_organizations_workspaces(
     config: &ClientConfig,
-    workspace_id: String,
-    anthropic_version: Option<String>,
+    params: ArchiveBetaOrganizationsWorkspacesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaWorkspace, SdkError> {
+    let ArchiveBetaOrganizationsWorkspacesParams {
+        workspace_id,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((

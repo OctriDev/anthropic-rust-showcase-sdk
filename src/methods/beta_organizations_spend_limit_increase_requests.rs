@@ -60,6 +60,11 @@ impl std::fmt::Display for ListBetaOrganizationsSpendLimitIncreaseRequestsItemEn
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsSpendLimitIncreaseRequestsParams {
+    pub spend_limit_increase_request_id: String,
+}
+
 /// Retrieve a spend limit increase request. While `pending`, the response includes a live `spend_summary` for the requester at the request's period.
 ///
 /// # Arguments
@@ -68,9 +73,12 @@ impl std::fmt::Display for ListBetaOrganizationsSpendLimitIncreaseRequestsItemEn
 ///   request.
 pub fn retrieve_beta_organizations_spend_limit_increase_requests(
     config: &ClientConfig,
-    spend_limit_increase_request_id: String,
+    params: RetrieveBetaOrganizationsSpendLimitIncreaseRequestsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaSpendLimitIncreaseRequestSchema, SdkError> {
+    let RetrieveBetaOrganizationsSpendLimitIncreaseRequestsParams {
+        spend_limit_increase_request_id,
+    } = params;
     Ok(sdk_request::<BetaSpendLimitIncreaseRequestSchema>(
         "GET",
         &format!(
@@ -106,6 +114,12 @@ pub fn retrieve_beta_organizations_spend_limit_increase_requests(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DenyBetaOrganizationsSpendLimitIncreaseRequestsParams {
+    pub spend_limit_increase_request_id: String,
+    pub suppress_notification: Option<bool>,
+}
+
 /// Denies a pending spend limit increase request and records the request as denied. Denying an already-denied request is idempotent, while denying an approved request is rejected; the requester is emailed unless `suppress_notification` is set.
 ///
 /// Deny a pending spend limit increase request. Idempotent on `denied`; denying an already-`approved` request returns 400\. Anthropic emails the requester unless `suppress_notification` is set.
@@ -118,10 +132,13 @@ pub fn retrieve_beta_organizations_spend_limit_increase_requests(
 ///   `suppress_notification` wire field.
 pub fn deny_beta_organizations_spend_limit_increase_requests(
     config: &ClientConfig,
-    spend_limit_increase_request_id: String,
-    suppress_notification: Option<bool>,
+    params: DenyBetaOrganizationsSpendLimitIncreaseRequestsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaSpendLimitIncreaseRequestSchema, SdkError> {
+    let DenyBetaOrganizationsSpendLimitIncreaseRequestsParams {
+        spend_limit_increase_request_id,
+        suppress_notification,
+    } = params;
     let mut __body_map = serde_json::Map::new();
     if let Some(ref value) = suppress_notification {
         __body_map.insert(
@@ -172,6 +189,14 @@ pub fn deny_beta_organizations_spend_limit_increase_requests(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ApproveBetaOrganizationsSpendLimitIncreaseRequestsParams {
+    pub spend_limit_increase_request_id: String,
+    pub amount: String,
+    pub period: Option<Option<BetaApproveSpendLimitIncreaseRequestParamsPeriod>>,
+    pub suppress_notification: Option<bool>,
+}
+
 /// Approves a pending spend limit increase request and creates a per-user spend limit for the requester. Supply `amount` as a non-negative integer decimal string in minor units; `period` defaults to the period the member was blocked on, and the requester is emailed unless `suppress_notification` is set.
 ///
 /// Approve a pending spend limit increase request. Writes a per-user spend limit at `amount` for the requester and transitions the request to `approved`. `period` defaults to the period the member was blocked on. Anthropic emails the requester unless `suppress_notification` is set.
@@ -187,12 +212,15 @@ pub fn deny_beta_organizations_spend_limit_increase_requests(
 ///   `suppress_notification` wire field.
 pub fn approve_beta_organizations_spend_limit_increase_requests(
     config: &ClientConfig,
-    spend_limit_increase_request_id: String,
-    amount: String,
-    period: Option<Option<BetaApproveSpendLimitIncreaseRequestParamsPeriod>>,
-    suppress_notification: Option<bool>,
+    params: ApproveBetaOrganizationsSpendLimitIncreaseRequestsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaApproveSpendLimitIncreaseRequestResponse, SdkError> {
+    let ApproveBetaOrganizationsSpendLimitIncreaseRequestsParams {
+        spend_limit_increase_request_id,
+        amount,
+        period,
+        suppress_notification,
+    } = params;
     let mut __body_map = serde_json::Map::new();
     __body_map.insert(
         "amount".to_string(),
@@ -263,6 +291,14 @@ pub fn approve_beta_organizations_spend_limit_increase_requests(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ListBetaOrganizationsSpendLimitIncreaseRequestsParams {
+    pub status: Option<Option<Vec<ListBetaOrganizationsSpendLimitIncreaseRequestsItemEnum>>>,
+    pub actor_ids: Option<Option<Vec<String>>>,
+    pub page: Option<Option<String>>,
+    pub limit: Option<i64>,
+}
+
 /// Lists spend limit increase requests, ordered from most recent to oldest. Filter by request status or requester, and use the `page` cursor from a previous response to continue through the results; pending requests include a live `spend_summary`, while requests from former members are excluded.
 ///
 /// List spend limit increase requests, most recent first. Pending requests include a live `spend_summary` for the requester. Requests whose requester is no longer a member are excluded.
@@ -274,12 +310,15 @@ pub fn approve_beta_organizations_spend_limit_increase_requests(
 /// * `page` - Opaque cursor from a previous response's `next_page`.
 pub fn list_beta_organizations_spend_limit_increase_requests(
     config: &ClientConfig,
-    status: Option<Option<Vec<ListBetaOrganizationsSpendLimitIncreaseRequestsItemEnum>>>,
-    actor_ids: Option<Option<Vec<String>>>,
-    page: Option<Option<String>>,
-    limit: Option<i64>,
+    params: ListBetaOrganizationsSpendLimitIncreaseRequestsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaSpendLimitIncreaseRequestListResponse, SdkError> {
+    let ListBetaOrganizationsSpendLimitIncreaseRequestsParams {
+        status,
+        actor_ids,
+        page,
+        limit,
+    } = params;
     if let Some(ref limit_v) = limit {
         validate_range(
             "limit",
@@ -350,21 +389,27 @@ pub fn list_beta_organizations_spend_limit_increase_requests(
 /// * `page` - Opaque cursor from a previous response's `next_page`.
 pub fn list_beta_organizations_spend_limit_increase_requests_paginated(
     config: &ClientConfig,
-    status: Option<Option<Vec<ListBetaOrganizationsSpendLimitIncreaseRequestsItemEnum>>>,
-    actor_ids: Option<Option<Vec<String>>>,
-    page: Option<Option<String>>,
-    limit: Option<i64>,
+    params: ListBetaOrganizationsSpendLimitIncreaseRequestsParams,
     options: Option<&RequestOptions>,
     mut yield_fn: impl FnMut(&BetaSpendLimitIncreaseRequestSchema) -> bool,
 ) -> Result<(), SdkError> {
+    let ListBetaOrganizationsSpendLimitIncreaseRequestsParams {
+        status,
+        actor_ids,
+        page,
+        limit,
+    } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
         let _page = list_beta_organizations_spend_limit_increase_requests(
             config,
-            status.clone(),
-            actor_ids.clone(),
-            _cursor,
-            limit,
+            ListBetaOrganizationsSpendLimitIncreaseRequestsParams {
+                status: status.clone(),
+                actor_ids: actor_ids.clone(),
+                page: _cursor,
+                limit,
+            },
             options,
         )?;
         let _items: Vec<_> = _page.data.iter().collect();
@@ -392,21 +437,27 @@ pub struct ListBetaOrganizationsSpendLimitIncreaseRequestsPage<'a> {
 
 pub fn list_beta_organizations_spend_limit_increase_requests_pages(
     config: &ClientConfig,
-    status: Option<Option<Vec<ListBetaOrganizationsSpendLimitIncreaseRequestsItemEnum>>>,
-    actor_ids: Option<Option<Vec<String>>>,
-    page: Option<Option<String>>,
-    limit: Option<i64>,
+    params: ListBetaOrganizationsSpendLimitIncreaseRequestsParams,
     options: Option<&RequestOptions>,
     mut yield_page: impl FnMut(ListBetaOrganizationsSpendLimitIncreaseRequestsPage<'_>) -> bool,
 ) -> Result<(), SdkError> {
+    let ListBetaOrganizationsSpendLimitIncreaseRequestsParams {
+        status,
+        actor_ids,
+        page,
+        limit,
+    } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
         let _page = list_beta_organizations_spend_limit_increase_requests(
             config,
-            status.clone(),
-            actor_ids.clone(),
-            _cursor,
-            limit,
+            ListBetaOrganizationsSpendLimitIncreaseRequestsParams {
+                status: status.clone(),
+                actor_ids: actor_ids.clone(),
+                page: _cursor,
+                limit,
+            },
             options,
         )?;
         let _items: Vec<_> = _page.data.iter().collect();

@@ -9,6 +9,12 @@ use crate::types::{
 };
 use crate::validation::{validate_email, validate_range, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsUsersParams {
+    pub user_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Retrieves an organization member by user ID. Use this endpoint to inspect the member's email address, name, organization role, and join timestamp. The returned role identifies the member's permissions within the organization.
 ///
 /// Retrieve a member of the organization by user ID.
@@ -21,10 +27,13 @@ use crate::validation::{validate_email, validate_range, RangeOpts};
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_users(
     config: &ClientConfig,
-    user_id: String,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsUsersParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaUser, SdkError> {
+    let RetrieveBetaOrganizationsUsersParams {
+        user_id,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -69,6 +78,13 @@ pub fn retrieve_beta_organizations_users(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct UpdateBetaOrganizationsUsersParams {
+    pub user_id: String,
+    pub role: BetaUpdateUserParamsRoleEnum,
+    pub anthropic_version: Option<String>,
+}
+
 /// Updates an organization member's role. Provide the new `role` in the request body; accepted values depend on the organization type, and the API does not allow assigning the admin role. The response returns the updated organization user object.
 ///
 /// Update a member's organization role.
@@ -85,11 +101,14 @@ pub fn retrieve_beta_organizations_users(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn update_beta_organizations_users(
     config: &ClientConfig,
-    user_id: String,
-    role: BetaUpdateUserParamsRoleEnum,
-    anthropic_version: Option<String>,
+    params: UpdateBetaOrganizationsUsersParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaUser, SdkError> {
+    let UpdateBetaOrganizationsUsersParams {
+        user_id,
+        role,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -147,6 +166,12 @@ pub fn update_beta_organizations_users(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaOrganizationsUsersParams {
+    pub user_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Removes a user from the organization. Supply the user's `user_id` and authenticate with an Admin API key in the `x-api-key` header. The response identifies the deleted user.
 ///
 /// Remove a member from the organization.
@@ -159,10 +184,13 @@ pub fn update_beta_organizations_users(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn delete_beta_organizations_users(
     config: &ClientConfig,
-    user_id: String,
-    anthropic_version: Option<String>,
+    params: DeleteBetaOrganizationsUsersParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaDeleteUserResponse, SdkError> {
+    let DeleteBetaOrganizationsUsersParams {
+        user_id,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((

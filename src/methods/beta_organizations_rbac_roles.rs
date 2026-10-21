@@ -9,6 +9,12 @@ use crate::types::{
 };
 use crate::validation::{validate_range, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct ListBetaOrganizationsRbacRolesParams {
+    pub limit: Option<i64>,
+    pub page: Option<Option<String>>,
+}
+
 /// List RBAC Roles in the organization. The RBAC Roles API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -19,10 +25,10 @@ use crate::validation::{validate_range, RangeOpts};
 ///   response.
 pub fn list_beta_organizations_rbac_roles(
     config: &ClientConfig,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: ListBetaOrganizationsRbacRolesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaRbacRoleList, SdkError> {
+    let ListBetaOrganizationsRbacRolesParams { limit, page } = params;
     if let Some(ref limit_v) = limit {
         validate_range(
             "limit",
@@ -86,14 +92,22 @@ pub fn list_beta_organizations_rbac_roles(
 ///   response.
 pub fn list_beta_organizations_rbac_roles_paginated(
     config: &ClientConfig,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: ListBetaOrganizationsRbacRolesParams,
     options: Option<&RequestOptions>,
     mut yield_fn: impl FnMut(&BetaRbacRole) -> bool,
 ) -> Result<(), SdkError> {
+    let ListBetaOrganizationsRbacRolesParams { limit, page } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
-        let _page = list_beta_organizations_rbac_roles(config, limit, _cursor, options)?;
+        let _page = list_beta_organizations_rbac_roles(
+            config,
+            ListBetaOrganizationsRbacRolesParams {
+                limit,
+                page: _cursor,
+            },
+            options,
+        )?;
         let _items: Vec<_> = _page.data.iter().collect();
         if _items.is_empty() {
             return Ok(());
@@ -122,14 +136,22 @@ pub struct ListBetaOrganizationsRbacRolesPage<'a> {
 
 pub fn list_beta_organizations_rbac_roles_pages(
     config: &ClientConfig,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: ListBetaOrganizationsRbacRolesParams,
     options: Option<&RequestOptions>,
     mut yield_page: impl FnMut(ListBetaOrganizationsRbacRolesPage<'_>) -> bool,
 ) -> Result<(), SdkError> {
+    let ListBetaOrganizationsRbacRolesParams { limit, page } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
-        let _page = list_beta_organizations_rbac_roles(config, limit, _cursor, options)?;
+        let _page = list_beta_organizations_rbac_roles(
+            config,
+            ListBetaOrganizationsRbacRolesParams {
+                limit,
+                page: _cursor,
+            },
+            options,
+        )?;
         let _items: Vec<_> = _page.data.iter().collect();
         if _items.is_empty() {
             return Ok(());
@@ -153,6 +175,11 @@ pub fn list_beta_organizations_rbac_roles_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsRbacRolesParams {
+    pub role_id: String,
+}
+
 /// Retrieve an RBAC Role by ID. The RBAC Roles API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -160,9 +187,10 @@ pub fn list_beta_organizations_rbac_roles_pages(
 /// * `role_id` - ID of the RBAC Role.
 pub fn retrieve_beta_organizations_rbac_roles(
     config: &ClientConfig,
-    role_id: String,
+    params: RetrieveBetaOrganizationsRbacRolesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaRbacRole, SdkError> {
+    let RetrieveBetaOrganizationsRbacRolesParams { role_id } = params;
     Ok(sdk_request::<BetaRbacRole>(
         "GET",
         &format!(
@@ -198,6 +226,13 @@ pub fn retrieve_beta_organizations_rbac_roles(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct PermissionsBetaOrganizationsRbacRolesParams {
+    pub role_id: String,
+    pub limit: Option<i64>,
+    pub page: Option<Option<String>>,
+}
+
 /// List the permissions an RBAC Role grants. The RBAC Roles API is available to Claude Enterprise organizations only.
 ///
 /// # Arguments
@@ -209,11 +244,14 @@ pub fn retrieve_beta_organizations_rbac_roles(
 ///   response.
 pub fn permissions_beta_organizations_rbac_roles(
     config: &ClientConfig,
-    role_id: String,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: PermissionsBetaOrganizationsRbacRolesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaRbacRolePermissionList, SdkError> {
+    let PermissionsBetaOrganizationsRbacRolesParams {
+        role_id,
+        limit,
+        page,
+    } = params;
     if let Some(ref limit_v) = limit {
         validate_range(
             "limit",
@@ -281,19 +319,25 @@ pub fn permissions_beta_organizations_rbac_roles(
 ///   response.
 pub fn permissions_beta_organizations_rbac_roles_paginated(
     config: &ClientConfig,
-    role_id: String,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: PermissionsBetaOrganizationsRbacRolesParams,
     options: Option<&RequestOptions>,
     mut yield_fn: impl FnMut(&BetaRbacRolePermission) -> bool,
 ) -> Result<(), SdkError> {
+    let PermissionsBetaOrganizationsRbacRolesParams {
+        role_id,
+        limit,
+        page,
+    } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
         let _page = permissions_beta_organizations_rbac_roles(
             config,
-            role_id.clone(),
-            limit,
-            _cursor,
+            PermissionsBetaOrganizationsRbacRolesParams {
+                role_id: role_id.clone(),
+                limit,
+                page: _cursor,
+            },
             options,
         )?;
         let _items: Vec<_> = _page.data.iter().collect();
@@ -324,19 +368,25 @@ pub struct PermissionsBetaOrganizationsRbacRolesPage<'a> {
 
 pub fn permissions_beta_organizations_rbac_roles_pages(
     config: &ClientConfig,
-    role_id: String,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
+    params: PermissionsBetaOrganizationsRbacRolesParams,
     options: Option<&RequestOptions>,
     mut yield_page: impl FnMut(PermissionsBetaOrganizationsRbacRolesPage<'_>) -> bool,
 ) -> Result<(), SdkError> {
+    let PermissionsBetaOrganizationsRbacRolesParams {
+        role_id,
+        limit,
+        page,
+    } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
         let _page = permissions_beta_organizations_rbac_roles(
             config,
-            role_id.clone(),
-            limit,
-            _cursor,
+            PermissionsBetaOrganizationsRbacRolesParams {
+                role_id: role_id.clone(),
+                limit,
+                page: _cursor,
+            },
             options,
         )?;
         let _items: Vec<_> = _page.data.iter().collect();

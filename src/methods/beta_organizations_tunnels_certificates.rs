@@ -9,6 +9,14 @@ use crate::types::{
 };
 use crate::validation::{validate_length, validate_range, LengthOpts, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateBetaOrganizationsTunnelsCertificatesParams {
+    pub tunnel_id: String,
+    pub anthropic_beta: Vec<AnthropicBeta>,
+    pub ca_certificate_pem: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Deprecated.\*\* This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use `/v1/tunnels` with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window. Register a public CA certificate for the tunnel. Anthropic verifies the gateway's server certificate against this CA when it terminates the inner TLS session. The PEM body must contain exactly one X.509 certificate and no private-key material. A tunnel holds at most two non-archived certificates.
 ///
 /// # Arguments
@@ -27,12 +35,15 @@ use crate::validation::{validate_length, validate_range, LengthOpts, RangeOpts};
 /// This operation is deprecated and may be removed in a future release.
 pub fn create_beta_organizations_tunnels_certificates(
     config: &ClientConfig,
-    tunnel_id: String,
-    anthropic_beta: Vec<AnthropicBeta>,
-    ca_certificate_pem: String,
-    anthropic_version: Option<String>,
+    params: CreateBetaOrganizationsTunnelsCertificatesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaOrganizationTunnelCertificate, SdkError> {
+    let CreateBetaOrganizationsTunnelsCertificatesParams {
+        tunnel_id,
+        anthropic_beta,
+        ca_certificate_pem,
+        anthropic_version,
+    } = params;
     validate_length(
         "ca_certificate_pem",
         &ca_certificate_pem,
@@ -340,6 +351,14 @@ pub fn list_beta_organizations_tunnels_certificates_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsTunnelsCertificatesParams {
+    pub tunnel_id: String,
+    pub certificate_id: String,
+    pub anthropic_beta: Vec<AnthropicBeta>,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Deprecated.\*\* This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use `/v1/tunnels` with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window. Retrieve a single certificate registered on a tunnel by ID.
 ///
 /// # Arguments
@@ -357,12 +376,15 @@ pub fn list_beta_organizations_tunnels_certificates_pages(
 /// This operation is deprecated and may be removed in a future release.
 pub fn retrieve_beta_organizations_tunnels_certificates(
     config: &ClientConfig,
-    tunnel_id: String,
-    certificate_id: String,
-    anthropic_beta: Vec<AnthropicBeta>,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsTunnelsCertificatesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaOrganizationTunnelCertificate, SdkError> {
+    let RetrieveBetaOrganizationsTunnelsCertificatesParams {
+        tunnel_id,
+        certificate_id,
+        anthropic_beta,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     __headers.extend([(
         "anthropic-beta".to_string(),
@@ -412,6 +434,14 @@ pub fn retrieve_beta_organizations_tunnels_certificates(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct ArchiveBetaOrganizationsTunnelsCertificatesParams {
+    pub tunnel_id: String,
+    pub certificate_id: String,
+    pub anthropic_beta: Vec<AnthropicBeta>,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Deprecated.\*\* This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use `/v1/tunnels` with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window. Archive a certificate, removing it from the set Anthropic trusts for this tunnel. The certificate record is retained. Archiving the last non-archived certificate is permitted; the tunnel rejects MCP traffic until a new certificate is added.
 ///
 /// # Arguments
@@ -429,12 +459,15 @@ pub fn retrieve_beta_organizations_tunnels_certificates(
 /// This operation is deprecated and may be removed in a future release.
 pub fn archive_beta_organizations_tunnels_certificates(
     config: &ClientConfig,
-    tunnel_id: String,
-    certificate_id: String,
-    anthropic_beta: Vec<AnthropicBeta>,
-    anthropic_version: Option<String>,
+    params: ArchiveBetaOrganizationsTunnelsCertificatesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaOrganizationTunnelCertificate, SdkError> {
+    let ArchiveBetaOrganizationsTunnelsCertificatesParams {
+        tunnel_id,
+        certificate_id,
+        anthropic_beta,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     __headers.extend([(
         "anthropic-beta".to_string(),

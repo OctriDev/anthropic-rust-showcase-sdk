@@ -7,6 +7,14 @@ use crate::errors::SdkError;
 use crate::types::{BetaClaudeCodeUsageReportItem, BetaGetClaudeCodeUsageReportResponse};
 use crate::validation::{validate_date, validate_pattern, validate_range, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsUsageReportClaudeCodeParams {
+    pub starting_at: String,
+    pub limit: Option<i64>,
+    pub page: Option<Option<String>>,
+    pub anthropic_version: Option<String>,
+}
+
 /// Retrieve daily aggregated usage metrics for Claude Code users. Enables organizations to analyze developer productivity and build custom dashboards.
 ///
 /// # Arguments
@@ -20,12 +28,15 @@ use crate::validation::{validate_date, validate_pattern, validate_range, RangeOp
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_usage_report_claude_code(
     config: &ClientConfig,
-    starting_at: String,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsUsageReportClaudeCodeParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaGetClaudeCodeUsageReportResponse, SdkError> {
+    let RetrieveBetaOrganizationsUsageReportClaudeCodeParams {
+        starting_at,
+        limit,
+        page,
+        anthropic_version,
+    } = params;
     validate_pattern("starting_at", &starting_at, "^\\d{4}-\\d{2}-\\d{2}$")?;
     validate_date("starting_at", &starting_at)?;
     if let Some(ref limit_v) = limit {
@@ -104,21 +115,27 @@ pub fn retrieve_beta_organizations_usage_report_claude_code(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_usage_report_claude_code_paginated(
     config: &ClientConfig,
-    starting_at: String,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsUsageReportClaudeCodeParams,
     options: Option<&RequestOptions>,
     mut yield_fn: impl FnMut(&BetaClaudeCodeUsageReportItem) -> bool,
 ) -> Result<(), SdkError> {
+    let RetrieveBetaOrganizationsUsageReportClaudeCodeParams {
+        starting_at,
+        limit,
+        page,
+        anthropic_version,
+    } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
         let _page = retrieve_beta_organizations_usage_report_claude_code(
             config,
-            starting_at.clone(),
-            limit,
-            _cursor,
-            anthropic_version.clone(),
+            RetrieveBetaOrganizationsUsageReportClaudeCodeParams {
+                starting_at: starting_at.clone(),
+                limit,
+                page: _cursor,
+                anthropic_version: anthropic_version.clone(),
+            },
             options,
         )?;
         let _items: Vec<_> = _page.data.iter().collect();
@@ -149,21 +166,27 @@ pub struct RetrieveBetaOrganizationsUsageReportClaudeCodePage<'a> {
 
 pub fn retrieve_beta_organizations_usage_report_claude_code_pages(
     config: &ClientConfig,
-    starting_at: String,
-    limit: Option<i64>,
-    page: Option<Option<String>>,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsUsageReportClaudeCodeParams,
     options: Option<&RequestOptions>,
     mut yield_page: impl FnMut(RetrieveBetaOrganizationsUsageReportClaudeCodePage<'_>) -> bool,
 ) -> Result<(), SdkError> {
+    let RetrieveBetaOrganizationsUsageReportClaudeCodeParams {
+        starting_at,
+        limit,
+        page,
+        anthropic_version,
+    } = params;
+
     let mut _cursor: Option<Option<String>> = page;
     loop {
         let _page = retrieve_beta_organizations_usage_report_claude_code(
             config,
-            starting_at.clone(),
-            limit,
-            _cursor,
-            anthropic_version.clone(),
+            RetrieveBetaOrganizationsUsageReportClaudeCodeParams {
+                starting_at: starting_at.clone(),
+                limit,
+                page: _cursor,
+                anthropic_version: anthropic_version.clone(),
+            },
             options,
         )?;
         let _items: Vec<_> = _page.data.iter().collect();

@@ -8,6 +8,12 @@ use crate::types::{
     BetaDeleteSpendLimitResponse, BetaSetSpendLimitParamsPeriodEnum, BetaSpendLimit, BetaUserScope,
 };
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsSpendLimitsParams {
+    pub spend_limit_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Retrieves a configured spend limit by its unique identifier, including its amount, currency, scope, and reset period. Use `spend_limit_id` to look up a specific limit and inspect its current configuration and timestamps.
 ///
 /// Retrieve a spend limit by ID.
@@ -20,10 +26,13 @@ use crate::types::{
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_spend_limits(
     config: &ClientConfig,
-    spend_limit_id: String,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsSpendLimitsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaSpendLimit, SdkError> {
+    let RetrieveBetaOrganizationsSpendLimitsParams {
+        spend_limit_id,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -68,6 +77,11 @@ pub fn retrieve_beta_organizations_spend_limits(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaOrganizationsSpendLimitsParams {
+    pub spend_limit_id: String,
+}
+
 /// Delete a per-user spend limit override. The member falls back to any inherited spend limit at that period. Seat-tier, group, and organization-level rows cannot be deleted via this endpoint.
 ///
 /// # Arguments
@@ -75,9 +89,10 @@ pub fn retrieve_beta_organizations_spend_limits(
 /// * `spend_limit_id` - ID of the Spend Limit.
 pub fn delete_beta_organizations_spend_limits(
     config: &ClientConfig,
-    spend_limit_id: String,
+    params: DeleteBetaOrganizationsSpendLimitsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaDeleteSpendLimitResponse, SdkError> {
+    let DeleteBetaOrganizationsSpendLimitsParams { spend_limit_id } = params;
     Ok(sdk_request::<BetaDeleteSpendLimitResponse>(
         "DELETE",
         &format!(
@@ -113,6 +128,13 @@ pub fn delete_beta_organizations_spend_limits(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateBetaOrganizationsSpendLimitsParams {
+    pub amount: Option<String>,
+    pub scope: BetaUserScope,
+    pub period: Option<BetaSetSpendLimitParamsPeriodEnum>,
+}
+
 /// Creates or replaces a per-user spend limit override keyed by `scope` and `period`. Supply `amount` and a user scope; `period` can be daily, monthly, or weekly, and setting an existing scope-period pair overwrites its limit. A `null` amount sets an explicit no-limit override for that scope and period only.
 ///
 /// Set a per-user spend limit override. Upsert keyed on (scope, period): setting a limit that already exists overwrites it in place. Only `scope.type: "user"` is accepted; seat-tier, group, and organization-level defaults are configured in claude.ai.
@@ -129,11 +151,14 @@ pub fn delete_beta_organizations_spend_limits(
 ///   field.
 pub fn create_beta_organizations_spend_limits(
     config: &ClientConfig,
-    amount: Option<String>,
-    scope: BetaUserScope,
-    period: Option<BetaSetSpendLimitParamsPeriodEnum>,
+    params: CreateBetaOrganizationsSpendLimitsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaSpendLimit, SdkError> {
+    let CreateBetaOrganizationsSpendLimitsParams {
+        amount,
+        scope,
+        period,
+    } = params;
     let mut __body_map = serde_json::Map::new();
     __body_map.insert(
         "amount".to_string(),

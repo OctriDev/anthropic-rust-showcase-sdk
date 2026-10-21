@@ -229,10 +229,12 @@ fn approve_beta_organizations_spend_limit_increase_requests_approve_beta_organiz
     let _ = &config;
     let actual = beta_organizations_spend_limit_increase_requests::approve_beta_organizations_spend_limit_increase_requests(
         &config,
-        decode(fixture(r#""spend_limit_increase_request-1""#)),
-        decode(fixture(r#""50000""#)),
-        Some(Some(decode(fixture(r#""monthly""#)))),
-        Some(decode(fixture(r#"false"#))),
+        beta_organizations_spend_limit_increase_requests::ApproveBetaOrganizationsSpendLimitIncreaseRequestsParams {
+            spend_limit_increase_request_id: decode(fixture(r#""spend_limit_increase_request-1""#)),
+            amount: decode(fixture(r#""50000""#)),
+            period: Some(Some(decode(fixture(r#""monthly""#)))),
+            suppress_notification: Some(decode(fixture(r#"false"#))),
+        },
         None,
     )
     .expect("approve_beta_organizations_spend_limit_increase_requests request failed");
@@ -260,10 +262,12 @@ fn approve_beta_organizations_spend_limit_increase_requests_approve_beta_organiz
     };
     let result = beta_organizations_spend_limit_increase_requests::approve_beta_organizations_spend_limit_increase_requests(
         &config,
-        decode(fixture(r#""spend_limit_increase_request-1""#)),
-        decode(fixture(r#""50000""#)),
-        Some(Some(decode(fixture(r#""monthly""#)))),
-        Some(decode(fixture(r#"false"#))),
+        beta_organizations_spend_limit_increase_requests::ApproveBetaOrganizationsSpendLimitIncreaseRequestsParams {
+            spend_limit_increase_request_id: decode(fixture(r#""spend_limit_increase_request-1""#)),
+            amount: decode(fixture(r#""50000""#)),
+            period: Some(Some(decode(fixture(r#""monthly""#)))),
+            suppress_notification: Some(decode(fixture(r#"false"#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -288,10 +292,12 @@ fn archive_beta_agents_archive_beta_agents_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = beta_agents::archive_beta_agents(
         &config,
-        decode(fixture(r#""agent_011CZkYpogX7uDKUyvBTophP""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_agents::ArchiveBetaAgentsParams {
+            agent_id: decode(fixture(r#""agent_011CZkYpogX7uDKUyvBTophP""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("archive_beta_agents request failed");
@@ -318,10 +324,12 @@ fn archive_beta_agents_archive_beta_agents_400_decodes_declared_error() {
     };
     let result = beta_agents::archive_beta_agents(
         &config,
-        decode(fixture(r#""agent_011CZkYpogX7uDKUyvBTophP""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_agents::ArchiveBetaAgentsParams {
+            agent_id: decode(fixture(r#""agent_011CZkYpogX7uDKUyvBTophP""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -346,10 +354,12 @@ fn archive_beta_deployments_archive_beta_deployments_reaches_mock_and_decodes_re
     let _ = &config;
     let actual = beta_deployments::archive_beta_deployments(
         &config,
-        decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployments::ArchiveBetaDeploymentsParams {
+            deployment_id: decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("archive_beta_deployments request failed");
@@ -376,10 +386,12 @@ fn archive_beta_deployments_archive_beta_deployments_400_decodes_declared_error(
     };
     let result = beta_deployments::archive_beta_deployments(
         &config,
-        decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployments::ArchiveBetaDeploymentsParams {
+            deployment_id: decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -404,10 +416,12 @@ fn archive_beta_dreams_archive_beta_dreams_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = beta_dreams::archive_beta_dreams(
         &config,
-        decode(fixture(r#""dream-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_dreams::ArchiveBetaDreamsParams {
+            dream_id: decode(fixture(r#""dream-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("archive_beta_dreams request failed");
@@ -434,10 +448,12 @@ fn archive_beta_dreams_archive_beta_dreams_400_decodes_declared_error() {
     };
     let result = beta_dreams::archive_beta_dreams(
         &config,
-        decode(fixture(r#""dream-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_dreams::ArchiveBetaDreamsParams {
+            dream_id: decode(fixture(r#""dream-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -462,10 +478,12 @@ fn archive_beta_environments_archive_beta_environments_reaches_mock_and_decodes_
     let _ = &config;
     let actual = beta_environments::archive_beta_environments(
         &config,
-        decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_environments::ArchiveBetaEnvironmentsParams {
+            environment_id: decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("archive_beta_environments request failed");
@@ -492,10 +510,12 @@ fn archive_beta_environments_archive_beta_environments_400_decodes_declared_erro
     };
     let result = beta_environments::archive_beta_environments(
         &config,
-        decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_environments::ArchiveBetaEnvironmentsParams {
+            environment_id: decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -520,10 +540,12 @@ fn archive_beta_memory_stores_archive_beta_memory_stores_reaches_mock_and_decode
     let _ = &config;
     let actual = beta_memory_stores::archive_beta_memory_stores(
         &config,
-        decode(fixture(r#""memory_store-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_memory_stores::ArchiveBetaMemoryStoresParams {
+            memory_store_id: decode(fixture(r#""memory_store-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("archive_beta_memory_stores request failed");
@@ -550,10 +572,12 @@ fn archive_beta_memory_stores_archive_beta_memory_stores_400_decodes_declared_er
     };
     let result = beta_memory_stores::archive_beta_memory_stores(
         &config,
-        decode(fixture(r#""memory_store-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_memory_stores::ArchiveBetaMemoryStoresParams {
+            memory_store_id: decode(fixture(r#""memory_store-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -577,15 +601,16 @@ fn archive_beta_organizations_federation_issuers_archive_beta_organizations_fede
         return;
     };
     let _ = &config;
-    let actual =
-        beta_organizations_federation_issuers::archive_beta_organizations_federation_issuers(
-            &config,
-            decode(fixture(r#""federation_issuer-1""#)),
-            Some(decode(fixture(r#"["anthropic-beta"]"#))),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        )
-        .expect("archive_beta_organizations_federation_issuers request failed");
+    let actual = beta_organizations_federation_issuers::archive_beta_organizations_federation_issuers(
+        &config,
+        beta_organizations_federation_issuers::ArchiveBetaOrganizationsFederationIssuersParams {
+            federation_issuer_id: decode(fixture(r#""federation_issuer-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    )
+    .expect("archive_beta_organizations_federation_issuers request failed");
     let actual = serde_json::to_value(actual).expect("serialize generated response");
     let expected = fixture(
         r#"{"archived_at":"2024-01-01T00:00:00Z","archived_by_actor_id":"archived_by_actor-1","check_jti":false,"created_at":"2024-10-30T23:58:27.427722Z","created_by_actor_id":"created_by_actor-1","id":"fdis_01SDCCSbTxrXDpWc1phhtcfK","issuer_url":"https://token.actions.githubusercontent.com","jwks":{"ca_cert_pem":"ca_cert_pem","discovery_base":"discovery_base","type":"discovery"},"jwks_polling_disabled_at":"2024-01-01T00:00:00Z","max_jwt_lifetime_seconds":1,"name":"github-actions","poll_status":{"consecutive_failures":1,"last_fetched_at":"2024-01-01T00:00:00Z","next_poll_at":"2024-01-01T00:00:00Z"},"type":"federation_issuer","updated_at":"2024-10-30T23:58:27.427722Z","updated_by_actor_id":"updated_by_actor-1"}"#,
@@ -608,14 +633,15 @@ fn archive_beta_organizations_federation_issuers_archive_beta_organizations_fede
             .map(|base_url| format!("{base_url}/__mockStatus/400")),
         ..config
     };
-    let result =
-        beta_organizations_federation_issuers::archive_beta_organizations_federation_issuers(
-            &config,
-            decode(fixture(r#""federation_issuer-1""#)),
-            Some(decode(fixture(r#"["anthropic-beta"]"#))),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        );
+    let result = beta_organizations_federation_issuers::archive_beta_organizations_federation_issuers(
+        &config,
+        beta_organizations_federation_issuers::ArchiveBetaOrganizationsFederationIssuersParams {
+            federation_issuer_id: decode(fixture(r#""federation_issuer-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
         panic!(
             "archive_beta_organizations_federation_issuers did not fail with SdkError::Http on 400"
@@ -641,9 +667,11 @@ fn archive_beta_organizations_federation_rules_archive_beta_organizations_federa
     let _ = &config;
     let actual = beta_organizations_federation_rules::archive_beta_organizations_federation_rules(
         &config,
-        decode(fixture(r#""federation_rule-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_federation_rules::ArchiveBetaOrganizationsFederationRulesParams {
+            federation_rule_id: decode(fixture(r#""federation_rule-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("archive_beta_organizations_federation_rules request failed");
@@ -671,9 +699,11 @@ fn archive_beta_organizations_federation_rules_archive_beta_organizations_federa
     };
     let result = beta_organizations_federation_rules::archive_beta_organizations_federation_rules(
         &config,
-        decode(fixture(r#""federation_rule-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_federation_rules::ArchiveBetaOrganizationsFederationRulesParams {
+            federation_rule_id: decode(fixture(r#""federation_rule-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -701,9 +731,11 @@ fn archive_beta_organizations_service_accounts_archive_beta_organizations_servic
     let _ = &config;
     let actual = beta_organizations_service_accounts::archive_beta_organizations_service_accounts(
         &config,
-        decode(fixture(r#""service_account-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_service_accounts::ArchiveBetaOrganizationsServiceAccountsParams {
+            service_account_id: decode(fixture(r#""service_account-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("archive_beta_organizations_service_accounts request failed");
@@ -731,9 +763,11 @@ fn archive_beta_organizations_service_accounts_archive_beta_organizations_servic
     };
     let result = beta_organizations_service_accounts::archive_beta_organizations_service_accounts(
         &config,
-        decode(fixture(r#""service_account-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_service_accounts::ArchiveBetaOrganizationsServiceAccountsParams {
+            service_account_id: decode(fixture(r#""service_account-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -761,9 +795,11 @@ fn archive_beta_organizations_tunnels_archive_beta_organizations_tunnels_reaches
     let _ = &config;
     let actual = beta_organizations_tunnels::archive_beta_organizations_tunnels(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        decode(fixture(r#"["anthropic-beta"]"#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_tunnels::ArchiveBetaOrganizationsTunnelsParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("archive_beta_organizations_tunnels request failed");
@@ -791,9 +827,11 @@ fn archive_beta_organizations_tunnels_archive_beta_organizations_tunnels_400_dec
     };
     let result = beta_organizations_tunnels::archive_beta_organizations_tunnels(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        decode(fixture(r#"["anthropic-beta"]"#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_tunnels::ArchiveBetaOrganizationsTunnelsParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -817,16 +855,17 @@ fn archive_beta_organizations_tunnels_certificates_archive_beta_organizations_tu
         return;
     };
     let _ = &config;
-    let actual =
-        beta_organizations_tunnels_certificates::archive_beta_organizations_tunnels_certificates(
-            &config,
-            decode(fixture(r#""tunnel-1""#)),
-            decode(fixture(r#""certificate-1""#)),
-            decode(fixture(r#"["anthropic-beta"]"#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        )
-        .expect("archive_beta_organizations_tunnels_certificates request failed");
+    let actual = beta_organizations_tunnels_certificates::archive_beta_organizations_tunnels_certificates(
+        &config,
+        beta_organizations_tunnels_certificates::ArchiveBetaOrganizationsTunnelsCertificatesParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            certificate_id: decode(fixture(r#""certificate-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    )
+    .expect("archive_beta_organizations_tunnels_certificates request failed");
     let actual = serde_json::to_value(actual).expect("serialize generated response");
     let expected = fixture(
         r#"{"archived_at":"2024-11-01T23:59:27.427722Z","created_at":"2024-10-30T23:58:27.427722Z","expires_at":"2024-10-30T23:58:27.427722Z","fingerprint":"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08","id":"tcrt_01JmWq4ZxnBvR7tKpY2sLdH9","tunnel_id":"tunnel-1","type":"tunnel_certificate"}"#,
@@ -849,15 +888,16 @@ fn archive_beta_organizations_tunnels_certificates_archive_beta_organizations_tu
             .map(|base_url| format!("{base_url}/__mockStatus/400")),
         ..config
     };
-    let result =
-        beta_organizations_tunnels_certificates::archive_beta_organizations_tunnels_certificates(
-            &config,
-            decode(fixture(r#""tunnel-1""#)),
-            decode(fixture(r#""certificate-1""#)),
-            decode(fixture(r#"["anthropic-beta"]"#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        );
+    let result = beta_organizations_tunnels_certificates::archive_beta_organizations_tunnels_certificates(
+        &config,
+        beta_organizations_tunnels_certificates::ArchiveBetaOrganizationsTunnelsCertificatesParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            certificate_id: decode(fixture(r#""certificate-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
         panic!("archive_beta_organizations_tunnels_certificates did not fail with SdkError::Http on 400");
     };
@@ -881,8 +921,10 @@ fn archive_beta_organizations_workspaces_archive_beta_organizations_workspaces_r
     let _ = &config;
     let actual = beta_organizations_workspaces::archive_beta_organizations_workspaces(
         &config,
-        decode(fixture(r#""workspace-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_workspaces::ArchiveBetaOrganizationsWorkspacesParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("archive_beta_organizations_workspaces request failed");
@@ -910,8 +952,10 @@ fn archive_beta_organizations_workspaces_archive_beta_organizations_workspaces_4
     };
     let result = beta_organizations_workspaces::archive_beta_organizations_workspaces(
         &config,
-        decode(fixture(r#""workspace-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_workspaces::ArchiveBetaOrganizationsWorkspacesParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -936,10 +980,12 @@ fn archive_beta_sessions_archive_beta_sessions_reaches_mock_and_decodes_response
     let _ = &config;
     let actual = beta_sessions::archive_beta_sessions(
         &config,
-        decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_sessions::ArchiveBetaSessionsParams {
+            session_id: decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("archive_beta_sessions request failed");
@@ -966,10 +1012,12 @@ fn archive_beta_sessions_archive_beta_sessions_400_decodes_declared_error() {
     };
     let result = beta_sessions::archive_beta_sessions(
         &config,
-        decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_sessions::ArchiveBetaSessionsParams {
+            session_id: decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -1058,10 +1106,12 @@ fn archive_beta_tunnels_archive_beta_tunnels_reaches_mock_and_decodes_response()
     let _ = &config;
     let actual = beta_tunnels::archive_beta_tunnels(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_tunnels::ArchiveBetaTunnelsParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("archive_beta_tunnels request failed");
@@ -1088,10 +1138,12 @@ fn archive_beta_tunnels_archive_beta_tunnels_400_decodes_declared_error() {
     };
     let result = beta_tunnels::archive_beta_tunnels(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_tunnels::ArchiveBetaTunnelsParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -1182,10 +1234,12 @@ fn archive_beta_vaults_archive_beta_vaults_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = beta_vaults::archive_beta_vaults(
         &config,
-        decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_vaults::ArchiveBetaVaultsParams {
+            vault_id: decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("archive_beta_vaults request failed");
@@ -1212,10 +1266,12 @@ fn archive_beta_vaults_archive_beta_vaults_400_decodes_declared_error() {
     };
     let result = beta_vaults::archive_beta_vaults(
         &config,
-        decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_vaults::ArchiveBetaVaultsParams {
+            vault_id: decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -1305,10 +1361,12 @@ fn cancel_beta_dreams_cancel_beta_dreams_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = beta_dreams::cancel_beta_dreams(
         &config,
-        decode(fixture(r#""dream-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_dreams::CancelBetaDreamsParams {
+            dream_id: decode(fixture(r#""dream-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("cancel_beta_dreams request failed");
@@ -1335,10 +1393,12 @@ fn cancel_beta_dreams_cancel_beta_dreams_400_decodes_declared_error() {
     };
     let result = beta_dreams::cancel_beta_dreams(
         &config,
-        decode(fixture(r#""dream-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_dreams::CancelBetaDreamsParams {
+            dream_id: decode(fixture(r#""dream-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -1363,10 +1423,12 @@ fn cancel_beta_messages_batches_cancel_beta_messages_batches_reaches_mock_and_de
     let _ = &config;
     let actual = beta_messages_batches::cancel_beta_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_messages_batches::CancelBetaMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("cancel_beta_messages_batches request failed");
@@ -1393,10 +1455,12 @@ fn cancel_beta_messages_batches_cancel_beta_messages_batches_400_decodes_declare
     };
     let result = beta_messages_batches::cancel_beta_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_messages_batches::CancelBetaMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -1421,9 +1485,11 @@ fn cancel_messages_batches_cancel_messages_batches_reaches_mock_and_decodes_resp
     let _ = &config;
     let actual = messages_batches::cancel_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        messages_batches::CancelMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("cancel_messages_batches request failed");
@@ -1450,9 +1516,11 @@ fn cancel_messages_batches_cancel_messages_batches_400_decodes_declared_error() 
     };
     let result = messages_batches::cancel_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        messages_batches::CancelMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -2262,14 +2330,15 @@ fn create_beta_organizations_compliance_settings_create_beta_organizations_compl
         return;
     };
     let _ = &config;
-    let actual =
-        beta_organizations_compliance_settings::create_beta_organizations_compliance_settings(
-            &config,
-            decode(fixture(r#"{"type":"enabled"}"#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        )
-        .expect("create_beta_organizations_compliance_settings request failed");
+    let actual = beta_organizations_compliance_settings::create_beta_organizations_compliance_settings(
+        &config,
+        beta_organizations_compliance_settings::CreateBetaOrganizationsComplianceSettingsParams {
+            state: decode(fixture(r#"{"type":"enabled"}"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    )
+    .expect("create_beta_organizations_compliance_settings request failed");
     let actual = serde_json::to_value(actual).expect("serialize generated response");
     let expected = fixture(r#"{"state":{"type":"enabled"},"type":"compliance_settings"}"#);
     assert!(
@@ -2290,13 +2359,14 @@ fn create_beta_organizations_compliance_settings_create_beta_organizations_compl
             .map(|base_url| format!("{base_url}/__mockStatus/400")),
         ..config
     };
-    let result =
-        beta_organizations_compliance_settings::create_beta_organizations_compliance_settings(
-            &config,
-            decode(fixture(r#"{"type":"enabled"}"#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        );
+    let result = beta_organizations_compliance_settings::create_beta_organizations_compliance_settings(
+        &config,
+        beta_organizations_compliance_settings::CreateBetaOrganizationsComplianceSettingsParams {
+            state: decode(fixture(r#"{"type":"enabled"}"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
         panic!(
             "create_beta_organizations_compliance_settings did not fail with SdkError::Http on 400"
@@ -2322,10 +2392,12 @@ fn create_beta_organizations_external_keys_create_beta_organizations_external_ke
     let _ = &config;
     let actual = beta_organizations_external_keys::create_beta_organizations_external_keys(
         &config,
-        decode(fixture(r#"{"kms_arn":"arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222","region":"us-east-1","role_arn":"arn:aws:iam::111122223333:role/anthropic-cmek","type":"aws"}"#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(Some(decode(fixture(r#""Example Name""#)))),
-        Some(decode(fixture(r#""us""#))),
+        beta_organizations_external_keys::CreateBetaOrganizationsExternalKeysParams {
+            provider_config: decode(fixture(r#"{"kms_arn":"arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222","region":"us-east-1","role_arn":"arn:aws:iam::111122223333:role/anthropic-cmek","type":"aws"}"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            display_name: Some(Some(decode(fixture(r#""Example Name""#)))),
+            geo: Some(decode(fixture(r#""us""#))),
+        },
         None,
     )
     .expect("create_beta_organizations_external_keys request failed");
@@ -2353,12 +2425,14 @@ fn create_beta_organizations_external_keys_create_beta_organizations_external_ke
     };
     let result = beta_organizations_external_keys::create_beta_organizations_external_keys(
         &config,
-        decode(fixture(
-            r#"{"kms_arn":"arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222","region":"us-east-1","role_arn":"arn:aws:iam::111122223333:role/anthropic-cmek","type":"aws"}"#,
-        )),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(Some(decode(fixture(r#""Example Name""#)))),
-        Some(decode(fixture(r#""us""#))),
+        beta_organizations_external_keys::CreateBetaOrganizationsExternalKeysParams {
+            provider_config: decode(fixture(
+                r#"{"kms_arn":"arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222","region":"us-east-1","role_arn":"arn:aws:iam::111122223333:role/anthropic-cmek","type":"aws"}"#,
+            )),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            display_name: Some(Some(decode(fixture(r#""Example Name""#)))),
+            geo: Some(decode(fixture(r#""us""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -2545,10 +2619,12 @@ fn create_beta_organizations_federation_rules_workspaces_create_beta_organizatio
     let _ = &config;
     let actual = beta_organizations_federation_rules_workspaces::create_beta_organizations_federation_rules_workspaces(
         &config,
-        decode(fixture(r#""federation_rule-1""#)),
-        decode(fixture(r#""workspace-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_federation_rules_workspaces::CreateBetaOrganizationsFederationRulesWorkspacesParams {
+            federation_rule_id: decode(fixture(r#""federation_rule-1""#)),
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("create_beta_organizations_federation_rules_workspaces request failed");
@@ -2576,10 +2652,12 @@ fn create_beta_organizations_federation_rules_workspaces_create_beta_organizatio
     };
     let result = beta_organizations_federation_rules_workspaces::create_beta_organizations_federation_rules_workspaces(
         &config,
-        decode(fixture(r#""federation_rule-1""#)),
-        decode(fixture(r#""workspace-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_federation_rules_workspaces::CreateBetaOrganizationsFederationRulesWorkspacesParams {
+            federation_rule_id: decode(fixture(r#""federation_rule-1""#)),
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -2605,10 +2683,12 @@ fn create_beta_organizations_invites_create_beta_organizations_invites_reaches_m
     let _ = &config;
     let actual = beta_organizations_invites::create_beta_organizations_invites(
         &config,
-        decode(fixture(r#""user@emaildomain.com""#)),
-        decode(fixture(r#""user""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["rbac_group_ids"]"#))),
+        beta_organizations_invites::CreateBetaOrganizationsInvitesParams {
+            email: decode(fixture(r#""user@emaildomain.com""#)),
+            role: decode(fixture(r#""user""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            rbac_group_ids: Some(decode(fixture(r#"["rbac_group_ids"]"#))),
+        },
         None,
     )
     .expect("create_beta_organizations_invites request failed");
@@ -2636,10 +2716,12 @@ fn create_beta_organizations_invites_create_beta_organizations_invites_400_decod
     };
     let result = beta_organizations_invites::create_beta_organizations_invites(
         &config,
-        decode(fixture(r#""user@emaildomain.com""#)),
-        decode(fixture(r#""user""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["rbac_group_ids"]"#))),
+        beta_organizations_invites::CreateBetaOrganizationsInvitesParams {
+            email: decode(fixture(r#""user@emaildomain.com""#)),
+            role: decode(fixture(r#""user""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            rbac_group_ids: Some(decode(fixture(r#"["rbac_group_ids"]"#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -2665,7 +2747,9 @@ fn create_beta_organizations_rbac_groups_create_beta_organizations_rbac_groups_r
     let _ = &config;
     let actual = beta_organizations_rbac_groups::create_beta_organizations_rbac_groups(
         &config,
-        decode(fixture(r#""Engineering""#)),
+        beta_organizations_rbac_groups::CreateBetaOrganizationsRbacGroupsParams {
+            name: decode(fixture(r#""Engineering""#)),
+        },
         None,
     )
     .expect("create_beta_organizations_rbac_groups request failed");
@@ -2693,7 +2777,9 @@ fn create_beta_organizations_rbac_groups_create_beta_organizations_rbac_groups_4
     };
     let result = beta_organizations_rbac_groups::create_beta_organizations_rbac_groups(
         &config,
-        decode(fixture(r#""Engineering""#)),
+        beta_organizations_rbac_groups::CreateBetaOrganizationsRbacGroupsParams {
+            name: decode(fixture(r#""Engineering""#)),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -2717,14 +2803,15 @@ fn create_beta_organizations_rbac_groups_members_create_beta_organizations_rbac_
         return;
     };
     let _ = &config;
-    let actual =
-        beta_organizations_rbac_groups_members::create_beta_organizations_rbac_groups_members(
-            &config,
-            decode(fixture(r#""group-1""#)),
-            decode(fixture(r#""user_01WCz1FkmYMm4gnmykNKUu3Q""#)),
-            None,
-        )
-        .expect("create_beta_organizations_rbac_groups_members request failed");
+    let actual = beta_organizations_rbac_groups_members::create_beta_organizations_rbac_groups_members(
+        &config,
+        beta_organizations_rbac_groups_members::CreateBetaOrganizationsRbacGroupsMembersParams {
+            group_id: decode(fixture(r#""group-1""#)),
+            user_id: decode(fixture(r#""user_01WCz1FkmYMm4gnmykNKUu3Q""#)),
+        },
+        None,
+    )
+    .expect("create_beta_organizations_rbac_groups_members request failed");
     let actual = serde_json::to_value(actual).expect("serialize generated response");
     let expected = fixture(
         r#"{"created_at":"2024-10-30T23:58:27.427722Z","email":"user@emaildomain.com","group_id":"group-1","type":"rbac_group_member","user_id":"user_01WCz1FkmYMm4gnmykNKUu3Q"}"#,
@@ -2747,13 +2834,14 @@ fn create_beta_organizations_rbac_groups_members_create_beta_organizations_rbac_
             .map(|base_url| format!("{base_url}/__mockStatus/400")),
         ..config
     };
-    let result =
-        beta_organizations_rbac_groups_members::create_beta_organizations_rbac_groups_members(
-            &config,
-            decode(fixture(r#""group-1""#)),
-            decode(fixture(r#""user_01WCz1FkmYMm4gnmykNKUu3Q""#)),
-            None,
-        );
+    let result = beta_organizations_rbac_groups_members::create_beta_organizations_rbac_groups_members(
+        &config,
+        beta_organizations_rbac_groups_members::CreateBetaOrganizationsRbacGroupsMembersParams {
+            group_id: decode(fixture(r#""group-1""#)),
+            user_id: decode(fixture(r#""user_01WCz1FkmYMm4gnmykNKUu3Q""#)),
+        },
+        None,
+    );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
         panic!(
             "create_beta_organizations_rbac_groups_members did not fail with SdkError::Http on 400"
@@ -2913,11 +3001,13 @@ fn create_beta_organizations_spend_limits_create_beta_organizations_spend_limits
     let _ = &config;
     let actual = beta_organizations_spend_limits::create_beta_organizations_spend_limits(
         &config,
-        Some(decode(fixture(r#""50000""#))),
-        decode(fixture(
-            r#"{"type":"user","user_id":"user_01WCz1FkmYMm4gnmykNKUu3Q"}"#,
-        )),
-        Some(decode(fixture(r#""monthly""#))),
+        beta_organizations_spend_limits::CreateBetaOrganizationsSpendLimitsParams {
+            amount: Some(decode(fixture(r#""50000""#))),
+            scope: decode(fixture(
+                r#"{"type":"user","user_id":"user_01WCz1FkmYMm4gnmykNKUu3Q"}"#,
+            )),
+            period: Some(decode(fixture(r#""monthly""#))),
+        },
         None,
     )
     .expect("create_beta_organizations_spend_limits request failed");
@@ -2945,11 +3035,13 @@ fn create_beta_organizations_spend_limits_create_beta_organizations_spend_limits
     };
     let result = beta_organizations_spend_limits::create_beta_organizations_spend_limits(
         &config,
-        Some(decode(fixture(r#""50000""#))),
-        decode(fixture(
-            r#"{"type":"user","user_id":"user_01WCz1FkmYMm4gnmykNKUu3Q"}"#,
-        )),
-        Some(decode(fixture(r#""monthly""#))),
+        beta_organizations_spend_limits::CreateBetaOrganizationsSpendLimitsParams {
+            amount: Some(decode(fixture(r#""50000""#))),
+            scope: decode(fixture(
+                r#"{"type":"user","user_id":"user_01WCz1FkmYMm4gnmykNKUu3Q"}"#,
+            )),
+            period: Some(decode(fixture(r#""monthly""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -2975,10 +3067,12 @@ fn create_beta_organizations_tunnels_certificates_create_beta_organizations_tunn
     let _ = &config;
     let actual = beta_organizations_tunnels_certificates::create_beta_organizations_tunnels_certificates(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        decode(fixture(r#"["anthropic-beta"]"#)),
-        decode(fixture(r#""-----BEGIN CERTIFICATE-----\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\n...illustrative placeholder, not a real certificate...\n-----END CERTIFICATE-----\n""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_tunnels_certificates::CreateBetaOrganizationsTunnelsCertificatesParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            ca_certificate_pem: decode(fixture(r#""-----BEGIN CERTIFICATE-----\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\n...illustrative placeholder, not a real certificate...\n-----END CERTIFICATE-----\n""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("create_beta_organizations_tunnels_certificates request failed");
@@ -3004,17 +3098,16 @@ fn create_beta_organizations_tunnels_certificates_create_beta_organizations_tunn
             .map(|base_url| format!("{base_url}/__mockStatus/400")),
         ..config
     };
-    let result =
-        beta_organizations_tunnels_certificates::create_beta_organizations_tunnels_certificates(
-            &config,
-            decode(fixture(r#""tunnel-1""#)),
-            decode(fixture(r#"["anthropic-beta"]"#)),
-            decode(fixture(
-                r#""-----BEGIN CERTIFICATE-----\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\n...illustrative placeholder, not a real certificate...\n-----END CERTIFICATE-----\n""#,
-            )),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        );
+    let result = beta_organizations_tunnels_certificates::create_beta_organizations_tunnels_certificates(
+        &config,
+        beta_organizations_tunnels_certificates::CreateBetaOrganizationsTunnelsCertificatesParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            ca_certificate_pem: decode(fixture(r#""-----BEGIN CERTIFICATE-----\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\n...illustrative placeholder, not a real certificate...\n-----END CERTIFICATE-----\n""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
         panic!("create_beta_organizations_tunnels_certificates did not fail with SdkError::Http on 400");
     };
@@ -3111,10 +3204,12 @@ fn create_beta_organizations_workspaces_members_create_beta_organizations_worksp
     let actual =
         beta_organizations_workspaces_members::create_beta_organizations_workspaces_members(
             &config,
-            decode(fixture(r#""workspace-1""#)),
-            decode(fixture(r#""user_01WCz1FkmYMm4gnmykNKUu3Q""#)),
-            decode(fixture(r#""workspace_admin""#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
+            beta_organizations_workspaces_members::CreateBetaOrganizationsWorkspacesMembersParams {
+                workspace_id: decode(fixture(r#""workspace-1""#)),
+                user_id: decode(fixture(r#""user_01WCz1FkmYMm4gnmykNKUu3Q""#)),
+                workspace_role: decode(fixture(r#""workspace_admin""#)),
+                anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            },
             None,
         )
         .expect("create_beta_organizations_workspaces_members request failed");
@@ -3143,10 +3238,12 @@ fn create_beta_organizations_workspaces_members_create_beta_organizations_worksp
     let result =
         beta_organizations_workspaces_members::create_beta_organizations_workspaces_members(
             &config,
-            decode(fixture(r#""workspace-1""#)),
-            decode(fixture(r#""user_01WCz1FkmYMm4gnmykNKUu3Q""#)),
-            decode(fixture(r#""workspace_admin""#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
+            beta_organizations_workspaces_members::CreateBetaOrganizationsWorkspacesMembersParams {
+                workspace_id: decode(fixture(r#""workspace-1""#)),
+                user_id: decode(fixture(r#""user_01WCz1FkmYMm4gnmykNKUu3Q""#)),
+                workspace_role: decode(fixture(r#""workspace_admin""#)),
+                anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            },
             None,
         );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -3592,10 +3689,12 @@ fn create_beta_tunnels_create_beta_tunnels_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = beta_tunnels::create_beta_tunnels(
         &config,
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
-        Some(Some(decode(fixture(r#""Example Name""#)))),
+        beta_tunnels::CreateBetaTunnelsParams {
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+            display_name: Some(Some(decode(fixture(r#""Example Name""#)))),
+        },
         None,
     )
     .expect("create_beta_tunnels request failed");
@@ -3622,10 +3721,12 @@ fn create_beta_tunnels_create_beta_tunnels_400_decodes_declared_error() {
     };
     let result = beta_tunnels::create_beta_tunnels(
         &config,
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
-        Some(Some(decode(fixture(r#""Example Name""#)))),
+        beta_tunnels::CreateBetaTunnelsParams {
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+            display_name: Some(Some(decode(fixture(r#""Example Name""#)))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -3784,9 +3885,11 @@ fn create_beta_user_profiles_enrollment_url_create_beta_user_profiles_enrollment
     let _ = &config;
     let actual = beta_user_profiles::create_beta_user_profiles_enrollment_url(
         &config,
-        decode(fixture(r#""uprof_011CZkZCu8hGbp5mYRQgUmz9""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
+        beta_user_profiles::CreateBetaUserProfilesEnrollmentUrlParams {
+            user_profile_id: decode(fixture(r#""uprof_011CZkZCu8hGbp5mYRQgUmz9""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+        },
         None,
     )
     .expect("create_beta_user_profiles_enrollment_url request failed");
@@ -3814,9 +3917,11 @@ fn create_beta_user_profiles_enrollment_url_create_beta_user_profiles_enrollment
     };
     let result = beta_user_profiles::create_beta_user_profiles_enrollment_url(
         &config,
-        decode(fixture(r#""uprof_011CZkZCu8hGbp5mYRQgUmz9""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
+        beta_user_profiles::CreateBetaUserProfilesEnrollmentUrlParams {
+            user_profile_id: decode(fixture(r#""uprof_011CZkZCu8hGbp5mYRQgUmz9""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4148,10 +4253,12 @@ fn create_messages_batches_create_messages_batches_reaches_mock_and_decodes_resp
     let _ = &config;
     let actual = messages_batches::create_messages_batches(
         &config,
-        decode(fixture(r#"[{"custom_id":"my-custom-id-1","params":{"max_tokens":1024,"messages":[{"content":"Hello, world","role":"user"}],"model":"claude-opus-5"}}]"#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""anthropic-user-profile-1""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        messages_batches::CreateMessagesBatchesParams {
+            requests: decode(fixture(r#"[{"custom_id":"my-custom-id-1","params":{"max_tokens":1024,"messages":[{"content":"Hello, world","role":"user"}],"model":"claude-opus-5"}}]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_user_profile_id: Some(decode(fixture(r#""anthropic-user-profile-1""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("create_messages_batches request failed");
@@ -4178,12 +4285,14 @@ fn create_messages_batches_create_messages_batches_400_decodes_declared_error() 
     };
     let result = messages_batches::create_messages_batches(
         &config,
-        decode(fixture(
-            r#"[{"custom_id":"my-custom-id-1","params":{"max_tokens":1024,"messages":[{"content":"Hello, world","role":"user"}],"model":"claude-opus-5"}}]"#,
-        )),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""anthropic-user-profile-1""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        messages_batches::CreateMessagesBatchesParams {
+            requests: decode(fixture(
+                r#"[{"custom_id":"my-custom-id-1","params":{"max_tokens":1024,"messages":[{"content":"Hello, world","role":"user"}],"model":"claude-opus-5"}}]"#,
+            )),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_user_profile_id: Some(decode(fixture(r#""anthropic-user-profile-1""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4208,14 +4317,16 @@ fn create_skills_create_skills_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = skills::create_skills(
         &config,
-        vec![::octridev_anthropic::client::UploadFile::new(
-            b"mock upload".to_vec(),
-            "mock.bin",
-            "application/octet-stream",
-        )],
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
-        Some(Some(decode(fixture(r#""Example Name""#)))),
+        skills::CreateSkillsParams {
+            files: vec![::octridev_anthropic::client::UploadFile::new(
+                b"mock upload".to_vec(),
+                "mock.bin",
+                "application/octet-stream",
+            )],
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+            display_name: Some(Some(decode(fixture(r#""Example Name""#)))),
+        },
         None,
     )
     .expect("create_skills request failed");
@@ -4242,14 +4353,16 @@ fn create_skills_create_skills_400_decodes_declared_error() {
     };
     let result = skills::create_skills(
         &config,
-        vec![::octridev_anthropic::client::UploadFile::new(
-            b"mock upload".to_vec(),
-            "mock.bin",
-            "application/octet-stream",
-        )],
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
-        Some(Some(decode(fixture(r#""Example Name""#)))),
+        skills::CreateSkillsParams {
+            files: vec![::octridev_anthropic::client::UploadFile::new(
+                b"mock upload".to_vec(),
+                "mock.bin",
+                "application/octet-stream",
+            )],
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+            display_name: Some(Some(decode(fixture(r#""Example Name""#)))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4274,14 +4387,16 @@ fn create_skills_versions_create_skills_versions_reaches_mock_and_decodes_respon
     let _ = &config;
     let actual = skills_versions::create_skills_versions(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        vec![::octridev_anthropic::client::UploadFile::new(
-            b"mock upload".to_vec(),
-            "mock.bin",
-            "application/octet-stream",
-        )],
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        skills_versions::CreateSkillsVersionsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            files: vec![::octridev_anthropic::client::UploadFile::new(
+                b"mock upload".to_vec(),
+                "mock.bin",
+                "application/octet-stream",
+            )],
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("create_skills_versions request failed");
@@ -4308,14 +4423,16 @@ fn create_skills_versions_create_skills_versions_400_decodes_declared_error() {
     };
     let result = skills_versions::create_skills_versions(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        vec![::octridev_anthropic::client::UploadFile::new(
-            b"mock upload".to_vec(),
-            "mock.bin",
-            "application/octet-stream",
-        )],
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        skills_versions::CreateSkillsVersionsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            files: vec![::octridev_anthropic::client::UploadFile::new(
+                b"mock upload".to_vec(),
+                "mock.bin",
+                "application/octet-stream",
+            )],
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4340,10 +4457,12 @@ fn delete_beta_environments_delete_beta_environments_reaches_mock_and_decodes_re
     let _ = &config;
     let actual = beta_environments::delete_beta_environments(
         &config,
-        decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_environments::DeleteBetaEnvironmentsParams {
+            environment_id: decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_beta_environments request failed");
@@ -4368,10 +4487,12 @@ fn delete_beta_environments_delete_beta_environments_400_decodes_declared_error(
     };
     let result = beta_environments::delete_beta_environments(
         &config,
-        decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_environments::DeleteBetaEnvironmentsParams {
+            environment_id: decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4396,10 +4517,12 @@ fn delete_beta_files_delete_beta_files_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = beta_files::delete_beta_files(
         &config,
-        decode(fixture(r#""file-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_files::DeleteBetaFilesParams {
+            file_id: decode(fixture(r#""file-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_beta_files request failed");
@@ -4424,10 +4547,12 @@ fn delete_beta_files_delete_beta_files_400_decodes_declared_error() {
     };
     let result = beta_files::delete_beta_files(
         &config,
-        decode(fixture(r#""file-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_files::DeleteBetaFilesParams {
+            file_id: decode(fixture(r#""file-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4452,10 +4577,12 @@ fn delete_beta_memory_stores_delete_beta_memory_stores_reaches_mock_and_decodes_
     let _ = &config;
     let actual = beta_memory_stores::delete_beta_memory_stores(
         &config,
-        decode(fixture(r#""memory_store-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_memory_stores::DeleteBetaMemoryStoresParams {
+            memory_store_id: decode(fixture(r#""memory_store-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_beta_memory_stores request failed");
@@ -4480,10 +4607,12 @@ fn delete_beta_memory_stores_delete_beta_memory_stores_400_decodes_declared_erro
     };
     let result = beta_memory_stores::delete_beta_memory_stores(
         &config,
-        decode(fixture(r#""memory_store-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_memory_stores::DeleteBetaMemoryStoresParams {
+            memory_store_id: decode(fixture(r#""memory_store-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4574,10 +4703,12 @@ fn delete_beta_messages_batches_delete_beta_messages_batches_reaches_mock_and_de
     let _ = &config;
     let actual = beta_messages_batches::delete_beta_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_messages_batches::DeleteBetaMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_beta_messages_batches request failed");
@@ -4603,10 +4734,12 @@ fn delete_beta_messages_batches_delete_beta_messages_batches_400_decodes_declare
     };
     let result = beta_messages_batches::delete_beta_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_messages_batches::DeleteBetaMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4632,8 +4765,10 @@ fn delete_beta_organizations_external_keys_delete_beta_organizations_external_ke
     let _ = &config;
     let actual = beta_organizations_external_keys::delete_beta_organizations_external_keys(
         &config,
-        decode(fixture(r#""external_key-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_external_keys::DeleteBetaOrganizationsExternalKeysParams {
+            external_key_id: decode(fixture(r#""external_key-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("delete_beta_organizations_external_keys request failed");
@@ -4660,8 +4795,10 @@ fn delete_beta_organizations_external_keys_delete_beta_organizations_external_ke
     };
     let result = beta_organizations_external_keys::delete_beta_organizations_external_keys(
         &config,
-        decode(fixture(r#""external_key-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_external_keys::DeleteBetaOrganizationsExternalKeysParams {
+            external_key_id: decode(fixture(r#""external_key-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4687,10 +4824,12 @@ fn delete_beta_organizations_federation_rules_workspaces_delete_beta_organizatio
     let _ = &config;
     let actual = beta_organizations_federation_rules_workspaces::delete_beta_organizations_federation_rules_workspaces(
         &config,
-        decode(fixture(r#""federation_rule-1""#)),
-        decode(fixture(r#""workspace-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_federation_rules_workspaces::DeleteBetaOrganizationsFederationRulesWorkspacesParams {
+            federation_rule_id: decode(fixture(r#""federation_rule-1""#)),
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("delete_beta_organizations_federation_rules_workspaces request failed");
@@ -4718,10 +4857,12 @@ fn delete_beta_organizations_federation_rules_workspaces_delete_beta_organizatio
     };
     let result = beta_organizations_federation_rules_workspaces::delete_beta_organizations_federation_rules_workspaces(
         &config,
-        decode(fixture(r#""federation_rule-1""#)),
-        decode(fixture(r#""workspace-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_federation_rules_workspaces::DeleteBetaOrganizationsFederationRulesWorkspacesParams {
+            federation_rule_id: decode(fixture(r#""federation_rule-1""#)),
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4747,8 +4888,10 @@ fn delete_beta_organizations_invites_delete_beta_organizations_invites_reaches_m
     let _ = &config;
     let actual = beta_organizations_invites::delete_beta_organizations_invites(
         &config,
-        decode(fixture(r#""invite-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_invites::DeleteBetaOrganizationsInvitesParams {
+            invite_id: decode(fixture(r#""invite-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("delete_beta_organizations_invites request failed");
@@ -4774,8 +4917,10 @@ fn delete_beta_organizations_invites_delete_beta_organizations_invites_400_decod
     };
     let result = beta_organizations_invites::delete_beta_organizations_invites(
         &config,
-        decode(fixture(r#""invite-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_invites::DeleteBetaOrganizationsInvitesParams {
+            invite_id: decode(fixture(r#""invite-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4801,7 +4946,9 @@ fn delete_beta_organizations_rbac_groups_delete_beta_organizations_rbac_groups_r
     let _ = &config;
     let actual = beta_organizations_rbac_groups::delete_beta_organizations_rbac_groups(
         &config,
-        decode(fixture(r#""group-1""#)),
+        beta_organizations_rbac_groups::DeleteBetaOrganizationsRbacGroupsParams {
+            group_id: decode(fixture(r#""group-1""#)),
+        },
         None,
     )
     .expect("delete_beta_organizations_rbac_groups request failed");
@@ -4828,7 +4975,9 @@ fn delete_beta_organizations_rbac_groups_delete_beta_organizations_rbac_groups_4
     };
     let result = beta_organizations_rbac_groups::delete_beta_organizations_rbac_groups(
         &config,
-        decode(fixture(r#""group-1""#)),
+        beta_organizations_rbac_groups::DeleteBetaOrganizationsRbacGroupsParams {
+            group_id: decode(fixture(r#""group-1""#)),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4852,14 +5001,15 @@ fn delete_beta_organizations_rbac_groups_members_delete_beta_organizations_rbac_
         return;
     };
     let _ = &config;
-    let actual =
-        beta_organizations_rbac_groups_members::delete_beta_organizations_rbac_groups_members(
-            &config,
-            decode(fixture(r#""group-1""#)),
-            decode(fixture(r#""user-1""#)),
-            None,
-        )
-        .expect("delete_beta_organizations_rbac_groups_members request failed");
+    let actual = beta_organizations_rbac_groups_members::delete_beta_organizations_rbac_groups_members(
+        &config,
+        beta_organizations_rbac_groups_members::DeleteBetaOrganizationsRbacGroupsMembersParams {
+            group_id: decode(fixture(r#""group-1""#)),
+            user_id: decode(fixture(r#""user-1""#)),
+        },
+        None,
+    )
+    .expect("delete_beta_organizations_rbac_groups_members request failed");
     let actual = serde_json::to_value(actual).expect("serialize generated response");
     let expected =
         fixture(r#"{"group_id":"group-1","type":"rbac_group_member_deleted","user_id":"user-1"}"#);
@@ -4881,13 +5031,14 @@ fn delete_beta_organizations_rbac_groups_members_delete_beta_organizations_rbac_
             .map(|base_url| format!("{base_url}/__mockStatus/400")),
         ..config
     };
-    let result =
-        beta_organizations_rbac_groups_members::delete_beta_organizations_rbac_groups_members(
-            &config,
-            decode(fixture(r#""group-1""#)),
-            decode(fixture(r#""user-1""#)),
-            None,
-        );
+    let result = beta_organizations_rbac_groups_members::delete_beta_organizations_rbac_groups_members(
+        &config,
+        beta_organizations_rbac_groups_members::DeleteBetaOrganizationsRbacGroupsMembersParams {
+            group_id: decode(fixture(r#""group-1""#)),
+            user_id: decode(fixture(r#""user-1""#)),
+        },
+        None,
+    );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
         panic!(
             "delete_beta_organizations_rbac_groups_members did not fail with SdkError::Http on 400"
@@ -4913,10 +5064,12 @@ fn delete_beta_organizations_service_accounts_workspaces_delete_beta_organizatio
     let _ = &config;
     let actual = beta_organizations_service_accounts_workspaces::delete_beta_organizations_service_accounts_workspaces(
         &config,
-        decode(fixture(r#""workspace-1""#)),
-        decode(fixture(r#""service_account-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_service_accounts_workspaces::DeleteBetaOrganizationsServiceAccountsWorkspacesParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            service_account_id: decode(fixture(r#""service_account-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("delete_beta_organizations_service_accounts_workspaces request failed");
@@ -4944,10 +5097,12 @@ fn delete_beta_organizations_service_accounts_workspaces_delete_beta_organizatio
     };
     let result = beta_organizations_service_accounts_workspaces::delete_beta_organizations_service_accounts_workspaces(
         &config,
-        decode(fixture(r#""workspace-1""#)),
-        decode(fixture(r#""service_account-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_service_accounts_workspaces::DeleteBetaOrganizationsServiceAccountsWorkspacesParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            service_account_id: decode(fixture(r#""service_account-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -4973,7 +5128,9 @@ fn delete_beta_organizations_spend_limits_delete_beta_organizations_spend_limits
     let _ = &config;
     let actual = beta_organizations_spend_limits::delete_beta_organizations_spend_limits(
         &config,
-        decode(fixture(r#""spend_limit-1""#)),
+        beta_organizations_spend_limits::DeleteBetaOrganizationsSpendLimitsParams {
+            spend_limit_id: decode(fixture(r#""spend_limit-1""#)),
+        },
         None,
     )
     .expect("delete_beta_organizations_spend_limits request failed");
@@ -4999,7 +5156,9 @@ fn delete_beta_organizations_spend_limits_delete_beta_organizations_spend_limits
     };
     let result = beta_organizations_spend_limits::delete_beta_organizations_spend_limits(
         &config,
-        decode(fixture(r#""spend_limit-1""#)),
+        beta_organizations_spend_limits::DeleteBetaOrganizationsSpendLimitsParams {
+            spend_limit_id: decode(fixture(r#""spend_limit-1""#)),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5025,8 +5184,10 @@ fn delete_beta_organizations_users_delete_beta_organizations_users_reaches_mock_
     let _ = &config;
     let actual = beta_organizations_users::delete_beta_organizations_users(
         &config,
-        decode(fixture(r#""user-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_users::DeleteBetaOrganizationsUsersParams {
+            user_id: decode(fixture(r#""user-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("delete_beta_organizations_users request failed");
@@ -5051,8 +5212,10 @@ fn delete_beta_organizations_users_delete_beta_organizations_users_400_decodes_d
     };
     let result = beta_organizations_users::delete_beta_organizations_users(
         &config,
-        decode(fixture(r#""user-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_users::DeleteBetaOrganizationsUsersParams {
+            user_id: decode(fixture(r#""user-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5079,9 +5242,11 @@ fn delete_beta_organizations_workspaces_members_delete_beta_organizations_worksp
     let actual =
         beta_organizations_workspaces_members::delete_beta_organizations_workspaces_members(
             &config,
-            decode(fixture(r#""user-1""#)),
-            decode(fixture(r#""workspace-1""#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
+            beta_organizations_workspaces_members::DeleteBetaOrganizationsWorkspacesMembersParams {
+                user_id: decode(fixture(r#""user-1""#)),
+                workspace_id: decode(fixture(r#""workspace-1""#)),
+                anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            },
             None,
         )
         .expect("delete_beta_organizations_workspaces_members request failed");
@@ -5110,9 +5275,11 @@ fn delete_beta_organizations_workspaces_members_delete_beta_organizations_worksp
     let result =
         beta_organizations_workspaces_members::delete_beta_organizations_workspaces_members(
             &config,
-            decode(fixture(r#""user-1""#)),
-            decode(fixture(r#""workspace-1""#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
+            beta_organizations_workspaces_members::DeleteBetaOrganizationsWorkspacesMembersParams {
+                user_id: decode(fixture(r#""user-1""#)),
+                workspace_id: decode(fixture(r#""workspace-1""#)),
+                anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            },
             None,
         );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5140,10 +5307,12 @@ fn delete_beta_organizations_workspaces_service_accounts_delete_beta_organizatio
     let _ = &config;
     let actual = beta_organizations_workspaces_service_accounts::delete_beta_organizations_workspaces_service_accounts(
         &config,
-        decode(fixture(r#""workspace-1""#)),
-        decode(fixture(r#""service_account-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_workspaces_service_accounts::DeleteBetaOrganizationsWorkspacesServiceAccountsParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            service_account_id: decode(fixture(r#""service_account-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("delete_beta_organizations_workspaces_service_accounts request failed");
@@ -5171,10 +5340,12 @@ fn delete_beta_organizations_workspaces_service_accounts_delete_beta_organizatio
     };
     let result = beta_organizations_workspaces_service_accounts::delete_beta_organizations_workspaces_service_accounts(
         &config,
-        decode(fixture(r#""workspace-1""#)),
-        decode(fixture(r#""service_account-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_workspaces_service_accounts::DeleteBetaOrganizationsWorkspacesServiceAccountsParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            service_account_id: decode(fixture(r#""service_account-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5199,10 +5370,12 @@ fn delete_beta_sessions_delete_beta_sessions_reaches_mock_and_decodes_response()
     let _ = &config;
     let actual = beta_sessions::delete_beta_sessions(
         &config,
-        decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_sessions::DeleteBetaSessionsParams {
+            session_id: decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_beta_sessions request failed");
@@ -5227,10 +5400,12 @@ fn delete_beta_sessions_delete_beta_sessions_400_decodes_declared_error() {
     };
     let result = beta_sessions::delete_beta_sessions(
         &config,
-        decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_sessions::DeleteBetaSessionsParams {
+            session_id: decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5319,10 +5494,12 @@ fn delete_beta_skills_delete_beta_skills_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = beta_skills::delete_beta_skills(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_skills::DeleteBetaSkillsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_beta_skills request failed");
@@ -5347,10 +5524,12 @@ fn delete_beta_skills_delete_beta_skills_400_decodes_declared_error() {
     };
     let result = beta_skills::delete_beta_skills(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_skills::DeleteBetaSkillsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5437,10 +5616,12 @@ fn delete_beta_vaults_delete_beta_vaults_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = beta_vaults::delete_beta_vaults(
         &config,
-        decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_vaults::DeleteBetaVaultsParams {
+            vault_id: decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_beta_vaults request failed");
@@ -5465,10 +5646,12 @@ fn delete_beta_vaults_delete_beta_vaults_400_decodes_declared_error() {
     };
     let result = beta_vaults::delete_beta_vaults(
         &config,
-        decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_vaults::DeleteBetaVaultsParams {
+            vault_id: decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5557,9 +5740,11 @@ fn delete_files_delete_files_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = files::delete_files(
         &config,
-        decode(fixture(r#""file-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        files::DeleteFilesParams {
+            file_id: decode(fixture(r#""file-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_files request failed");
@@ -5584,9 +5769,11 @@ fn delete_files_delete_files_400_decodes_declared_error() {
     };
     let result = files::delete_files(
         &config,
-        decode(fixture(r#""file-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        files::DeleteFilesParams {
+            file_id: decode(fixture(r#""file-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5611,9 +5798,11 @@ fn delete_messages_batches_delete_messages_batches_reaches_mock_and_decodes_resp
     let _ = &config;
     let actual = messages_batches::delete_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        messages_batches::DeleteMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_messages_batches request failed");
@@ -5639,9 +5828,11 @@ fn delete_messages_batches_delete_messages_batches_400_decodes_declared_error() 
     };
     let result = messages_batches::delete_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        messages_batches::DeleteMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5666,9 +5857,11 @@ fn delete_skills_delete_skills_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = skills::delete_skills(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        skills::DeleteSkillsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_skills request failed");
@@ -5693,9 +5886,11 @@ fn delete_skills_delete_skills_400_decodes_declared_error() {
     };
     let result = skills::delete_skills(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        skills::DeleteSkillsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5720,10 +5915,12 @@ fn delete_skills_versions_delete_skills_versions_reaches_mock_and_decodes_respon
     let _ = &config;
     let actual = skills_versions::delete_skills_versions(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        decode(fixture(r#""version""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        skills_versions::DeleteSkillsVersionsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            version: decode(fixture(r#""version""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("delete_skills_versions request failed");
@@ -5748,10 +5945,12 @@ fn delete_skills_versions_delete_skills_versions_400_decodes_declared_error() {
     };
     let result = skills_versions::delete_skills_versions(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        decode(fixture(r#""version""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        skills_versions::DeleteSkillsVersionsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            version: decode(fixture(r#""version""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5777,8 +5976,10 @@ fn deny_beta_organizations_spend_limit_increase_requests_deny_beta_organizations
     let _ = &config;
     let actual = beta_organizations_spend_limit_increase_requests::deny_beta_organizations_spend_limit_increase_requests(
         &config,
-        decode(fixture(r#""spend_limit_increase_request-1""#)),
-        Some(decode(fixture(r#"false"#))),
+        beta_organizations_spend_limit_increase_requests::DenyBetaOrganizationsSpendLimitIncreaseRequestsParams {
+            spend_limit_increase_request_id: decode(fixture(r#""spend_limit_increase_request-1""#)),
+            suppress_notification: Some(decode(fixture(r#"false"#))),
+        },
         None,
     )
     .expect("deny_beta_organizations_spend_limit_increase_requests request failed");
@@ -5806,8 +6007,10 @@ fn deny_beta_organizations_spend_limit_increase_requests_deny_beta_organizations
     };
     let result = beta_organizations_spend_limit_increase_requests::deny_beta_organizations_spend_limit_increase_requests(
         &config,
-        decode(fixture(r#""spend_limit_increase_request-1""#)),
-        Some(decode(fixture(r#"false"#))),
+        beta_organizations_spend_limit_increase_requests::DenyBetaOrganizationsSpendLimitIncreaseRequestsParams {
+            spend_limit_increase_request_id: decode(fixture(r#""spend_limit_increase_request-1""#)),
+            suppress_notification: Some(decode(fixture(r#"false"#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -5832,10 +6035,12 @@ fn download_beta_files_download_beta_files_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = beta_files::download_beta_files(
         &config,
-        decode(fixture(r#""file-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_files::DownloadBetaFilesParams {
+            file_id: decode(fixture(r#""file-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("download_beta_files request failed");
@@ -5871,9 +6076,11 @@ fn download_files_download_files_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = files::download_files(
         &config,
-        decode(fixture(r#""file-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        files::DownloadFilesParams {
+            file_id: decode(fixture(r#""file-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("download_files request failed");
@@ -6869,6 +7076,80 @@ fn list_beta_models_list_beta_models_400_decodes_declared_error() {
 }
 
 #[test]
+fn list_beta_organization_analytics_plugins_list_beta_organization_analytics_plugins_reaches_mock_and_decodes_response(
+) {
+    let Some(config) = configured_client() else {
+        return;
+    };
+    let _ = &config;
+    let actual = beta_organizations_analytics_plugins::list_beta_organization_analytics_plugins(
+        &config,
+        beta_organizations_analytics_plugins::ListBetaOrganizationAnalyticsPluginsParams {
+            date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
+            starting_date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
+            ending_date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
+            limit: Some(Some(decode(fixture(r#"1"#)))),
+            page: Some(Some(decode(fixture(r#""page""#)))),
+            group_by: Some(Some(decode(fixture(r#"["product"]"#)))),
+            filter: Some(Some(decode(fixture(r#"["filter[]"]"#)))),
+            order_by: Some(Some(decode(fixture(r#""order_by""#)))),
+            order: Some(Some(decode(fixture(r#""asc""#)))),
+        },
+        None,
+    )
+    .expect("list_beta_organization_analytics_plugins request failed");
+    let actual = serde_json::to_value(actual).expect("serialize generated response");
+    let expected = fixture(
+        r#"{"data":[{"claude_code_metrics":{"distinct_session_plugin_used_count":1},"cowork_metrics":{"distinct_session_plugin_used_count":1},"distinct_user_count":1,"install_count":1,"invocation_count":1,"plugin_id":"plugin-1","plugin_name":"Example Name","product":"product","rbac_group_id":"rbac_group-1","rbac_group_name":"Example Name","user_id":"user-1"}],"next_page":"next_page"}"#,
+    );
+    assert!(
+        representative(&actual, &expected),
+        "list_beta_organization_analytics_plugins decoded {actual}, expected representative {expected}"
+    );
+}
+
+#[test]
+fn list_beta_organization_analytics_plugins_list_beta_organization_analytics_plugins_400_decodes_declared_error(
+) {
+    let Some(config) = configured_client() else {
+        return;
+    };
+    let config = ClientConfig {
+        base_url: config
+            .base_url
+            .map(|base_url| format!("{base_url}/__mockStatus/400")),
+        ..config
+    };
+    let result = beta_organizations_analytics_plugins::list_beta_organization_analytics_plugins(
+        &config,
+        beta_organizations_analytics_plugins::ListBetaOrganizationAnalyticsPluginsParams {
+            date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
+            starting_date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
+            ending_date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
+            limit: Some(Some(decode(fixture(r#"1"#)))),
+            page: Some(Some(decode(fixture(r#""page""#)))),
+            group_by: Some(Some(decode(fixture(r#"["product"]"#)))),
+            filter: Some(Some(decode(fixture(r#"["filter[]"]"#)))),
+            order_by: Some(Some(decode(fixture(r#""order_by""#)))),
+            order: Some(Some(decode(fixture(r#""asc""#)))),
+        },
+        None,
+    );
+    let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
+        panic!("list_beta_organization_analytics_plugins did not fail with SdkError::Http on 400");
+    };
+    assert_eq!(error.status_code, 400);
+    let actual = serde_json::to_value(&error.data).expect("serialize declared error body");
+    let expected = fixture(
+        r#"{"error":{"message":"Invalid request","type":"invalid_request_error"},"request_id":null,"type":"error"}"#,
+    );
+    assert!(
+        representative(&actual, &expected),
+        "list_beta_organization_analytics_plugins decoded error body {actual}, expected representative {expected}"
+    );
+}
+
+#[test]
 fn list_beta_organizations_analytics_apps_chat_projects_list_beta_organizations_analytics_apps_chat_projects_reaches_mock_and_decodes_response(
 ) {
     let Some(config) = configured_client() else {
@@ -7089,80 +7370,6 @@ fn list_beta_organizations_analytics_connectors_list_beta_organizations_analytic
 }
 
 #[test]
-fn list_beta_organizations_analytics_plugins_list_beta_organizations_analytics_plugins_reaches_mock_and_decodes_response(
-) {
-    let Some(config) = configured_client() else {
-        return;
-    };
-    let _ = &config;
-    let actual = beta_organizations_analytics_plugins::list_beta_organizations_analytics_plugins(
-        &config,
-        beta_organizations_analytics_plugins::ListBetaOrganizationsAnalyticsPluginsParams {
-            date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
-            starting_date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
-            ending_date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
-            limit: Some(Some(decode(fixture(r#"1"#)))),
-            page: Some(Some(decode(fixture(r#""page""#)))),
-            group_by: Some(Some(decode(fixture(r#"["product"]"#)))),
-            filter: Some(Some(decode(fixture(r#"["filter[]"]"#)))),
-            order_by: Some(Some(decode(fixture(r#""order_by""#)))),
-            order: Some(Some(decode(fixture(r#""asc""#)))),
-        },
-        None,
-    )
-    .expect("list_beta_organizations_analytics_plugins request failed");
-    let actual = serde_json::to_value(actual).expect("serialize generated response");
-    let expected = fixture(
-        r#"{"data":[{"claude_code_metrics":{"distinct_session_plugin_used_count":1},"cowork_metrics":{"distinct_session_plugin_used_count":1},"distinct_user_count":1,"install_count":1,"invocation_count":1,"plugin_id":"plugin-1","plugin_name":"Example Name","product":"product","rbac_group_id":"rbac_group-1","rbac_group_name":"Example Name","user_id":"user-1"}],"next_page":"next_page"}"#,
-    );
-    assert!(
-        representative(&actual, &expected),
-        "list_beta_organizations_analytics_plugins decoded {actual}, expected representative {expected}"
-    );
-}
-
-#[test]
-fn list_beta_organizations_analytics_plugins_list_beta_organizations_analytics_plugins_400_decodes_declared_error(
-) {
-    let Some(config) = configured_client() else {
-        return;
-    };
-    let config = ClientConfig {
-        base_url: config
-            .base_url
-            .map(|base_url| format!("{base_url}/__mockStatus/400")),
-        ..config
-    };
-    let result = beta_organizations_analytics_plugins::list_beta_organizations_analytics_plugins(
-        &config,
-        beta_organizations_analytics_plugins::ListBetaOrganizationsAnalyticsPluginsParams {
-            date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
-            starting_date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
-            ending_date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
-            limit: Some(Some(decode(fixture(r#"1"#)))),
-            page: Some(Some(decode(fixture(r#""page""#)))),
-            group_by: Some(Some(decode(fixture(r#"["product"]"#)))),
-            filter: Some(Some(decode(fixture(r#"["filter[]"]"#)))),
-            order_by: Some(Some(decode(fixture(r#""order_by""#)))),
-            order: Some(Some(decode(fixture(r#""asc""#)))),
-        },
-        None,
-    );
-    let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
-        panic!("list_beta_organizations_analytics_plugins did not fail with SdkError::Http on 400");
-    };
-    assert_eq!(error.status_code, 400);
-    let actual = serde_json::to_value(&error.data).expect("serialize declared error body");
-    let expected = fixture(
-        r#"{"error":{"message":"Invalid request","type":"invalid_request_error"},"request_id":null,"type":"error"}"#,
-    );
-    assert!(
-        representative(&actual, &expected),
-        "list_beta_organizations_analytics_plugins decoded error body {actual}, expected representative {expected}"
-    );
-}
-
-#[test]
 fn list_beta_organizations_analytics_skills_list_beta_organizations_analytics_skills_reaches_mock_and_decodes_response(
 ) {
     let Some(config) = configured_client() else {
@@ -7246,9 +7453,11 @@ fn list_beta_organizations_analytics_summaries_list_beta_organizations_analytics
     let actual =
         beta_organizations_analytics_summaries::list_beta_organizations_analytics_summaries(
             &config,
-            decode(fixture(r#""2024-01-01""#)),
-            Some(Some(decode(fixture(r#""2024-01-01""#)))),
-            Some(Some(decode(fixture(r#"["filter[]"]"#)))),
+            beta_organizations_analytics_summaries::ListBetaOrganizationsAnalyticsSummariesParams {
+                starting_date: decode(fixture(r#""2024-01-01""#)),
+                ending_date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
+                filter: Some(Some(decode(fixture(r#"["filter[]"]"#)))),
+            },
             None,
         )
         .expect("list_beta_organizations_analytics_summaries request failed");
@@ -7277,9 +7486,11 @@ fn list_beta_organizations_analytics_summaries_list_beta_organizations_analytics
     let result =
         beta_organizations_analytics_summaries::list_beta_organizations_analytics_summaries(
             &config,
-            decode(fixture(r#""2024-01-01""#)),
-            Some(Some(decode(fixture(r#""2024-01-01""#)))),
-            Some(Some(decode(fixture(r#"["filter[]"]"#)))),
+            beta_organizations_analytics_summaries::ListBetaOrganizationsAnalyticsSummariesParams {
+                starting_date: decode(fixture(r#""2024-01-01""#)),
+                ending_date: Some(Some(decode(fixture(r#""2024-01-01""#)))),
+                filter: Some(Some(decode(fixture(r#"["filter[]"]"#)))),
+            },
             None,
         );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -7451,7 +7662,9 @@ fn list_beta_organizations_compliance_settings_list_beta_organizations_complianc
     let actual =
         beta_organizations_compliance_settings::list_beta_organizations_compliance_settings(
             &config,
-            Some(decode(fixture(r#""anthropic-version""#))),
+            beta_organizations_compliance_settings::ListBetaOrganizationsComplianceSettingsParams {
+                anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            },
             None,
         )
         .expect("list_beta_organizations_compliance_settings request failed");
@@ -7478,7 +7691,9 @@ fn list_beta_organizations_compliance_settings_list_beta_organizations_complianc
     let result =
         beta_organizations_compliance_settings::list_beta_organizations_compliance_settings(
             &config,
-            Some(decode(fixture(r#""anthropic-version""#))),
+            beta_organizations_compliance_settings::ListBetaOrganizationsComplianceSettingsParams {
+                anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            },
             None,
         );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -7506,9 +7721,11 @@ fn list_beta_organizations_external_keys_list_beta_organizations_external_keys_r
     let _ = &config;
     let actual = beta_organizations_external_keys::list_beta_organizations_external_keys(
         &config,
-        Some(decode(fixture(r#"20"#))),
-        Some(Some(decode(fixture(r#""page""#)))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_external_keys::ListBetaOrganizationsExternalKeysParams {
+            limit: Some(decode(fixture(r#"20"#))),
+            page: Some(Some(decode(fixture(r#""page""#)))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("list_beta_organizations_external_keys request failed");
@@ -7536,9 +7753,11 @@ fn list_beta_organizations_external_keys_list_beta_organizations_external_keys_4
     };
     let result = beta_organizations_external_keys::list_beta_organizations_external_keys(
         &config,
-        Some(decode(fixture(r#"20"#))),
-        Some(Some(decode(fixture(r#""page""#)))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_external_keys::ListBetaOrganizationsExternalKeysParams {
+            limit: Some(decode(fixture(r#"20"#))),
+            page: Some(Some(decode(fixture(r#""page""#)))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -7901,10 +8120,12 @@ fn list_beta_organizations_rbac_groups_list_beta_organizations_rbac_groups_reach
     let _ = &config;
     let actual = beta_organizations_rbac_groups::list_beta_organizations_rbac_groups(
         &config,
-        Some(decode(fixture(r#"20"#))),
-        Some(Some(decode(fixture(
-            r#""eyJjdXJzb3IiOiAicmJhY19ncm91cF8wMSJ9""#,
-        )))),
+        beta_organizations_rbac_groups::ListBetaOrganizationsRbacGroupsParams {
+            limit: Some(decode(fixture(r#"20"#))),
+            page: Some(Some(decode(fixture(
+                r#""eyJjdXJzb3IiOiAicmJhY19ncm91cF8wMSJ9""#,
+            )))),
+        },
         None,
     )
     .expect("list_beta_organizations_rbac_groups request failed");
@@ -7932,10 +8153,12 @@ fn list_beta_organizations_rbac_groups_list_beta_organizations_rbac_groups_400_d
     };
     let result = beta_organizations_rbac_groups::list_beta_organizations_rbac_groups(
         &config,
-        Some(decode(fixture(r#"20"#))),
-        Some(Some(decode(fixture(
-            r#""eyJjdXJzb3IiOiAicmJhY19ncm91cF8wMSJ9""#,
-        )))),
+        beta_organizations_rbac_groups::ListBetaOrganizationsRbacGroupsParams {
+            limit: Some(decode(fixture(r#"20"#))),
+            page: Some(Some(decode(fixture(
+                r#""eyJjdXJzb3IiOiAicmJhY19ncm91cF8wMSJ9""#,
+            )))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -7962,11 +8185,13 @@ fn list_beta_organizations_rbac_groups_members_list_beta_organizations_rbac_grou
     let actual =
         beta_organizations_rbac_groups_members::list_beta_organizations_rbac_groups_members(
             &config,
-            decode(fixture(r#""group-1""#)),
-            Some(decode(fixture(r#"20"#))),
-            Some(Some(decode(fixture(
-                r#""eyJjdXJzb3IiOiAicmJhY19ncm91cF8wMSJ9""#,
-            )))),
+            beta_organizations_rbac_groups_members::ListBetaOrganizationsRbacGroupsMembersParams {
+                group_id: decode(fixture(r#""group-1""#)),
+                limit: Some(decode(fixture(r#"20"#))),
+                page: Some(Some(decode(fixture(
+                    r#""eyJjdXJzb3IiOiAicmJhY19ncm91cF8wMSJ9""#,
+                )))),
+            },
             None,
         )
         .expect("list_beta_organizations_rbac_groups_members request failed");
@@ -7995,11 +8220,13 @@ fn list_beta_organizations_rbac_groups_members_list_beta_organizations_rbac_grou
     let result =
         beta_organizations_rbac_groups_members::list_beta_organizations_rbac_groups_members(
             &config,
-            decode(fixture(r#""group-1""#)),
-            Some(decode(fixture(r#"20"#))),
-            Some(Some(decode(fixture(
-                r#""eyJjdXJzb3IiOiAicmJhY19ncm91cF8wMSJ9""#,
-            )))),
+            beta_organizations_rbac_groups_members::ListBetaOrganizationsRbacGroupsMembersParams {
+                group_id: decode(fixture(r#""group-1""#)),
+                limit: Some(decode(fixture(r#"20"#))),
+                page: Some(Some(decode(fixture(
+                    r#""eyJjdXJzb3IiOiAicmJhY19ncm91cF8wMSJ9""#,
+                )))),
+            },
             None,
         );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -8027,10 +8254,12 @@ fn list_beta_organizations_rbac_roles_list_beta_organizations_rbac_roles_reaches
     let _ = &config;
     let actual = beta_organizations_rbac_roles::list_beta_organizations_rbac_roles(
         &config,
-        Some(decode(fixture(r#"20"#))),
-        Some(Some(decode(fixture(
-            r#""eyJjdXJzb3IiOiAicmJhY19yb2xlXzAxIn0""#,
-        )))),
+        beta_organizations_rbac_roles::ListBetaOrganizationsRbacRolesParams {
+            limit: Some(decode(fixture(r#"20"#))),
+            page: Some(Some(decode(fixture(
+                r#""eyJjdXJzb3IiOiAicmJhY19yb2xlXzAxIn0""#,
+            )))),
+        },
         None,
     )
     .expect("list_beta_organizations_rbac_roles request failed");
@@ -8058,10 +8287,12 @@ fn list_beta_organizations_rbac_roles_list_beta_organizations_rbac_roles_400_dec
     };
     let result = beta_organizations_rbac_roles::list_beta_organizations_rbac_roles(
         &config,
-        Some(decode(fixture(r#"20"#))),
-        Some(Some(decode(fixture(
-            r#""eyJjdXJzb3IiOiAicmJhY19yb2xlXzAxIn0""#,
-        )))),
+        beta_organizations_rbac_roles::ListBetaOrganizationsRbacRolesParams {
+            limit: Some(decode(fixture(r#"20"#))),
+            page: Some(Some(decode(fixture(
+                r#""eyJjdXJzb3IiOiAicmJhY19yb2xlXzAxIn0""#,
+            )))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -8219,10 +8450,12 @@ fn list_beta_organizations_spend_limit_increase_requests_list_beta_organizations
     let _ = &config;
     let actual = beta_organizations_spend_limit_increase_requests::list_beta_organizations_spend_limit_increase_requests(
         &config,
-        Some(Some(decode(fixture(r#"["approved"]"#)))),
-        Some(Some(decode(fixture(r#"["actor_ids[]"]"#)))),
-        Some(Some(decode(fixture(r#""page""#)))),
-        Some(decode(fixture(r#"20"#))),
+        beta_organizations_spend_limit_increase_requests::ListBetaOrganizationsSpendLimitIncreaseRequestsParams {
+            status: Some(Some(decode(fixture(r#"["approved"]"#)))),
+            actor_ids: Some(Some(decode(fixture(r#"["actor_ids[]"]"#)))),
+            page: Some(Some(decode(fixture(r#""page""#)))),
+            limit: Some(decode(fixture(r#"20"#))),
+        },
         None,
     )
     .expect("list_beta_organizations_spend_limit_increase_requests request failed");
@@ -8250,10 +8483,12 @@ fn list_beta_organizations_spend_limit_increase_requests_list_beta_organizations
     };
     let result = beta_organizations_spend_limit_increase_requests::list_beta_organizations_spend_limit_increase_requests(
         &config,
-        Some(Some(decode(fixture(r#"["approved"]"#)))),
-        Some(Some(decode(fixture(r#"["actor_ids[]"]"#)))),
-        Some(Some(decode(fixture(r#""page""#)))),
-        Some(decode(fixture(r#"20"#))),
+        beta_organizations_spend_limit_increase_requests::ListBetaOrganizationsSpendLimitIncreaseRequestsParams {
+            status: Some(Some(decode(fixture(r#"["approved"]"#)))),
+            actor_ids: Some(Some(decode(fixture(r#"["actor_ids[]"]"#)))),
+            page: Some(Some(decode(fixture(r#""page""#)))),
+            limit: Some(decode(fixture(r#"20"#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -10002,10 +10237,12 @@ fn pause_beta_deployments_pause_beta_deployments_reaches_mock_and_decodes_respon
     let _ = &config;
     let actual = beta_deployments::pause_beta_deployments(
         &config,
-        decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployments::PauseBetaDeploymentsParams {
+            deployment_id: decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("pause_beta_deployments request failed");
@@ -10032,10 +10269,12 @@ fn pause_beta_deployments_pause_beta_deployments_400_decodes_declared_error() {
     };
     let result = beta_deployments::pause_beta_deployments(
         &config,
-        decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployments::PauseBetaDeploymentsParams {
+            deployment_id: decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -10061,11 +10300,13 @@ fn permissions_beta_organizations_rbac_roles_permissions_beta_organizations_rbac
     let _ = &config;
     let actual = beta_organizations_rbac_roles::permissions_beta_organizations_rbac_roles(
         &config,
-        decode(fixture(r#""role-1""#)),
-        Some(decode(fixture(r#"20"#))),
-        Some(Some(decode(fixture(
-            r#""eyJjdXJzb3IiOiAicmJhY19yb2xlXzAxIn0""#,
-        )))),
+        beta_organizations_rbac_roles::PermissionsBetaOrganizationsRbacRolesParams {
+            role_id: decode(fixture(r#""role-1""#)),
+            limit: Some(decode(fixture(r#"20"#))),
+            page: Some(Some(decode(fixture(
+                r#""eyJjdXJzb3IiOiAicmJhY19yb2xlXzAxIn0""#,
+            )))),
+        },
         None,
     )
     .expect("permissions_beta_organizations_rbac_roles request failed");
@@ -10093,11 +10334,13 @@ fn permissions_beta_organizations_rbac_roles_permissions_beta_organizations_rbac
     };
     let result = beta_organizations_rbac_roles::permissions_beta_organizations_rbac_roles(
         &config,
-        decode(fixture(r#""role-1""#)),
-        Some(decode(fixture(r#"20"#))),
-        Some(Some(decode(fixture(
-            r#""eyJjdXJzb3IiOiAicmJhY19yb2xlXzAxIn0""#,
-        )))),
+        beta_organizations_rbac_roles::PermissionsBetaOrganizationsRbacRolesParams {
+            role_id: decode(fixture(r#""role-1""#)),
+            limit: Some(decode(fixture(r#"20"#))),
+            page: Some(Some(decode(fixture(
+                r#""eyJjdXJzb3IiOiAicmJhY19yb2xlXzAxIn0""#,
+            )))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -10256,10 +10499,12 @@ fn results_beta_messages_batches_results_beta_messages_batches_reaches_mock_and_
     let _ = &config;
     let actual = beta_messages_batches::results_beta_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_messages_batches::ResultsBetaMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("results_beta_messages_batches request failed");
@@ -10286,10 +10531,12 @@ fn results_beta_messages_batches_results_beta_messages_batches_400_decodes_decla
     };
     let result = beta_messages_batches::results_beta_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_messages_batches::ResultsBetaMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -10314,9 +10561,11 @@ fn results_messages_batches_results_messages_batches_reaches_mock_and_decodes_re
     let _ = &config;
     let actual = messages_batches::results_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        messages_batches::ResultsMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("results_messages_batches request failed");
@@ -10343,9 +10592,11 @@ fn results_messages_batches_results_messages_batches_400_decodes_declared_error(
     };
     let result = messages_batches::results_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        messages_batches::ResultsMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -10434,10 +10685,12 @@ fn retrieve_beta_deployment_runs_retrieve_beta_deployment_runs_reaches_mock_and_
     let _ = &config;
     let actual = beta_deployment_runs::retrieve_beta_deployment_runs(
         &config,
-        decode(fixture(r#""deployment_run-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployment_runs::RetrieveBetaDeploymentRunsParams {
+            deployment_run_id: decode(fixture(r#""deployment_run-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_deployment_runs request failed");
@@ -10464,10 +10717,12 @@ fn retrieve_beta_deployment_runs_retrieve_beta_deployment_runs_400_decodes_decla
     };
     let result = beta_deployment_runs::retrieve_beta_deployment_runs(
         &config,
-        decode(fixture(r#""deployment_run-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployment_runs::RetrieveBetaDeploymentRunsParams {
+            deployment_run_id: decode(fixture(r#""deployment_run-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -10492,10 +10747,12 @@ fn retrieve_beta_deployments_retrieve_beta_deployments_reaches_mock_and_decodes_
     let _ = &config;
     let actual = beta_deployments::retrieve_beta_deployments(
         &config,
-        decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployments::RetrieveBetaDeploymentsParams {
+            deployment_id: decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_deployments request failed");
@@ -10522,10 +10779,12 @@ fn retrieve_beta_deployments_retrieve_beta_deployments_400_decodes_declared_erro
     };
     let result = beta_deployments::retrieve_beta_deployments(
         &config,
-        decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployments::RetrieveBetaDeploymentsParams {
+            deployment_id: decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -10550,10 +10809,12 @@ fn retrieve_beta_dreams_retrieve_beta_dreams_reaches_mock_and_decodes_response()
     let _ = &config;
     let actual = beta_dreams::retrieve_beta_dreams(
         &config,
-        decode(fixture(r#""dream-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_dreams::RetrieveBetaDreamsParams {
+            dream_id: decode(fixture(r#""dream-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_dreams request failed");
@@ -10580,10 +10841,12 @@ fn retrieve_beta_dreams_retrieve_beta_dreams_400_decodes_declared_error() {
     };
     let result = beta_dreams::retrieve_beta_dreams(
         &config,
-        decode(fixture(r#""dream-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_dreams::RetrieveBetaDreamsParams {
+            dream_id: decode(fixture(r#""dream-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -10608,10 +10871,12 @@ fn retrieve_beta_environments_retrieve_beta_environments_reaches_mock_and_decode
     let _ = &config;
     let actual = beta_environments::retrieve_beta_environments(
         &config,
-        decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_environments::RetrieveBetaEnvironmentsParams {
+            environment_id: decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_environments request failed");
@@ -10638,10 +10903,12 @@ fn retrieve_beta_environments_retrieve_beta_environments_400_decodes_declared_er
     };
     let result = beta_environments::retrieve_beta_environments(
         &config,
-        decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_environments::RetrieveBetaEnvironmentsParams {
+            environment_id: decode(fixture(r#""env_011CZkZ9X2dpNyB7HsEFoRfW""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -10797,10 +11064,12 @@ fn retrieve_beta_files_retrieve_beta_files_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = beta_files::retrieve_beta_files(
         &config,
-        decode(fixture(r#""file-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_files::RetrieveBetaFilesParams {
+            file_id: decode(fixture(r#""file-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_files request failed");
@@ -10827,10 +11096,12 @@ fn retrieve_beta_files_retrieve_beta_files_400_decodes_declared_error() {
     };
     let result = beta_files::retrieve_beta_files(
         &config,
-        decode(fixture(r#""file-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_files::RetrieveBetaFilesParams {
+            file_id: decode(fixture(r#""file-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -10855,10 +11126,12 @@ fn retrieve_beta_memory_stores_retrieve_beta_memory_stores_reaches_mock_and_deco
     let _ = &config;
     let actual = beta_memory_stores::retrieve_beta_memory_stores(
         &config,
-        decode(fixture(r#""memory_store-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_memory_stores::RetrieveBetaMemoryStoresParams {
+            memory_store_id: decode(fixture(r#""memory_store-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_memory_stores request failed");
@@ -10885,10 +11158,12 @@ fn retrieve_beta_memory_stores_retrieve_beta_memory_stores_400_decodes_declared_
     };
     let result = beta_memory_stores::retrieve_beta_memory_stores(
         &config,
-        decode(fixture(r#""memory_store-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_memory_stores::RetrieveBetaMemoryStoresParams {
+            memory_store_id: decode(fixture(r#""memory_store-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -11052,10 +11327,12 @@ fn retrieve_beta_messages_batches_retrieve_beta_messages_batches_reaches_mock_an
     let _ = &config;
     let actual = beta_messages_batches::retrieve_beta_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_messages_batches::RetrieveBetaMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_messages_batches request failed");
@@ -11082,10 +11359,12 @@ fn retrieve_beta_messages_batches_retrieve_beta_messages_batches_400_decodes_dec
     };
     let result = beta_messages_batches::retrieve_beta_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_messages_batches::RetrieveBetaMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -11110,10 +11389,12 @@ fn retrieve_beta_models_retrieve_beta_models_reaches_mock_and_decodes_response()
     let _ = &config;
     let actual = beta_models::retrieve_beta_models(
         &config,
-        decode(fixture(r#""model-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_models::RetrieveBetaModelsParams {
+            model_id: decode(fixture(r#""model-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_models request failed");
@@ -11140,10 +11421,12 @@ fn retrieve_beta_models_retrieve_beta_models_400_decodes_declared_error() {
     };
     let result = beta_models::retrieve_beta_models(
         &config,
-        decode(fixture(r#""model-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_models::RetrieveBetaModelsParams {
+            model_id: decode(fixture(r#""model-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -11517,8 +11800,10 @@ fn retrieve_beta_organizations_api_keys_retrieve_beta_organizations_api_keys_rea
     let _ = &config;
     let actual = beta_organizations_api_keys::retrieve_beta_organizations_api_keys(
         &config,
-        decode(fixture(r#""api_key-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_api_keys::RetrieveBetaOrganizationsApiKeysParams {
+            api_key_id: decode(fixture(r#""api_key-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_api_keys request failed");
@@ -11546,8 +11831,10 @@ fn retrieve_beta_organizations_api_keys_retrieve_beta_organizations_api_keys_400
     };
     let result = beta_organizations_api_keys::retrieve_beta_organizations_api_keys(
         &config,
-        decode(fixture(r#""api_key-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_api_keys::RetrieveBetaOrganizationsApiKeysParams {
+            api_key_id: decode(fixture(r#""api_key-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -11649,8 +11936,10 @@ fn retrieve_beta_organizations_external_keys_retrieve_beta_organizations_externa
     let _ = &config;
     let actual = beta_organizations_external_keys::retrieve_beta_organizations_external_keys(
         &config,
-        decode(fixture(r#""external_key-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_external_keys::RetrieveBetaOrganizationsExternalKeysParams {
+            external_key_id: decode(fixture(r#""external_key-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_external_keys request failed");
@@ -11678,8 +11967,10 @@ fn retrieve_beta_organizations_external_keys_retrieve_beta_organizations_externa
     };
     let result = beta_organizations_external_keys::retrieve_beta_organizations_external_keys(
         &config,
-        decode(fixture(r#""external_key-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_external_keys::RetrieveBetaOrganizationsExternalKeysParams {
+            external_key_id: decode(fixture(r#""external_key-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -11703,15 +11994,16 @@ fn retrieve_beta_organizations_federation_issuers_retrieve_beta_organizations_fe
         return;
     };
     let _ = &config;
-    let actual =
-        beta_organizations_federation_issuers::retrieve_beta_organizations_federation_issuers(
-            &config,
-            decode(fixture(r#""federation_issuer-1""#)),
-            Some(decode(fixture(r#"["anthropic-beta"]"#))),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        )
-        .expect("retrieve_beta_organizations_federation_issuers request failed");
+    let actual = beta_organizations_federation_issuers::retrieve_beta_organizations_federation_issuers(
+        &config,
+        beta_organizations_federation_issuers::RetrieveBetaOrganizationsFederationIssuersParams {
+            federation_issuer_id: decode(fixture(r#""federation_issuer-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    )
+    .expect("retrieve_beta_organizations_federation_issuers request failed");
     let actual = serde_json::to_value(actual).expect("serialize generated response");
     let expected = fixture(
         r#"{"archived_at":"2024-01-01T00:00:00Z","archived_by_actor_id":"archived_by_actor-1","check_jti":false,"created_at":"2024-10-30T23:58:27.427722Z","created_by_actor_id":"created_by_actor-1","id":"fdis_01SDCCSbTxrXDpWc1phhtcfK","issuer_url":"https://token.actions.githubusercontent.com","jwks":{"ca_cert_pem":"ca_cert_pem","discovery_base":"discovery_base","type":"discovery"},"jwks_polling_disabled_at":"2024-01-01T00:00:00Z","max_jwt_lifetime_seconds":1,"name":"github-actions","poll_status":{"consecutive_failures":1,"last_fetched_at":"2024-01-01T00:00:00Z","next_poll_at":"2024-01-01T00:00:00Z"},"type":"federation_issuer","updated_at":"2024-10-30T23:58:27.427722Z","updated_by_actor_id":"updated_by_actor-1"}"#,
@@ -11734,14 +12026,15 @@ fn retrieve_beta_organizations_federation_issuers_retrieve_beta_organizations_fe
             .map(|base_url| format!("{base_url}/__mockStatus/400")),
         ..config
     };
-    let result =
-        beta_organizations_federation_issuers::retrieve_beta_organizations_federation_issuers(
-            &config,
-            decode(fixture(r#""federation_issuer-1""#)),
-            Some(decode(fixture(r#"["anthropic-beta"]"#))),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        );
+    let result = beta_organizations_federation_issuers::retrieve_beta_organizations_federation_issuers(
+        &config,
+        beta_organizations_federation_issuers::RetrieveBetaOrganizationsFederationIssuersParams {
+            federation_issuer_id: decode(fixture(r#""federation_issuer-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
         panic!("retrieve_beta_organizations_federation_issuers did not fail with SdkError::Http on 400");
     };
@@ -11765,9 +12058,11 @@ fn retrieve_beta_organizations_federation_rules_retrieve_beta_organizations_fede
     let _ = &config;
     let actual = beta_organizations_federation_rules::retrieve_beta_organizations_federation_rules(
         &config,
-        decode(fixture(r#""federation_rule-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_federation_rules::RetrieveBetaOrganizationsFederationRulesParams {
+            federation_rule_id: decode(fixture(r#""federation_rule-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_federation_rules request failed");
@@ -11795,9 +12090,11 @@ fn retrieve_beta_organizations_federation_rules_retrieve_beta_organizations_fede
     };
     let result = beta_organizations_federation_rules::retrieve_beta_organizations_federation_rules(
         &config,
-        decode(fixture(r#""federation_rule-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_federation_rules::RetrieveBetaOrganizationsFederationRulesParams {
+            federation_rule_id: decode(fixture(r#""federation_rule-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -11825,8 +12122,10 @@ fn retrieve_beta_organizations_invites_retrieve_beta_organizations_invites_reach
     let _ = &config;
     let actual = beta_organizations_invites::retrieve_beta_organizations_invites(
         &config,
-        decode(fixture(r#""invite-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_invites::RetrieveBetaOrganizationsInvitesParams {
+            invite_id: decode(fixture(r#""invite-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_invites request failed");
@@ -11854,8 +12153,10 @@ fn retrieve_beta_organizations_invites_retrieve_beta_organizations_invites_400_d
     };
     let result = beta_organizations_invites::retrieve_beta_organizations_invites(
         &config,
-        decode(fixture(r#""invite-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_invites::RetrieveBetaOrganizationsInvitesParams {
+            invite_id: decode(fixture(r#""invite-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -11881,7 +12182,9 @@ fn retrieve_beta_organizations_me_retrieve_beta_organizations_me_reaches_mock_an
     let _ = &config;
     let actual = beta_organizations_me::retrieve_beta_organizations_me(
         &config,
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_me::RetrieveBetaOrganizationsMeParams {
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_me request failed");
@@ -11908,7 +12211,9 @@ fn retrieve_beta_organizations_me_retrieve_beta_organizations_me_400_decodes_dec
     };
     let result = beta_organizations_me::retrieve_beta_organizations_me(
         &config,
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_me::RetrieveBetaOrganizationsMeParams {
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -11934,7 +12239,9 @@ fn retrieve_beta_organizations_rbac_groups_retrieve_beta_organizations_rbac_grou
     let _ = &config;
     let actual = beta_organizations_rbac_groups::retrieve_beta_organizations_rbac_groups(
         &config,
-        decode(fixture(r#""group-1""#)),
+        beta_organizations_rbac_groups::RetrieveBetaOrganizationsRbacGroupsParams {
+            group_id: decode(fixture(r#""group-1""#)),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_rbac_groups request failed");
@@ -11962,7 +12269,9 @@ fn retrieve_beta_organizations_rbac_groups_retrieve_beta_organizations_rbac_grou
     };
     let result = beta_organizations_rbac_groups::retrieve_beta_organizations_rbac_groups(
         &config,
-        decode(fixture(r#""group-1""#)),
+        beta_organizations_rbac_groups::RetrieveBetaOrganizationsRbacGroupsParams {
+            group_id: decode(fixture(r#""group-1""#)),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -11988,7 +12297,9 @@ fn retrieve_beta_organizations_rbac_roles_retrieve_beta_organizations_rbac_roles
     let _ = &config;
     let actual = beta_organizations_rbac_roles::retrieve_beta_organizations_rbac_roles(
         &config,
-        decode(fixture(r#""role-1""#)),
+        beta_organizations_rbac_roles::RetrieveBetaOrganizationsRbacRolesParams {
+            role_id: decode(fixture(r#""role-1""#)),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_rbac_roles request failed");
@@ -12016,7 +12327,9 @@ fn retrieve_beta_organizations_rbac_roles_retrieve_beta_organizations_rbac_roles
     };
     let result = beta_organizations_rbac_roles::retrieve_beta_organizations_rbac_roles(
         &config,
-        decode(fixture(r#""role-1""#)),
+        beta_organizations_rbac_roles::RetrieveBetaOrganizationsRbacRolesParams {
+            role_id: decode(fixture(r#""role-1""#)),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12042,9 +12355,11 @@ fn retrieve_beta_organizations_service_accounts_retrieve_beta_organizations_serv
     let _ = &config;
     let actual = beta_organizations_service_accounts::retrieve_beta_organizations_service_accounts(
         &config,
-        decode(fixture(r#""service_account-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_service_accounts::RetrieveBetaOrganizationsServiceAccountsParams {
+            service_account_id: decode(fixture(r#""service_account-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_service_accounts request failed");
@@ -12072,9 +12387,11 @@ fn retrieve_beta_organizations_service_accounts_retrieve_beta_organizations_serv
     };
     let result = beta_organizations_service_accounts::retrieve_beta_organizations_service_accounts(
         &config,
-        decode(fixture(r#""service_account-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_service_accounts::RetrieveBetaOrganizationsServiceAccountsParams {
+            service_account_id: decode(fixture(r#""service_account-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12102,7 +12419,9 @@ fn retrieve_beta_organizations_spend_limit_increase_requests_retrieve_beta_organ
     let _ = &config;
     let actual = beta_organizations_spend_limit_increase_requests::retrieve_beta_organizations_spend_limit_increase_requests(
         &config,
-        decode(fixture(r#""spend_limit_increase_request-1""#)),
+        beta_organizations_spend_limit_increase_requests::RetrieveBetaOrganizationsSpendLimitIncreaseRequestsParams {
+            spend_limit_increase_request_id: decode(fixture(r#""spend_limit_increase_request-1""#)),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_spend_limit_increase_requests request failed");
@@ -12130,7 +12449,9 @@ fn retrieve_beta_organizations_spend_limit_increase_requests_retrieve_beta_organ
     };
     let result = beta_organizations_spend_limit_increase_requests::retrieve_beta_organizations_spend_limit_increase_requests(
         &config,
-        decode(fixture(r#""spend_limit_increase_request-1""#)),
+        beta_organizations_spend_limit_increase_requests::RetrieveBetaOrganizationsSpendLimitIncreaseRequestsParams {
+            spend_limit_increase_request_id: decode(fixture(r#""spend_limit_increase_request-1""#)),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12156,8 +12477,10 @@ fn retrieve_beta_organizations_spend_limits_retrieve_beta_organizations_spend_li
     let _ = &config;
     let actual = beta_organizations_spend_limits::retrieve_beta_organizations_spend_limits(
         &config,
-        decode(fixture(r#""spend_limit-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_spend_limits::RetrieveBetaOrganizationsSpendLimitsParams {
+            spend_limit_id: decode(fixture(r#""spend_limit-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_spend_limits request failed");
@@ -12185,8 +12508,10 @@ fn retrieve_beta_organizations_spend_limits_retrieve_beta_organizations_spend_li
     };
     let result = beta_organizations_spend_limits::retrieve_beta_organizations_spend_limits(
         &config,
-        decode(fixture(r#""spend_limit-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_spend_limits::RetrieveBetaOrganizationsSpendLimitsParams {
+            spend_limit_id: decode(fixture(r#""spend_limit-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12278,9 +12603,11 @@ fn retrieve_beta_organizations_tunnels_retrieve_beta_organizations_tunnels_reach
     let _ = &config;
     let actual = beta_organizations_tunnels::retrieve_beta_organizations_tunnels(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        decode(fixture(r#"["anthropic-beta"]"#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_tunnels::RetrieveBetaOrganizationsTunnelsParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_tunnels request failed");
@@ -12308,9 +12635,11 @@ fn retrieve_beta_organizations_tunnels_retrieve_beta_organizations_tunnels_400_d
     };
     let result = beta_organizations_tunnels::retrieve_beta_organizations_tunnels(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        decode(fixture(r#"["anthropic-beta"]"#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_tunnels::RetrieveBetaOrganizationsTunnelsParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12334,16 +12663,17 @@ fn retrieve_beta_organizations_tunnels_certificates_retrieve_beta_organizations_
         return;
     };
     let _ = &config;
-    let actual =
-        beta_organizations_tunnels_certificates::retrieve_beta_organizations_tunnels_certificates(
-            &config,
-            decode(fixture(r#""tunnel-1""#)),
-            decode(fixture(r#""certificate-1""#)),
-            decode(fixture(r#"["anthropic-beta"]"#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        )
-        .expect("retrieve_beta_organizations_tunnels_certificates request failed");
+    let actual = beta_organizations_tunnels_certificates::retrieve_beta_organizations_tunnels_certificates(
+        &config,
+        beta_organizations_tunnels_certificates::RetrieveBetaOrganizationsTunnelsCertificatesParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            certificate_id: decode(fixture(r#""certificate-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    )
+    .expect("retrieve_beta_organizations_tunnels_certificates request failed");
     let actual = serde_json::to_value(actual).expect("serialize generated response");
     let expected = fixture(
         r#"{"archived_at":"2024-11-01T23:59:27.427722Z","created_at":"2024-10-30T23:58:27.427722Z","expires_at":"2024-10-30T23:58:27.427722Z","fingerprint":"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08","id":"tcrt_01JmWq4ZxnBvR7tKpY2sLdH9","tunnel_id":"tunnel-1","type":"tunnel_certificate"}"#,
@@ -12366,15 +12696,16 @@ fn retrieve_beta_organizations_tunnels_certificates_retrieve_beta_organizations_
             .map(|base_url| format!("{base_url}/__mockStatus/400")),
         ..config
     };
-    let result =
-        beta_organizations_tunnels_certificates::retrieve_beta_organizations_tunnels_certificates(
-            &config,
-            decode(fixture(r#""tunnel-1""#)),
-            decode(fixture(r#""certificate-1""#)),
-            decode(fixture(r#"["anthropic-beta"]"#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        );
+    let result = beta_organizations_tunnels_certificates::retrieve_beta_organizations_tunnels_certificates(
+        &config,
+        beta_organizations_tunnels_certificates::RetrieveBetaOrganizationsTunnelsCertificatesParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            certificate_id: decode(fixture(r#""certificate-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
         panic!("retrieve_beta_organizations_tunnels_certificates did not fail with SdkError::Http on 400");
     };
@@ -12398,10 +12729,12 @@ fn retrieve_beta_organizations_usage_report_claude_code_retrieve_beta_organizati
     let _ = &config;
     let actual = beta_organizations_usage_report_claude_code::retrieve_beta_organizations_usage_report_claude_code(
         &config,
-        decode(fixture(r#""2026-07-01""#)),
-        Some(decode(fixture(r#"20"#))),
-        Some(Some(decode(fixture(r#""page""#)))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_usage_report_claude_code::RetrieveBetaOrganizationsUsageReportClaudeCodeParams {
+            starting_at: decode(fixture(r#""2026-07-01""#)),
+            limit: Some(decode(fixture(r#"20"#))),
+            page: Some(Some(decode(fixture(r#""page""#)))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_usage_report_claude_code request failed");
@@ -12429,10 +12762,12 @@ fn retrieve_beta_organizations_usage_report_claude_code_retrieve_beta_organizati
     };
     let result = beta_organizations_usage_report_claude_code::retrieve_beta_organizations_usage_report_claude_code(
         &config,
-        decode(fixture(r#""2026-07-01""#)),
-        Some(decode(fixture(r#"20"#))),
-        Some(Some(decode(fixture(r#""page""#)))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_usage_report_claude_code::RetrieveBetaOrganizationsUsageReportClaudeCodeParams {
+            starting_at: decode(fixture(r#""2026-07-01""#)),
+            limit: Some(decode(fixture(r#"20"#))),
+            page: Some(Some(decode(fixture(r#""page""#)))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12458,8 +12793,10 @@ fn retrieve_beta_organizations_users_retrieve_beta_organizations_users_reaches_m
     let _ = &config;
     let actual = beta_organizations_users::retrieve_beta_organizations_users(
         &config,
-        decode(fixture(r#""user-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_users::RetrieveBetaOrganizationsUsersParams {
+            user_id: decode(fixture(r#""user-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_users request failed");
@@ -12487,8 +12824,10 @@ fn retrieve_beta_organizations_users_retrieve_beta_organizations_users_400_decod
     };
     let result = beta_organizations_users::retrieve_beta_organizations_users(
         &config,
-        decode(fixture(r#""user-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_users::RetrieveBetaOrganizationsUsersParams {
+            user_id: decode(fixture(r#""user-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12514,8 +12853,10 @@ fn retrieve_beta_organizations_workspaces_retrieve_beta_organizations_workspaces
     let _ = &config;
     let actual = beta_organizations_workspaces::retrieve_beta_organizations_workspaces(
         &config,
-        decode(fixture(r#""workspace-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_workspaces::RetrieveBetaOrganizationsWorkspacesParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_workspaces request failed");
@@ -12543,8 +12884,10 @@ fn retrieve_beta_organizations_workspaces_retrieve_beta_organizations_workspaces
     };
     let result = beta_organizations_workspaces::retrieve_beta_organizations_workspaces(
         &config,
-        decode(fixture(r#""workspace-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_workspaces::RetrieveBetaOrganizationsWorkspacesParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12568,15 +12911,16 @@ fn retrieve_beta_organizations_workspaces_members_retrieve_beta_organizations_wo
         return;
     };
     let _ = &config;
-    let actual =
-        beta_organizations_workspaces_members::retrieve_beta_organizations_workspaces_members(
-            &config,
-            decode(fixture(r#""workspace-1""#)),
-            decode(fixture(r#""user-1""#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        )
-        .expect("retrieve_beta_organizations_workspaces_members request failed");
+    let actual = beta_organizations_workspaces_members::retrieve_beta_organizations_workspaces_members(
+        &config,
+        beta_organizations_workspaces_members::RetrieveBetaOrganizationsWorkspacesMembersParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            user_id: decode(fixture(r#""user-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    )
+    .expect("retrieve_beta_organizations_workspaces_members request failed");
     let actual = serde_json::to_value(actual).expect("serialize generated response");
     let expected = fixture(
         r#"{"type":"workspace_member","user_id":"user-1","workspace_id":"workspace-1","workspace_role":"workspace_user"}"#,
@@ -12599,14 +12943,15 @@ fn retrieve_beta_organizations_workspaces_members_retrieve_beta_organizations_wo
             .map(|base_url| format!("{base_url}/__mockStatus/400")),
         ..config
     };
-    let result =
-        beta_organizations_workspaces_members::retrieve_beta_organizations_workspaces_members(
-            &config,
-            decode(fixture(r#""workspace-1""#)),
-            decode(fixture(r#""user-1""#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
-            None,
-        );
+    let result = beta_organizations_workspaces_members::retrieve_beta_organizations_workspaces_members(
+        &config,
+        beta_organizations_workspaces_members::RetrieveBetaOrganizationsWorkspacesMembersParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            user_id: decode(fixture(r#""user-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
+        None,
+    );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
         panic!("retrieve_beta_organizations_workspaces_members did not fail with SdkError::Http on 400");
     };
@@ -12630,10 +12975,12 @@ fn retrieve_beta_organizations_workspaces_service_accounts_retrieve_beta_organiz
     let _ = &config;
     let actual = beta_organizations_workspaces_service_accounts::retrieve_beta_organizations_workspaces_service_accounts(
         &config,
-        decode(fixture(r#""workspace-1""#)),
-        decode(fixture(r#""service_account-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_workspaces_service_accounts::RetrieveBetaOrganizationsWorkspacesServiceAccountsParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            service_account_id: decode(fixture(r#""service_account-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("retrieve_beta_organizations_workspaces_service_accounts request failed");
@@ -12661,10 +13008,12 @@ fn retrieve_beta_organizations_workspaces_service_accounts_retrieve_beta_organiz
     };
     let result = beta_organizations_workspaces_service_accounts::retrieve_beta_organizations_workspaces_service_accounts(
         &config,
-        decode(fixture(r#""workspace-1""#)),
-        decode(fixture(r#""service_account-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_workspaces_service_accounts::RetrieveBetaOrganizationsWorkspacesServiceAccountsParams {
+            workspace_id: decode(fixture(r#""workspace-1""#)),
+            service_account_id: decode(fixture(r#""service_account-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12689,10 +13038,12 @@ fn retrieve_beta_sessions_retrieve_beta_sessions_reaches_mock_and_decodes_respon
     let _ = &config;
     let actual = beta_sessions::retrieve_beta_sessions(
         &config,
-        decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_sessions::RetrieveBetaSessionsParams {
+            session_id: decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_sessions request failed");
@@ -12719,10 +13070,12 @@ fn retrieve_beta_sessions_retrieve_beta_sessions_400_decodes_declared_error() {
     };
     let result = beta_sessions::retrieve_beta_sessions(
         &config,
-        decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_sessions::RetrieveBetaSessionsParams {
+            session_id: decode(fixture(r#""sesn_011CZkZAtmR3yMPDzynEDxu7""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12877,10 +13230,12 @@ fn retrieve_beta_skills_retrieve_beta_skills_reaches_mock_and_decodes_response()
     let _ = &config;
     let actual = beta_skills::retrieve_beta_skills(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_skills::RetrieveBetaSkillsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_skills request failed");
@@ -12907,10 +13262,12 @@ fn retrieve_beta_skills_retrieve_beta_skills_400_decodes_declared_error() {
     };
     let result = beta_skills::retrieve_beta_skills(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_skills::RetrieveBetaSkillsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -12999,10 +13356,12 @@ fn retrieve_beta_tunnels_retrieve_beta_tunnels_reaches_mock_and_decodes_response
     let _ = &config;
     let actual = beta_tunnels::retrieve_beta_tunnels(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_tunnels::RetrieveBetaTunnelsParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_tunnels request failed");
@@ -13029,10 +13388,12 @@ fn retrieve_beta_tunnels_retrieve_beta_tunnels_400_decodes_declared_error() {
     };
     let result = beta_tunnels::retrieve_beta_tunnels(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_tunnels::RetrieveBetaTunnelsParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13123,9 +13484,11 @@ fn retrieve_beta_user_profiles_retrieve_beta_user_profiles_reaches_mock_and_deco
     let _ = &config;
     let actual = beta_user_profiles::retrieve_beta_user_profiles(
         &config,
-        decode(fixture(r#""uprof_011CZkZCu8hGbp5mYRQgUmz9""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
+        beta_user_profiles::RetrieveBetaUserProfilesParams {
+            user_profile_id: decode(fixture(r#""uprof_011CZkZCu8hGbp5mYRQgUmz9""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+        },
         None,
     )
     .expect("retrieve_beta_user_profiles request failed");
@@ -13152,9 +13515,11 @@ fn retrieve_beta_user_profiles_retrieve_beta_user_profiles_400_decodes_declared_
     };
     let result = beta_user_profiles::retrieve_beta_user_profiles(
         &config,
-        decode(fixture(r#""uprof_011CZkZCu8hGbp5mYRQgUmz9""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
+        beta_user_profiles::RetrieveBetaUserProfilesParams {
+            user_profile_id: decode(fixture(r#""uprof_011CZkZCu8hGbp5mYRQgUmz9""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13179,10 +13544,12 @@ fn retrieve_beta_vaults_retrieve_beta_vaults_reaches_mock_and_decodes_response()
     let _ = &config;
     let actual = beta_vaults::retrieve_beta_vaults(
         &config,
-        decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_vaults::RetrieveBetaVaultsParams {
+            vault_id: decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_beta_vaults request failed");
@@ -13209,10 +13576,12 @@ fn retrieve_beta_vaults_retrieve_beta_vaults_400_decodes_declared_error() {
     };
     let result = beta_vaults::retrieve_beta_vaults(
         &config,
-        decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_vaults::RetrieveBetaVaultsParams {
+            vault_id: decode(fixture(r#""vlt_011CZkZDLs7fYzm1hXNPeRjv""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13302,9 +13671,11 @@ fn retrieve_files_retrieve_files_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = files::retrieve_files(
         &config,
-        decode(fixture(r#""file-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        files::RetrieveFilesParams {
+            file_id: decode(fixture(r#""file-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_files request failed");
@@ -13331,9 +13702,11 @@ fn retrieve_files_retrieve_files_400_decodes_declared_error() {
     };
     let result = files::retrieve_files(
         &config,
-        decode(fixture(r#""file-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        files::RetrieveFilesParams {
+            file_id: decode(fixture(r#""file-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13358,9 +13731,11 @@ fn retrieve_messages_batches_retrieve_messages_batches_reaches_mock_and_decodes_
     let _ = &config;
     let actual = messages_batches::retrieve_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        messages_batches::RetrieveMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_messages_batches request failed");
@@ -13387,9 +13762,11 @@ fn retrieve_messages_batches_retrieve_messages_batches_400_decodes_declared_erro
     };
     let result = messages_batches::retrieve_messages_batches(
         &config,
-        decode(fixture(r#""message_batch-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        messages_batches::RetrieveMessagesBatchesParams {
+            message_batch_id: decode(fixture(r#""message_batch-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13414,10 +13791,12 @@ fn retrieve_models_retrieve_models_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = models::retrieve_models(
         &config,
-        decode(fixture(r#""model-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        models::RetrieveModelsParams {
+            model_id: decode(fixture(r#""model-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_models request failed");
@@ -13444,10 +13823,12 @@ fn retrieve_models_retrieve_models_400_decodes_declared_error() {
     };
     let result = models::retrieve_models(
         &config,
-        decode(fixture(r#""model-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        models::RetrieveModelsParams {
+            model_id: decode(fixture(r#""model-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13472,9 +13853,11 @@ fn retrieve_skills_retrieve_skills_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = skills::retrieve_skills(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        skills::RetrieveSkillsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_skills request failed");
@@ -13501,9 +13884,11 @@ fn retrieve_skills_retrieve_skills_400_decodes_declared_error() {
     };
     let result = skills::retrieve_skills(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        skills::RetrieveSkillsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13528,10 +13913,12 @@ fn retrieve_skills_versions_retrieve_skills_versions_reaches_mock_and_decodes_re
     let _ = &config;
     let actual = skills_versions::retrieve_skills_versions(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        decode(fixture(r#""version""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        skills_versions::RetrieveSkillsVersionsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            version: decode(fixture(r#""version""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("retrieve_skills_versions request failed");
@@ -13558,10 +13945,12 @@ fn retrieve_skills_versions_retrieve_skills_versions_400_decodes_declared_error(
     };
     let result = skills_versions::retrieve_skills_versions(
         &config,
-        decode(fixture(r#""skill-1""#)),
-        decode(fixture(r#""version""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        skills_versions::RetrieveSkillsVersionsParams {
+            skill_id: decode(fixture(r#""skill-1""#)),
+            version: decode(fixture(r#""version""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13587,9 +13976,11 @@ fn reveal_beta_organizations_tunnels_token_reveal_beta_organizations_tunnels_tok
     let _ = &config;
     let actual = beta_organizations_tunnels::reveal_beta_organizations_tunnels_token(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        decode(fixture(r#"["anthropic-beta"]"#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_tunnels::RevealBetaOrganizationsTunnelsTokenParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("reveal_beta_organizations_tunnels_token request failed");
@@ -13617,9 +14008,11 @@ fn reveal_beta_organizations_tunnels_token_reveal_beta_organizations_tunnels_tok
     };
     let result = beta_organizations_tunnels::reveal_beta_organizations_tunnels_token(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        decode(fixture(r#"["anthropic-beta"]"#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_tunnels::RevealBetaOrganizationsTunnelsTokenParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13644,10 +14037,12 @@ fn reveal_beta_tunnels_token_reveal_beta_tunnels_token_reaches_mock_and_decodes_
     let _ = &config;
     let actual = beta_tunnels::reveal_beta_tunnels_token(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_tunnels::RevealBetaTunnelsTokenParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("reveal_beta_tunnels_token request failed");
@@ -13672,10 +14067,12 @@ fn reveal_beta_tunnels_token_reveal_beta_tunnels_token_400_decodes_declared_erro
     };
     let result = beta_tunnels::reveal_beta_tunnels_token(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_tunnels::RevealBetaTunnelsTokenParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13701,10 +14098,12 @@ fn rotate_beta_organizations_tunnels_token_rotate_beta_organizations_tunnels_tok
     let _ = &config;
     let actual = beta_organizations_tunnels::rotate_beta_organizations_tunnels_token(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        decode(fixture(r#"["anthropic-beta"]"#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"{"reason":"Suspected key compromise"}"#))),
+        beta_organizations_tunnels::RotateBetaOrganizationsTunnelsTokenParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            body: Some(decode(fixture(r#"{"reason":"Suspected key compromise"}"#))),
+        },
         None,
     )
     .expect("rotate_beta_organizations_tunnels_token request failed");
@@ -13732,10 +14131,12 @@ fn rotate_beta_organizations_tunnels_token_rotate_beta_organizations_tunnels_tok
     };
     let result = beta_organizations_tunnels::rotate_beta_organizations_tunnels_token(
         &config,
-        decode(fixture(r#""tunnel-1""#)),
-        decode(fixture(r#"["anthropic-beta"]"#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"{"reason":"Suspected key compromise"}"#))),
+        beta_organizations_tunnels::RotateBetaOrganizationsTunnelsTokenParams {
+            tunnel_id: decode(fixture(r#""tunnel-1""#)),
+            anthropic_beta: decode(fixture(r#"["anthropic-beta"]"#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            body: Some(decode(fixture(r#"{"reason":"Suspected key compromise"}"#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -13822,10 +14223,12 @@ fn run_beta_deployments_run_beta_deployments_reaches_mock_and_decodes_response()
     let _ = &config;
     let actual = beta_deployments::run_beta_deployments(
         &config,
-        decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployments::RunBetaDeploymentsParams {
+            deployment_id: decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("run_beta_deployments request failed");
@@ -13852,10 +14255,12 @@ fn run_beta_deployments_run_beta_deployments_400_decodes_declared_error() {
     };
     let result = beta_deployments::run_beta_deployments(
         &config,
-        decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployments::RunBetaDeploymentsParams {
+            deployment_id: decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -14078,10 +14483,12 @@ fn unpause_beta_deployments_unpause_beta_deployments_reaches_mock_and_decodes_re
     let _ = &config;
     let actual = beta_deployments::unpause_beta_deployments(
         &config,
-        decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployments::UnpauseBetaDeploymentsParams {
+            deployment_id: decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     )
     .expect("unpause_beta_deployments request failed");
@@ -14108,10 +14515,12 @@ fn unpause_beta_deployments_unpause_beta_deployments_400_decodes_declared_error(
     };
     let result = beta_deployments::unpause_beta_deployments(
         &config,
-        decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#"["anthropic-beta"]"#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        beta_deployments::UnpauseBetaDeploymentsParams {
+            deployment_id: decode(fixture(r#""depl_011CZkZcDH3vPqd7xnEfwTai""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_beta: Some(decode(fixture(r#"["anthropic-beta"]"#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -14597,10 +15006,12 @@ fn update_beta_organizations_api_keys_update_beta_organizations_api_keys_reaches
     let _ = &config;
     let actual = beta_organizations_api_keys::update_beta_organizations_api_keys(
         &config,
-        decode(fixture(r#""api_key-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(Some(decode(fixture(r#""Example Name""#)))),
-        Some(Some(decode(fixture(r#""active""#)))),
+        beta_organizations_api_keys::UpdateBetaOrganizationsApiKeysParams {
+            api_key_id: decode(fixture(r#""api_key-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            name: Some(Some(decode(fixture(r#""Example Name""#)))),
+            status: Some(Some(decode(fixture(r#""active""#)))),
+        },
         None,
     )
     .expect("update_beta_organizations_api_keys request failed");
@@ -14628,10 +15039,12 @@ fn update_beta_organizations_api_keys_update_beta_organizations_api_keys_400_dec
     };
     let result = beta_organizations_api_keys::update_beta_organizations_api_keys(
         &config,
-        decode(fixture(r#""api_key-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(Some(decode(fixture(r#""Example Name""#)))),
-        Some(Some(decode(fixture(r#""active""#)))),
+        beta_organizations_api_keys::UpdateBetaOrganizationsApiKeysParams {
+            api_key_id: decode(fixture(r#""api_key-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            name: Some(Some(decode(fixture(r#""Example Name""#)))),
+            status: Some(Some(decode(fixture(r#""active""#)))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -14890,8 +15303,10 @@ fn update_beta_organizations_rbac_groups_update_beta_organizations_rbac_groups_r
     let _ = &config;
     let actual = beta_organizations_rbac_groups::update_beta_organizations_rbac_groups(
         &config,
-        decode(fixture(r#""group-1""#)),
-        Some(Some(decode(fixture(r#""Engineering""#)))),
+        beta_organizations_rbac_groups::UpdateBetaOrganizationsRbacGroupsParams {
+            group_id: decode(fixture(r#""group-1""#)),
+            name: Some(Some(decode(fixture(r#""Engineering""#)))),
+        },
         None,
     )
     .expect("update_beta_organizations_rbac_groups request failed");
@@ -14919,8 +15334,10 @@ fn update_beta_organizations_rbac_groups_update_beta_organizations_rbac_groups_4
     };
     let result = beta_organizations_rbac_groups::update_beta_organizations_rbac_groups(
         &config,
-        decode(fixture(r#""group-1""#)),
-        Some(Some(decode(fixture(r#""Engineering""#)))),
+        beta_organizations_rbac_groups::UpdateBetaOrganizationsRbacGroupsParams {
+            group_id: decode(fixture(r#""group-1""#)),
+            name: Some(Some(decode(fixture(r#""Engineering""#)))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -15014,9 +15431,11 @@ fn update_beta_organizations_users_update_beta_organizations_users_reaches_mock_
     let _ = &config;
     let actual = beta_organizations_users::update_beta_organizations_users(
         &config,
-        decode(fixture(r#""user-1""#)),
-        decode(fixture(r#""user""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_users::UpdateBetaOrganizationsUsersParams {
+            user_id: decode(fixture(r#""user-1""#)),
+            role: decode(fixture(r#""user""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("update_beta_organizations_users request failed");
@@ -15043,9 +15462,11 @@ fn update_beta_organizations_users_update_beta_organizations_users_400_decodes_d
     };
     let result = beta_organizations_users::update_beta_organizations_users(
         &config,
-        decode(fixture(r#""user-1""#)),
-        decode(fixture(r#""user""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_users::UpdateBetaOrganizationsUsersParams {
+            user_id: decode(fixture(r#""user-1""#)),
+            role: decode(fixture(r#""user""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -15146,10 +15567,12 @@ fn update_beta_organizations_workspaces_members_update_beta_organizations_worksp
     let actual =
         beta_organizations_workspaces_members::update_beta_organizations_workspaces_members(
             &config,
-            decode(fixture(r#""user-1""#)),
-            decode(fixture(r#""workspace-1""#)),
-            decode(fixture(r#""workspace_admin""#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
+            beta_organizations_workspaces_members::UpdateBetaOrganizationsWorkspacesMembersParams {
+                user_id: decode(fixture(r#""user-1""#)),
+                workspace_id: decode(fixture(r#""workspace-1""#)),
+                workspace_role: decode(fixture(r#""workspace_admin""#)),
+                anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            },
             None,
         )
         .expect("update_beta_organizations_workspaces_members request failed");
@@ -15178,10 +15601,12 @@ fn update_beta_organizations_workspaces_members_update_beta_organizations_worksp
     let result =
         beta_organizations_workspaces_members::update_beta_organizations_workspaces_members(
             &config,
-            decode(fixture(r#""user-1""#)),
-            decode(fixture(r#""workspace-1""#)),
-            decode(fixture(r#""workspace_admin""#)),
-            Some(decode(fixture(r#""anthropic-version""#))),
+            beta_organizations_workspaces_members::UpdateBetaOrganizationsWorkspacesMembersParams {
+                user_id: decode(fixture(r#""user-1""#)),
+                workspace_id: decode(fixture(r#""workspace-1""#)),
+                workspace_role: decode(fixture(r#""workspace_admin""#)),
+                anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            },
             None,
         );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -15692,14 +16117,16 @@ fn upload_files_upload_files_reaches_mock_and_decodes_response() {
     let _ = &config;
     let actual = files::upload_files(
         &config,
-        ::octridev_anthropic::client::UploadFile::new(
-            b"mock upload".to_vec(),
-            "mock.bin",
-            "application/octet-stream",
-        ),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
-        Some(decode(fixture(r#"3600"#))),
+        files::UploadFilesParams {
+            file: ::octridev_anthropic::client::UploadFile::new(
+                b"mock upload".to_vec(),
+                "mock.bin",
+                "application/octet-stream",
+            ),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+            expires_in_seconds: Some(decode(fixture(r#"3600"#))),
+        },
         None,
     )
     .expect("upload_files request failed");
@@ -15726,14 +16153,16 @@ fn upload_files_upload_files_400_decodes_declared_error() {
     };
     let result = files::upload_files(
         &config,
-        ::octridev_anthropic::client::UploadFile::new(
-            b"mock upload".to_vec(),
-            "mock.bin",
-            "application/octet-stream",
-        ),
-        Some(decode(fixture(r#""anthropic-version""#))),
-        Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
-        Some(decode(fixture(r#"3600"#))),
+        files::UploadFilesParams {
+            file: ::octridev_anthropic::client::UploadFile::new(
+                b"mock upload".to_vec(),
+                "mock.bin",
+                "application/octet-stream",
+            ),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+            anthropic_workspace_id: Some(decode(fixture(r#""wrkspc_011CZkZaBF1tNoB5wlCeusgy""#))),
+            expires_in_seconds: Some(decode(fixture(r#"3600"#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {
@@ -15759,8 +16188,10 @@ fn validate_beta_organizations_external_keys_validate_beta_organizations_externa
     let _ = &config;
     let actual = beta_organizations_external_keys::validate_beta_organizations_external_keys(
         &config,
-        decode(fixture(r#""external_key-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_external_keys::ValidateBetaOrganizationsExternalKeysParams {
+            external_key_id: decode(fixture(r#""external_key-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     )
     .expect("validate_beta_organizations_external_keys request failed");
@@ -15787,8 +16218,10 @@ fn validate_beta_organizations_external_keys_validate_beta_organizations_externa
     };
     let result = beta_organizations_external_keys::validate_beta_organizations_external_keys(
         &config,
-        decode(fixture(r#""external_key-1""#)),
-        Some(decode(fixture(r#""anthropic-version""#))),
+        beta_organizations_external_keys::ValidateBetaOrganizationsExternalKeysParams {
+            external_key_id: decode(fixture(r#""external_key-1""#)),
+            anthropic_version: Some(decode(fixture(r#""anthropic-version""#))),
+        },
         None,
     );
     let Err(::octridev_anthropic::errors::SdkError::Http(error)) = result else {

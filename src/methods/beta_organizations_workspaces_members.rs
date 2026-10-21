@@ -10,6 +10,13 @@ use crate::types::{
 };
 use crate::validation::{validate_range, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsWorkspacesMembersParams {
+    pub workspace_id: String,
+    pub user_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Retrieves a user's membership in a workspace. Supply both `workspace_id` and `user_id` to identify the membership. The response includes the user's workspace role.
 ///
 /// # Arguments
@@ -21,11 +28,14 @@ use crate::validation::{validate_range, RangeOpts};
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_workspaces_members(
     config: &ClientConfig,
-    workspace_id: String,
-    user_id: String,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsWorkspacesMembersParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaWorkspaceMemberSchema, SdkError> {
+    let RetrieveBetaOrganizationsWorkspacesMembersParams {
+        workspace_id,
+        user_id,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -71,6 +81,14 @@ pub fn retrieve_beta_organizations_workspaces_members(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct UpdateBetaOrganizationsWorkspacesMembersParams {
+    pub user_id: String,
+    pub workspace_id: String,
+    pub workspace_role: BetaWorkspaceRoleSchema,
+    pub anthropic_version: Option<String>,
+}
+
 /// Updates a user's role in a workspace. Supply `workspace_role` with the new role and use the path parameters to identify the workspace membership. The role must be one of the defined workspace roles.
 ///
 /// # Arguments
@@ -83,12 +101,15 @@ pub fn retrieve_beta_organizations_workspaces_members(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn update_beta_organizations_workspaces_members(
     config: &ClientConfig,
-    user_id: String,
-    workspace_id: String,
-    workspace_role: BetaWorkspaceRoleSchema,
-    anthropic_version: Option<String>,
+    params: UpdateBetaOrganizationsWorkspacesMembersParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaWorkspaceMemberSchema, SdkError> {
+    let UpdateBetaOrganizationsWorkspacesMembersParams {
+        user_id,
+        workspace_id,
+        workspace_role,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -147,6 +168,13 @@ pub fn update_beta_organizations_workspaces_members(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaOrganizationsWorkspacesMembersParams {
+    pub user_id: String,
+    pub workspace_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Removes a user's membership from a workspace. Identify the membership with `workspace_id` and `user_id`, and authenticate with an Admin API key in the `x-api-key` header. The response identifies the deleted workspace membership.
 ///
 /// # Arguments
@@ -158,11 +186,14 @@ pub fn update_beta_organizations_workspaces_members(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn delete_beta_organizations_workspaces_members(
     config: &ClientConfig,
-    user_id: String,
-    workspace_id: String,
-    anthropic_version: Option<String>,
+    params: DeleteBetaOrganizationsWorkspacesMembersParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaDeleteWorkspaceMemberResponse, SdkError> {
+    let DeleteBetaOrganizationsWorkspacesMembersParams {
+        user_id,
+        workspace_id,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -311,6 +342,14 @@ pub fn list_beta_organizations_workspaces_members(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateBetaOrganizationsWorkspacesMembersParams {
+    pub workspace_id: String,
+    pub user_id: String,
+    pub workspace_role: BetaNoBillingWorkspaceRoleSchema,
+    pub anthropic_version: Option<String>,
+}
+
 /// Creates a membership for a user in a specified workspace. Supply `user_id` and `workspace_role`; the role must be one of the supported non-billing workspace roles. The response contains the new workspace member and its assigned role.
 ///
 /// # Arguments
@@ -324,12 +363,15 @@ pub fn list_beta_organizations_workspaces_members(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn create_beta_organizations_workspaces_members(
     config: &ClientConfig,
-    workspace_id: String,
-    user_id: String,
-    workspace_role: BetaNoBillingWorkspaceRoleSchema,
-    anthropic_version: Option<String>,
+    params: CreateBetaOrganizationsWorkspacesMembersParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaWorkspaceMemberSchema, SdkError> {
+    let CreateBetaOrganizationsWorkspacesMembersParams {
+        workspace_id,
+        user_id,
+        workspace_role,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((

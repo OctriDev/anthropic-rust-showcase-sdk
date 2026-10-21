@@ -60,6 +60,14 @@ impl std::fmt::Display for ListBetaOrganizationsInvitesItemEnum {
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateBetaOrganizationsInvitesParams {
+    pub email: String,
+    pub role: BetaCreateInviteParamsRoleEnum,
+    pub anthropic_version: Option<String>,
+    pub rbac_group_ids: Option<Vec<String>>,
+}
+
 /// Invite a user to join the organization by email. On plans that draw members from a finite pool of purchased seats, the invite automatically consumes a seat from the lowest tier with availability; there is no seat-tier parameter. When no seat is free the request fails with a 400 error rather than purchasing a seat.
 ///
 /// # Arguments
@@ -78,12 +86,15 @@ impl std::fmt::Display for ListBetaOrganizationsInvitesItemEnum {
 ///   `write:rbac_groups` scope.
 pub fn create_beta_organizations_invites(
     config: &ClientConfig,
-    email: String,
-    role: BetaCreateInviteParamsRoleEnum,
-    anthropic_version: Option<String>,
-    rbac_group_ids: Option<Vec<String>>,
+    params: CreateBetaOrganizationsInvitesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaInviteSchema, SdkError> {
+    let CreateBetaOrganizationsInvitesParams {
+        email,
+        role,
+        anthropic_version,
+        rbac_group_ids,
+    } = params;
     validate_email("email", &email)?;
     if let Some(ref rbac_group_ids_v) = rbac_group_ids {
         validate_items(
@@ -300,6 +311,12 @@ pub fn list_beta_organizations_invites(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaOrganizationsInvitesParams {
+    pub invite_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Retrieves an organization invite by its identifier. Use this endpoint to inspect the recipient, assigned role, status, and expiration details for a specific invite. The invite status indicates whether it is accepted, deleted, expired, or pending.
 ///
 /// Retrieve an invite by ID.
@@ -312,10 +329,13 @@ pub fn list_beta_organizations_invites(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn retrieve_beta_organizations_invites(
     config: &ClientConfig,
-    invite_id: String,
-    anthropic_version: Option<String>,
+    params: RetrieveBetaOrganizationsInvitesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaInviteSchema, SdkError> {
+    let RetrieveBetaOrganizationsInvitesParams {
+        invite_id,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((
@@ -360,6 +380,12 @@ pub fn retrieve_beta_organizations_invites(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaOrganizationsInvitesParams {
+    pub invite_id: String,
+    pub anthropic_version: Option<String>,
+}
+
 /// Deletes a pending organization invite. Provide the invite's identifier to remove it. The response confirms deletion with the invite ID and a deleted-object type.
 ///
 /// Delete a pending invite.
@@ -372,10 +398,13 @@ pub fn retrieve_beta_organizations_invites(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn delete_beta_organizations_invites(
     config: &ClientConfig,
-    invite_id: String,
-    anthropic_version: Option<String>,
+    params: DeleteBetaOrganizationsInvitesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaDeleteInviteResponse, SdkError> {
+    let DeleteBetaOrganizationsInvitesParams {
+        invite_id,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(1);
     if let Some(ref value) = anthropic_version {
         __headers.push((

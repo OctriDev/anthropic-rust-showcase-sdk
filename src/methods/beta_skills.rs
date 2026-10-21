@@ -385,6 +385,14 @@ pub fn list_beta_skills_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct RetrieveBetaSkillsParams {
+    pub skill_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Retrieves a Skill by its identifier. Use `skill_id` to select the Skill and, when applicable, `anthropic-workspace-id` to choose the workspace to access. The response includes the Skill's metadata and latest version identifier.
 ///
 /// # Arguments
@@ -404,12 +412,15 @@ pub fn list_beta_skills_pages(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn retrieve_beta_skills(
     config: &ClientConfig,
-    skill_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: RetrieveBetaSkillsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaSkill, SdkError> {
+    let RetrieveBetaSkillsParams {
+        skill_id,
+        anthropic_beta,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(3);
     if let Some(ref value) = anthropic_beta {
         __headers.push((
@@ -466,6 +477,14 @@ pub fn retrieve_beta_skills(
     .data)
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaSkillsParams {
+    pub skill_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+    pub anthropic_workspace_id: Option<String>,
+}
+
 /// Deletes a Skill identified by its `skill_id` path parameter. Use this operation when you want to remove a Skill from the selected workspace. The response confirms deletion with the Skill identifier and a deletion type.
 ///
 /// # Arguments
@@ -485,12 +504,15 @@ pub fn retrieve_beta_skills(
 ///   Workspace may omit it; if sent, it must match that Workspace.
 pub fn delete_beta_skills(
     config: &ClientConfig,
-    skill_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
-    anthropic_workspace_id: Option<String>,
+    params: DeleteBetaSkillsParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaDeletedSkill, SdkError> {
+    let DeleteBetaSkillsParams {
+        skill_id,
+        anthropic_beta,
+        anthropic_version,
+        anthropic_workspace_id,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(3);
     if let Some(ref value) = anthropic_beta {
         __headers.push((

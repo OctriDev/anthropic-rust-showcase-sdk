@@ -10,6 +10,14 @@ use crate::types::{
 };
 use crate::validation::{validate_range, RangeOpts};
 
+#[derive(Debug, Clone, Default)]
+pub struct CreateBetaOrganizationsFederationRulesWorkspacesParams {
+    pub federation_rule_id: String,
+    pub workspace_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Enable a federation rule for a workspace. Idempotent; re-enabling returns the existing enablement. The rule and workspace must both belong to your organization. Membership of the rule's target service account in this workspace is not checked at enablement: token exchange into this workspace is rejected unless the target is a member (it is implicitly a member of the default workspace). Archived rules are rejected with 400\. OAuth callers may only manage rules whose `oauth_scope` is `workspace:developer` or `workspace:inference`; other scopes require a Console session.
 ///
 /// # Arguments
@@ -24,12 +32,15 @@ use crate::validation::{validate_range, RangeOpts};
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn create_beta_organizations_federation_rules_workspaces(
     config: &ClientConfig,
-    federation_rule_id: String,
-    workspace_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
+    params: CreateBetaOrganizationsFederationRulesWorkspacesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaFederationRuleWorkspace, SdkError> {
+    let CreateBetaOrganizationsFederationRulesWorkspacesParams {
+        federation_rule_id,
+        workspace_id,
+        anthropic_beta,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_beta {
         __headers.push((
@@ -311,6 +322,14 @@ pub fn list_beta_organizations_federation_rules_workspaces_pages(
     }
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DeleteBetaOrganizationsFederationRulesWorkspacesParams {
+    pub federation_rule_id: String,
+    pub workspace_id: String,
+    pub anthropic_beta: Option<Vec<AnthropicBeta>>,
+    pub anthropic_version: Option<String>,
+}
+
 /// \*\*Requires an OAuth access token with the `org:admin` scope\*\*, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See Manage WIF with the Admin API. Disable a federation rule for a workspace. Idempotent; succeeds even if the enablement was already removed. OAuth callers may only manage rules whose `oauth_scope` is `workspace:developer` or `workspace:inference`; other scopes require a Console session.
 ///
 /// # Arguments
@@ -325,12 +344,15 @@ pub fn list_beta_organizations_federation_rules_workspaces_pages(
 ///   [here](https://platform.claude.com/docs/en/api/versioning).
 pub fn delete_beta_organizations_federation_rules_workspaces(
     config: &ClientConfig,
-    federation_rule_id: String,
-    workspace_id: String,
-    anthropic_beta: Option<Vec<AnthropicBeta>>,
-    anthropic_version: Option<String>,
+    params: DeleteBetaOrganizationsFederationRulesWorkspacesParams,
     options: Option<&RequestOptions>,
 ) -> Result<BetaRemoveFederationRuleWorkspaceResponse, SdkError> {
+    let DeleteBetaOrganizationsFederationRulesWorkspacesParams {
+        federation_rule_id,
+        workspace_id,
+        anthropic_beta,
+        anthropic_version,
+    } = params;
     let mut __headers: Vec<(String, String)> = Vec::with_capacity(2);
     if let Some(ref value) = anthropic_beta {
         __headers.push((
